@@ -694,7 +694,7 @@ select option { background: var(--bg3); }
   <div class="header-divider"><div class="header-divider-dot"></div></div>
   <div class="currency-pill">
     <span class="cur-icon">💱</span>
-    <label>Devise</label>
+    <label data-i18n="currency_label">Devise</label>
     <select id="currency-select" onchange="setCurrency(this.value)">
       <option value="CHF">CHF — Franc suisse</option>
       <option value="EUR">EUR — Euro</option>
@@ -728,18 +728,18 @@ select option { background: var(--bg3); }
   <div class="panel">
     <div class="panel-title" data-i18n-panel="p_cocktail"><span class="panel-title-icon">🍹</span> Informations cocktail</div>
     <div class="form-row cols-2">
-      <div><label data-i18n="l_name">Nom du cocktail</label><input type="text" id="cocktail-name" placeholder="ex. Negroni…"></div>
+      <div><label data-i18n="l_name">Nom du cocktail</label><input type="text" id="cocktail-name" data-i18n-ph="ph_cocktail" placeholder="ex. Negroni…"></div>
       <div><label data-i18n-cur="l_price">Prix de vente (<span class="cur-label">CHF</span>)</label><input type="number" id="sell-price" placeholder="18" min="0" step="0.5"></div>
     </div>
     <div class="form-row cols-3">
-      <div><label>Catégorie</label>
+      <div><label data-i18n="l_category">Catégorie</label>
         <select id="category">
           <option data-i18n-opt="cat_classic">Classique</option><option data-i18n-opt="cat_sig">Signature</option><option data-i18n-opt="cat_mock">Mocktail</option>
           <option data-i18n-opt="cat_champ">Champagne / Bulles</option><option data-i18n-opt="cat_shot">Shot</option>
         </select>
       </div>
-      <div><label>Verre</label><input type="text" id="glass" placeholder="Coupe, Highball…"></div>
-      <div><label>Méthode</label>
+      <div><label data-i18n="l_glass">Verre</label><input type="text" id="glass" data-i18n-ph="ph_glass" placeholder="Coupe, Highball…"></div>
+      <div><label data-i18n="l_method">Méthode</label>
         <select id="method" onchange="setCplx('complexity-bar','complexity-text',this.value)">
           <option value="direct" data-i18n-opt="m_direct">Direct (build)</option>
           <option value="shaker" data-i18n-opt="m_shaker">Shaker</option>
@@ -752,7 +752,7 @@ select option { background: var(--bg3); }
       </div>
     </div>
     <div style="margin-top:2px">
-      <label>Complexité estimée selon méthode</label>
+      <label data-i18n="l_complexity">Complexité estimée selon méthode</label>
       <div class="cplx-bar" id="complexity-bar"><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div></div>
       <div style="font-size:10px;color:var(--text-faint);margin-top:4px" id="complexity-text">Direct (build) — faible complexité</div>
     </div>
@@ -775,7 +775,7 @@ select option { background: var(--bg3); }
   <div class="panel">
     <div class="panel-title" data-i18n-panel="p_params"><span class="panel-title-icon">⚙️</span> Paramètres</div>
     <div class="form-row cols-3">
-      <div><label>Food cost cible (%)</label><input type="number" id="target-fc" value="20" min="1" max="100"></div>
+      <div><label data-i18n="l_target_fc">Food cost cible (%)</label><input type="number" id="target-fc" value="20" min="1" max="100"></div>
       <div><label data-i18n-cur="l_garnish">Coût garnish (<span class="cur-label">CHF</span>)</label><input type="number" id="garnish-cost" value="0.30" step="0.05" min="0"></div>
       <div><label data-i18n-cur="l_ice">Coût glace (<span class="cur-label">CHF</span>)</label><input type="number" id="ice-cost" value="0.15" step="0.05" min="0"></div>
     </div>
@@ -790,7 +790,7 @@ select option { background: var(--bg3); }
   </div>
   <input type="number" id="labor-cost" value="1.50" step="0.10" min="0" disabled style="opacity:.3;cursor:not-allowed">
 </div>
-      <div><label>TVA (%)</label><input type="number" id="tva-rate" value="7.7" step="0.1" min="0" placeholder="7.7 CH · 10 FR…"></div>
+      <div><label data-i18n="l_tva">TVA (%)</label><input type="number" id="tva-rate" value="7.7" step="0.1" min="0" placeholder="7.7 CH · 10 FR…"></div>
     </div>
 
     <button class="advanced-btn" onclick="toggleAdv()">
@@ -803,8 +803,8 @@ select option { background: var(--bg3); }
       </div>
       <div id="waste-row" style="opacity:.3;pointer-events:none;transition:opacity .2s">
         <div class="form-row cols-2">
-          <div><label>Taux de perte (%)</label><input type="number" id="waste-pct" value="3" min="0" max="30" step="0.5" disabled></div>
-          <div style="display:flex;align-items:flex-end;padding-bottom:4px"><span style="font-size:11px;color:var(--text-dim);line-height:1.5">Majore le coût matière des pertes réelles au service.</span></div>
+          <div><label data-i18n="l_waste_pct">Taux de perte (%)</label><input type="number" id="waste-pct" value="3" min="0" max="30" step="0.5" disabled></div>
+          <div style="display:flex;align-items:flex-end;padding-bottom:4px"><span style="font-size:11px;color:var(--text-dim);line-height:1.5" data-i18n="l_waste_hint">Majore le coût matière des pertes réelles au service.</span></div>
         </div>
       </div>
     </div>
@@ -878,7 +878,7 @@ select option { background: var(--bg3); }
   <div class="panel">
     <div class="panel-title" data-i18n-panel="p_renta_cocktail"><span class="panel-title-icon">🍹</span> Paramètres du cocktail</div>
     <div class="form-row cols-3">
-      <div><label data-i18n="r2_name">Nom (optionnel)</label><input type="text" id="r2-name" placeholder="ex. Signature Mango…"></div>
+      <div><label data-i18n="r2_name">Nom (optionnel)</label><input type="text" id="r2-name" data-i18n-ph="ph_cocktail" placeholder="ex. Signature Mango…"></div>
       <div><label data-i18n-cur="r2_price">Prix de vente (<span class="cur-label">CHF</span>)</label><input type="number" id="r2-price" placeholder="18" min="0" step="0.5"></div>
       <div><label data-i18n-cur="r2_cost">Coût matière total (<span class="cur-label">CHF</span>)</label><input type="number" id="r2-cost" placeholder="3.20" min="0" step="0.1"></div>
     </div>
@@ -922,7 +922,7 @@ select option { background: var(--bg3); }
       <div><label data-i18n-cur-h="r2_hourly">Taux horaire barman (<span class="cur-label">CHF</span>/h)</label><input type="number" id="r2-hourly" value="35" min="0" step="1"></div>
     </div>
     <div>
-      <label>Complexité selon méthode</label>
+      <label data-i18n="r2_complexity">Complexité selon méthode</label>
       <div class="cplx-bar" id="r2-cplx-bar"><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div></div>
       <div style="font-size:10px;color:var(--text-faint);margin-top:4px" id="r2-cplx-text"></div>
     </div>
@@ -1362,18 +1362,18 @@ function addProduce(){
   const row=document.createElement('div');
   row.className='produce-row'; row.id='prod-'+id;
   row.innerHTML=`
-    <div><label>Produit</label><input type="text" placeholder="ex. Menthe, Citron vert…" oninput="calcProd(${id})"></div>
+    <div><label>${t('pr_name')}</label><input type="text" placeholder="${t('pr_name')}..." oninput="calcProd(${id})"></div>
     <div>
-      <label>Unité paquet</label>
+      <label>${t('i_unit')}</label>
       <select class="prod-unit" onchange="calcProd(${id})">
         <option value="g">grammes (g)</option>
         <option value="kg">kilogrammes (kg)</option>
         <option value="piece">pièces</option>
       </select>
     </div>
-    <div><label>Taille paquet</label><input type="number" placeholder="250" min="0" step="0.1" oninput="calcProd(${id})" class="prod-pkg"></div>
-    <div><label>Prix paquet (CHF)</label><input type="number" placeholder="2.50" min="0" step="0.1" oninput="calcProd(${id})" class="prod-price"></div>
-    <div><label>Qté utilisée</label><input type="number" placeholder="8" min="0" step="0.1" oninput="calcProd(${id})" class="prod-qty"></div>
+    <div><label>${t('pr_pkg')}</label><input type="number" placeholder="250" min="0" step="0.1" oninput="calcProd(${id})" class="prod-pkg"></div>
+    <div><label>${t('pr_price')} (<span class="cur-label">${curSym()}</span>)</label><input type="number" placeholder="2.50" min="0" step="0.1" oninput="calcProd(${id})" class="prod-price"></div>
+    <div><label>${t('pr_qty')}</label><input type="number" placeholder="8" min="0" step="0.1" oninput="calcProd(${id})" class="prod-qty"></div>
     <div><label style="opacity:0">—</label><button class="btn-remove" onclick="document.getElementById('prod-${id}').remove()">×</button></div>
     <div style="grid-column:1/-1;margin-top:-4px;display:flex;align-items:center;gap:12px">
       <div class="produce-cost" id="pc-${id}" style="color:var(--text-faint);flex:1">—</div>
