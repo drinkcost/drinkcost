@@ -728,8 +728,8 @@ select option { background: var(--bg3); }
   <div class="panel">
     <div class="panel-title" data-i18n-panel="p_cocktail"><span class="panel-title-icon">🍹</span> Informations cocktail</div>
     <div class="form-row cols-2">
-      <div><label>Nom du cocktail</label><input type="text" id="cocktail-name" placeholder="ex. Negroni…"></div>
-      <div><label>Prix de vente (<span class="cur-label">CHF</span>)</label><input type="number" id="sell-price" placeholder="18" min="0" step="0.5"></div>
+      <div><label data-i18n="l_name">Nom du cocktail</label><input type="text" id="cocktail-name" placeholder="ex. Negroni…"></div>
+      <div><label data-i18n-cur="l_price">Prix de vente (<span class="cur-label">CHF</span>)</label><input type="number" id="sell-price" placeholder="18" min="0" step="0.5"></div>
     </div>
     <div class="form-row cols-3">
       <div><label>Catégorie</label>
@@ -776,8 +776,8 @@ select option { background: var(--bg3); }
     <div class="panel-title" data-i18n-panel="p_params"><span class="panel-title-icon">⚙️</span> Paramètres</div>
     <div class="form-row cols-3">
       <div><label>Food cost cible (%)</label><input type="number" id="target-fc" value="20" min="1" max="100"></div>
-      <div><label>Coût garnish (<span class="cur-label">CHF</span>)</label><input type="number" id="garnish-cost" value="0.30" step="0.05" min="0"></div>
-      <div><label>Coût glace (<span class="cur-label">CHF</span>)</label><input type="number" id="ice-cost" value="0.15" step="0.05" min="0"></div>
+      <div><label data-i18n-cur="l_garnish">Coût garnish (<span class="cur-label">CHF</span>)</label><input type="number" id="garnish-cost" value="0.30" step="0.05" min="0"></div>
+      <div><label data-i18n-cur="l_ice">Coût glace (<span class="cur-label">CHF</span>)</label><input type="number" id="ice-cost" value="0.15" step="0.05" min="0"></div>
     </div>
     <div class="form-row cols-2">
       <div>
@@ -786,7 +786,7 @@ select option { background: var(--bg3); }
       <input type="checkbox" id="labor-toggle" onchange="toggleLabor(this)">
       <span class="toggle-slider"></span>
     </label>
-    <label style="margin-bottom:0;cursor:pointer" onclick="document.getElementById('labor-toggle').click()">Coût main d'œuvre (<span class="cur-label">CHF</span>)</label>
+    <label style="margin-bottom:0;cursor:pointer" onclick="document.getElementById('labor-toggle').click()" data-i18n-cur="l_labor">Coût main d'œuvre (<span class="cur-label">CHF</span>)</label>
   </div>
   <input type="number" id="labor-cost" value="1.50" step="0.10" min="0" disabled style="opacity:.3;cursor:not-allowed">
 </div>
@@ -879,8 +879,8 @@ select option { background: var(--bg3); }
     <div class="panel-title" data-i18n-panel="p_renta_cocktail"><span class="panel-title-icon">🍹</span> Paramètres du cocktail</div>
     <div class="form-row cols-3">
       <div><label data-i18n="r2_name">Nom (optionnel)</label><input type="text" id="r2-name" placeholder="ex. Signature Mango…"></div>
-      <div><label>Prix de vente (<span class="cur-label">CHF</span>)</label><input type="number" id="r2-price" placeholder="18" min="0" step="0.5"></div>
-      <div><label>Coût matière total (<span class="cur-label">CHF</span>)</label><input type="number" id="r2-cost" placeholder="3.20" min="0" step="0.1"></div>
+      <div><label data-i18n-cur="r2_price">Prix de vente (<span class="cur-label">CHF</span>)</label><input type="number" id="r2-price" placeholder="18" min="0" step="0.5"></div>
+      <div><label data-i18n-cur="r2_cost">Coût matière total (<span class="cur-label">CHF</span>)</label><input type="number" id="r2-cost" placeholder="3.20" min="0" step="0.1"></div>
     </div>
   </div>
 
@@ -919,7 +919,7 @@ select option { background: var(--bg3); }
         </select>
       </div>
       <div><label data-i18n="r2_prep">Temps de préparation (min)</label><input type="number" id="r2-preptime" value="3" min="0.5" step="0.5"></div>
-      <div><label>Taux horaire barman (<span class="cur-label">CHF</span>/h)</label><input type="number" id="r2-hourly" value="35" min="0" step="1"></div>
+      <div><label data-i18n-cur-h="r2_hourly">Taux horaire barman (<span class="cur-label">CHF</span>/h)</label><input type="number" id="r2-hourly" value="35" min="0" step="1"></div>
     </div>
     <div>
       <label>Complexité selon méthode</label>
@@ -931,8 +931,8 @@ select option { background: var(--bg3); }
   <div class="panel">
     <div class="panel-title" data-i18n-panel="p_charges"><span class="panel-title-icon">📊</span> Charges fixes du service</div>
     <div class="form-row cols-3">
-      <div><label>Coût barman / service (<span class="cur-label">CHF</span>)</label><input type="number" id="r2-staff" value="210" min="0" step="10"></div>
-      <div><label>Frais fixes / soir (<span class="cur-label">CHF</span>)</label><input type="number" id="r2-fixed" value="80" min="0" step="10" placeholder="loyer, énergie…"></div>
+      <div><label data-i18n-cur="r2_staff">Coût barman / service (<span class="cur-label">CHF</span>)</label><input type="number" id="r2-staff" value="210" min="0" step="10"></div>
+      <div><label data-i18n-cur="r2_fixed">Frais fixes / soir (<span class="cur-label">CHF</span>)</label><input type="number" id="r2-fixed" value="80" min="0" step="10" placeholder="loyer, énergie…"></div>
       <div><label data-i18n="r2_tva">TVA (%)</label><input type="number" id="r2-tva" value="7.7" step="0.1" min="0"></div>
     </div>
   </div>
@@ -991,6 +991,8 @@ function setCurrency(code) {
   const cur = CURRENCIES[code] || CURRENCIES['CHF'];
   document.getElementById('currency-symbol').textContent = cur.symbol;
   document.querySelectorAll('.cur-label').forEach(el => el.textContent = cur.symbol);
+  // Refresh labels that embed currency symbol
+  applyTranslations();
 }
 
 function curSym() {
@@ -1216,6 +1218,18 @@ function applyTranslations(){
     if(bvs){Array.from(bvs.options).forEach(o=>{const k='v'+o.value;if(T[currentLang][k])o.text=t(k);});}
     const ius=row.querySelector('.ing-unit-select');
     if(ius){Array.from(ius.options).forEach(o=>{const km={ml:'ml',cl:'cl',g:'g'};if(km[o.value])o.text=o.value;});}
+  });
+  // Labels with currency + /h suffix
+  document.querySelectorAll('[data-i18n-cur-h]').forEach(el=>{
+    const k=el.getAttribute('data-i18n-cur-h');
+    const sym=curSym();
+    el.innerHTML=t(k)+' (<span class="cur-label">'+sym+'</span>/h)';
+  });
+  // Labels with embedded cur-label span (text + currency)
+  document.querySelectorAll('[data-i18n-cur]').forEach(el=>{
+    const k=el.getAttribute('data-i18n-cur');
+    const sym=curSym();
+    el.innerHTML=t(k)+' (<span class="cur-label">'+sym+'</span>)';
   });
   // Tfoot labels
   const lbls={
