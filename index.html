@@ -754,7 +754,7 @@ select option { background: var(--bg3); }
     <div style="margin-top:2px">
       <label data-i18n="l_complexity">Complexité estimée selon méthode</label>
       <div class="cplx-bar" id="complexity-bar"><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div></div>
-      <div style="font-size:10px;color:var(--text-faint);margin-top:4px" id="complexity-text">Direct (build) — faible complexité</div>
+      <div style="font-size:10px;color:var(--text-faint);margin-top:4px" id="complexity-text" data-cplx-key="direct">Direct (build) — faible complexité</div>
     </div>
   </div>
 
@@ -960,13 +960,13 @@ select option { background: var(--bg3); }
 <script>
 // ===== DATA =====
 const CPLX = {
-  'direct':        {lvl:1, label:'Direct (build) — faible complexité', t:2},
-  'shaker':        {lvl:2, label:'Shaker — complexité modérée', t:3},
-  'verre-melange': {lvl:3, label:'Verre à mélange — bonne maîtrise requise', t:4},
-  'blender':       {lvl:2, label:'Blender — complexité modérée', t:3},
-  'infusion':      {lvl:4, label:'Infusion / Macération — préparation longue', t:10},
-  'carbonation':   {lvl:4, label:'Carbonation — technique avancée', t:8},
-  'multi':         {lvl:5, label:'Multi-techniques — haute complexité', t:7},
+  'direct':        {lvl:1, key:'direct',         label:'Direct (build) — faible complexité', t:2},
+  'shaker':        {lvl:2, key:'shaker',          label:'Shaker — complexité modérée', t:3},
+  'verre-melange': {lvl:3, key:'verre-melange',   label:'Verre à mélange — bonne maîtrise requise', t:4},
+  'blender':       {lvl:2, key:'blender',         label:'Blender — complexité modérée', t:3},
+  'infusion':      {lvl:4, key:'infusion',        label:'Infusion / Macération — préparation longue', t:10},
+  'carbonation':   {lvl:4, key:'carbonation',     label:'Carbonation — technique avancée', t:8},
+  'multi':         {lvl:5, key:'multi',           label:'Multi-techniques — haute complexité', t:7},
 };
 function getVOLS(){return [{v:200,k:'v200'},{v:250,k:'v250'},{v:330,k:'v330'},{v:500,k:'v500'},{v:700,k:'v700'},{v:750,k:'v750'},{v:1000,k:'v1000'},{v:1500,k:'v1500'},{v:0,k:'v0'}];}
 let ingCount=0, prodCount=0, lastRes={};
@@ -1219,6 +1219,12 @@ function applyTranslations(){
     const ius=row.querySelector('.ing-unit-select');
     if(ius){Array.from(ius.options).forEach(o=>{const km={ml:'ml',cl:'cl',g:'g'};if(km[o.value])o.text=o.value;});}
   });
+  // Refresh complexity text with current lang
+  ['complexity-text','r2-cplx-text','r-cplx-text'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el||!el.dataset.cplxKey) return;
+    el.textContent=(T[currentLang].cplx&&T[currentLang].cplx[el.dataset.cplxKey])||el.textContent;
+  });
   // Labels with currency + /h suffix
   document.querySelectorAll('[data-i18n-cur-h]').forEach(el=>{
     const k=el.getAttribute('data-i18n-cur-h');
@@ -1281,7 +1287,9 @@ function setCplx(barId, txtId, method) {
     d.classList.remove('on','hi');
     if(i<c.lvl){ d.classList.add('on'); if(c.lvl>=4) d.classList.add('hi'); }
   });
-  document.getElementById(txtId).textContent = T[currentLang].cplx[c.key]||c.label||c.key;
+  const txtEl=document.getElementById(txtId);
+  txtEl.textContent=(T[currentLang]&&T[currentLang].cplx&&T[currentLang].cplx[c.key])||c.label||c.key;
+  txtEl.dataset.cplxKey=c.key;
   return c;
 }
 
