@@ -10,7 +10,7 @@
   gtag('js', new Date());
   gtag('config', 'G-CBMJ6CRX0N');
 </script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>DrinkCost — Cost Sheet / Fiche Technique / Ficha Técnica</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -44,6 +44,8 @@
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -556,15 +558,124 @@ select option { background: var(--bg3); }
 .lang-btn.active { background:var(--accent);color:#0d1117; }
 .lang-btn:hover:not(.active) { color:var(--text);background:var(--bg3); }
 
-@media(max-width:640px){
-  .ingredient-row{grid-template-columns:1fr 60px 52px 1fr 70px 32px;}
-  .produce-row{grid-template-columns:1fr 90px 70px 70px 60px 32px;}
-  .cols-3,.cols-4{grid-template-columns:1fr 1fr;}
+/* ── TABLET (max 900px) ── */
+@media(max-width:900px){
+  .app{padding:32px 20px 80px;}
+  .ingredient-row{grid-template-columns:2fr 65px 55px 1fr 78px 32px;}
   .k5{grid-template-columns:repeat(3,1fr);}
+}
+
+/* ── MOBILE (max 640px) ── */
+@media(max-width:640px){
+  .app{padding:20px 14px 80px;}
+  .panel{padding:16px 14px;}
+
+  /* Header */
+  .header-sub{font-size:clamp(22px,7vw,32px);}
+  .currency-pill{flex-wrap:wrap;justify-content:center;padding:6px 10px;}
+  .lang-pill{margin-top:8px;}
+
+  /* Tabs — pill style on mobile */
+  .nav-tabs{
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:4px;
+    gap:3px;
+  }
+  .nav-tab{padding:9px 10px;font-size:10px;letter-spacing:.08em;}
+
+  /* Form cols — all single column on mobile */
+  .cols-2,.cols-3,.cols-4{grid-template-columns:1fr;}
+
+  /* KPI grids */
+  .k5{grid-template-columns:repeat(2,1fr);}
   .k4{grid-template-columns:repeat(2,1fr);}
+
+  /* Ingredient rows — stacked on mobile */
+  .ingredient-row{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    background:var(--bg3);
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    padding:12px;
+    margin-bottom:10px;
+  }
+  .ingredient-row > div { width:100%; }
+
+  /* Produce rows — stacked */
+  .produce-row{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    background:var(--bg3);
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    padding:12px;
+    margin-bottom:10px;
+  }
+  .produce-row > div { width:100%; }
+
+  /* Remove button — full width on mobile */
+  .btn-remove{
+    width:100%;
+    border-radius:var(--radius-sm);
+    padding:8px;
+    justify-content:center;
+    color:var(--red);
+    border-color:rgba(224,82,82,0.3);
+    background:var(--red-bg);
+    font-size:12px;
+  }
+  .btn-remove::before{content:'Supprimer cet ingrédient';}
+  .btn-remove:hover{background:var(--red-bg);}
+
+  /* Rentability grid */
   .renta-grid{grid-template-columns:1fr;}
-  .panel{padding:18px 16px;}
-  .nav-tabs{gap:4px;}
+
+  /* Result header — stack on mobile */
+  .result-header{flex-direction:column;gap:12px;}
+  .rbadge{align-self:flex-start;}
+  .rname{font-size:24px;}
+
+  /* KPI values smaller on mobile */
+  .kpi-value{font-size:22px;}
+  .kpi{padding:12px 10px;}
+
+  /* Action buttons — stack */
+  .actions-row{flex-direction:column;}
+
+  /* Advanced btn full width */
+  .advanced-btn{width:100%;justify-content:center;}
+
+  /* Produce cost display */
+  .produce-cost{font-size:13px;}
+
+  /* Suggest price */
+  #r-suggest{font-size:34px;}
+
+  /* Renta result values */
+  .ri-value{font-size:20px;}
+
+  /* Input touch targets */
+  input, select{
+    padding:12px 14px;
+    font-size:16px; /* prevents iOS zoom on focus */
+    min-height:44px;
+  }
+
+  /* Primary button touch target */
+  .btn-primary{padding:16px;font-size:13px;}
+  .btn{min-height:44px;}
+}
+
+/* ── VERY SMALL (max 380px) ── */
+@media(max-width:380px){
+  .k5,.k4{grid-template-columns:1fr;}
+  .kpi-value{font-size:20px;}
+  .nav-tab{padding:8px 6px;font-size:9px;}
 }
 </style>
 </head>
@@ -1102,6 +1213,13 @@ function applyTranslations(){
     const ius=row.querySelector('.ing-unit-select');
     if(ius){Array.from(ius.options).forEach(o=>{const km={ml:'ml',cl:'cl',g:'g'};if(km[o.value])o.text=o.value;});}
   });
+  // Mobile remove button text
+  if(window.innerWidth<=640){
+    document.querySelectorAll('.btn-remove').forEach(btn=>{
+      const labels={fr:'Supprimer',en:'Remove',es:'Eliminar'};
+      btn.style.cssText='';
+    });
+  }
   document.querySelectorAll('.produce-row').forEach(row=>{
     row.querySelectorAll('label').forEach((lbl,i)=>{
       const keys=['pr_name','pr_pkg','pr_price','pr_qty'];
@@ -1260,6 +1378,13 @@ function calcProd(id){
 }
 function getProdCost(){
   let t=0;
+  // Mobile remove button text
+  if(window.innerWidth<=640){
+    document.querySelectorAll('.btn-remove').forEach(btn=>{
+      const labels={fr:'Supprimer',en:'Remove',es:'Eliminar'};
+      btn.style.cssText='';
+    });
+  }
   document.querySelectorAll('.produce-row').forEach(row=>{
     const pkgSize=parseFloat(row.querySelector('.prod-pkg')?.value)||0;
     const pkgCost=parseFloat(row.querySelector('.prod-price')?.value)||0;
