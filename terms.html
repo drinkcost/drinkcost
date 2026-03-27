@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DrinkCost — Conditions Générales d'Utilisation</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d1117;--bg2:#161b22;--bg3:#1c2330;
+  --accent:#e8a020;--accent2:#f5c842;
+  --teal:#1fb88a;--red:#e05252;
+  --border:rgba(255,255,255,0.07);--border2:rgba(232,160,32,0.2);
+  --text:#e6edf3;--text2:#8b949e;--text3:#484f58;
+  --radius:10px;--radius-sm:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7;font-size:15px;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% -10%,rgba(232,160,32,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 110%,rgba(77,143,212,0.05) 0%,transparent 60%);pointer-events:none;z-index:0;}
+.app{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:48px 24px 100px;}
+
+/* Header */
+header{text-align:center;margin-bottom:48px;}
+.logo-wrap{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;text-decoration:none;}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.logo-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:600;color:var(--text);letter-spacing:-.02em;}
+.logo-text span{color:var(--accent);}
+.page-title{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,38px);font-weight:400;font-style:italic;color:var(--text);margin-bottom:8px;}
+.page-title em{color:var(--accent);font-style:normal;font-weight:600;}
+.page-meta{font-size:12px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;}
+
+/* Lang switcher */
+.lang-pill{display:inline-flex;align-items:center;gap:4px;background:var(--bg2);border:1px solid var(--border);border-radius:999px;padding:4px 6px;margin-top:14px;}
+.lang-btn{font-size:11px;font-weight:600;padding:4px 12px;border-radius:999px;border:none;background:transparent;color:var(--text2);cursor:pointer;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif;}
+.lang-btn.active{background:var(--accent);color:#0d1117;}
+.lang-btn:hover:not(.active){color:var(--text);background:var(--bg3);}
+
+/* Back link */
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--text2);text-decoration:none;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:32px;transition:color .15s;}
+.back-link:hover{color:var(--accent);}
+.back-link::before{content:'←';}
+
+/* Content */
+.section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;margin-bottom:12px;}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px;}
+.section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);margin-bottom:14px;}
+.section-body{font-size:14px;color:var(--text2);line-height:1.8;}
+.section-body p{margin-bottom:10px;}
+.section-body p:last-child{margin-bottom:0;}
+.section-body strong{color:var(--text);font-weight:600;}
+.section-body ul{margin:8px 0 8px 18px;}
+.section-body li{margin-bottom:6px;}
+
+/* Footer */
+.cgu-footer{margin-top:32px;padding:20px 24px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);text-align:center;}
+.cgu-footer p{font-size:12px;color:var(--text3);line-height:1.6;}
+.cgu-footer a{color:var(--accent);text-decoration:none;}
+
+/* Lang sections */
+.lang-section{display:none;}
+.lang-section.active{display:block;}
+
+@media(max-width:640px){.section{padding:18px 16px;}.app{padding:24px 14px 80px;}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header>
+  <a href="/" class="logo-wrap">
+    <div class="logo-icon">🍸</div>
+    <div class="logo-text">Drink<span>Cost</span></div>
+  </a>
+  <div class="page-title">Conditions <em>d'Utilisation</em></div>
+  <div class="page-meta">Dernière mise à jour : 27 mars 2026</div>
+  <div class="lang-pill">
+    <button class="lang-btn active" onclick="setLang('fr',this)">FR</button>
+    <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+    <button class="lang-btn" onclick="setLang('es',this)">ES</button>
+  </div>
+</header>
+
+<a href="/" class="back-link">Retour à l'outil</a>
+
+<!-- ===== FRANÇAIS ===== -->
+<div class="lang-section active" id="lang-fr">
+
+  <div class="section">
+    <div class="section-num">01</div>
+    <div class="section-title">Objet et acceptation</div>
+    <div class="section-body">
+      <p>Les présentes Conditions Générales d'Utilisation (CGU) régissent l'accès et l'utilisation du service DrinkCost, accessible à l'adresse <strong>drinkcost.bar</strong>, édité par Jordan Haïm, domicilié en Suisse.</p>
+      <p>L'utilisation du service vaut acceptation sans réserve des présentes CGU. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser le service.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">02</div>
+    <div class="section-title">Description du service</div>
+    <div class="section-body">
+      <p>DrinkCost est un outil en ligne de calcul de coût de revient pour les professionnels de la restauration et du bar. Il permet de :</p>
+      <ul>
+        <li>Créer des fiches techniques de cocktails avec calcul automatique du coût matière</li>
+        <li>Calculer le food cost, la marge brute et la marge nette</li>
+        <li>Analyser la rentabilité d'un service ou d'un événement</li>
+      </ul>
+      <p>Le service est actuellement proposé gratuitement dans sa version de base. Des fonctionnalités premium pourront être proposées ultérieurement.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">03</div>
+    <div class="section-title">Propriété intellectuelle</div>
+    <div class="section-body">
+      <p>L'ensemble des éléments constituant le service DrinkCost — code source, design, interface, logo, nom commercial, concept et méthodes de calcul — sont la propriété exclusive de Jordan Haïm et sont protégés par les lois suisses et internationales relatives à la propriété intellectuelle.</p>
+      <p><strong>Toute reproduction, copie, modification, distribution ou exploitation commerciale</strong>, totale ou partielle, du service ou de ses composants, sans autorisation écrite préalable, est strictement interdite et pourra faire l'objet de poursuites.</p>
+      <p>La marque "DrinkCost" et le domaine drinkcost.bar sont réservés. L'usage non autorisé de ces éléments constitue une contrefaçon.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">04</div>
+    <div class="section-title">Données personnelles et confidentialité</div>
+    <div class="section-body">
+      <p>DrinkCost ne collecte pas de données personnelles directement. Les données saisies dans l'outil (recettes, coûts, prix) restent dans votre navigateur et ne sont pas transmises à nos serveurs.</p>
+      <p>Nous utilisons <strong>Google Analytics</strong> pour mesurer l'audience du site. Cet outil collecte des données anonymisées (pays, langue, type d'appareil, pages visitées). Aucune donnée permettant d'identifier personnellement un utilisateur n'est collectée.</p>
+      <p>Conformément au RGPD et à la LPD suisse, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Contact : <strong>contact@drinkcost.bar</strong></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">05</div>
+    <div class="section-title">Responsabilité et garanties</div>
+    <div class="section-body">
+      <p>Les calculs fournis par DrinkCost sont donnés à titre indicatif. DrinkCost ne garantit pas l'exactitude absolue des résultats et ne saurait être tenu responsable des décisions commerciales prises sur la base de ces calculs.</p>
+      <p>L'utilisateur est seul responsable de la vérification des données saisies et de leur adéquation à sa situation réelle (prix fournisseurs, taux de TVA locaux, législation applicable).</p>
+      <p>DrinkCost se réserve le droit de modifier, suspendre ou interrompre le service à tout moment, sans préavis ni indemnité.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">06</div>
+    <div class="section-title">Utilisation acceptable</div>
+    <div class="section-body">
+      <p>Il est interdit d'utiliser DrinkCost pour :</p>
+      <ul>
+        <li>Toute activité illégale ou frauduleuse</li>
+        <li>Scraper, copier ou reproduire le service de manière automatisée</li>
+        <li>Créer un service concurrent basé sur le concept ou le code de DrinkCost</li>
+        <li>Tenter de contourner les mesures de sécurité du service</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">07</div>
+    <div class="section-title">Droit applicable et juridiction</div>
+    <div class="section-body">
+      <p>Les présentes CGU sont soumises au <strong>droit suisse</strong>. En cas de litige, les tribunaux compétents seront ceux du canton de Neuchâtel, Suisse, sauf disposition légale contraire.</p>
+      <p>Pour toute question relative aux présentes CGU : <strong>contact@drinkcost.bar</strong></p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== ENGLISH ===== -->
+<div class="lang-section" id="lang-en">
+
+  <div class="section">
+    <div class="section-num">01</div>
+    <div class="section-title">Purpose and acceptance</div>
+    <div class="section-body">
+      <p>These Terms of Use govern access to and use of the DrinkCost service, available at <strong>drinkcost.bar</strong>, published by Jordan Haïm, based in Switzerland.</p>
+      <p>By using the service, you unconditionally accept these Terms. If you do not accept these terms, please do not use the service.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">02</div>
+    <div class="section-title">Service description</div>
+    <div class="section-body">
+      <p>DrinkCost is an online cost calculation tool for bar and restaurant professionals. It allows users to:</p>
+      <ul>
+        <li>Create cocktail recipe sheets with automatic material cost calculation</li>
+        <li>Calculate food cost, gross margin and net margin</li>
+        <li>Analyze the profitability of a service or event</li>
+      </ul>
+      <p>The service is currently offered free of charge in its basic version. Premium features may be offered in the future.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">03</div>
+    <div class="section-title">Intellectual property</div>
+    <div class="section-body">
+      <p>All elements of the DrinkCost service — source code, design, interface, logo, trade name, concept and calculation methods — are the exclusive property of Jordan Haïm and are protected by Swiss and international intellectual property laws.</p>
+      <p><strong>Any reproduction, copying, modification, distribution or commercial exploitation</strong>, in whole or in part, of the service or its components, without prior written authorization, is strictly prohibited and may result in legal action.</p>
+      <p>The "DrinkCost" brand and the drinkcost.bar domain are reserved. Unauthorized use of these elements constitutes infringement.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">04</div>
+    <div class="section-title">Personal data and privacy</div>
+    <div class="section-body">
+      <p>DrinkCost does not directly collect personal data. Data entered into the tool (recipes, costs, prices) remains in your browser and is not transmitted to our servers.</p>
+      <p>We use <strong>Google Analytics</strong> to measure site traffic. This tool collects anonymized data (country, language, device type, pages visited). No data that could personally identify a user is collected.</p>
+      <p>In accordance with GDPR and Swiss data protection law (LPD), you have the right to access, correct and delete your data. Contact: <strong>contact@drinkcost.bar</strong></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">05</div>
+    <div class="section-title">Liability and warranties</div>
+    <div class="section-body">
+      <p>Calculations provided by DrinkCost are for guidance only. DrinkCost does not guarantee the absolute accuracy of results and cannot be held responsible for business decisions made on the basis of these calculations.</p>
+      <p>The user is solely responsible for verifying the data entered and its adequacy to their actual situation (supplier prices, local VAT rates, applicable legislation).</p>
+      <p>DrinkCost reserves the right to modify, suspend or discontinue the service at any time, without notice or compensation.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">06</div>
+    <div class="section-title">Acceptable use</div>
+    <div class="section-body">
+      <p>It is prohibited to use DrinkCost for:</p>
+      <ul>
+        <li>Any illegal or fraudulent activity</li>
+        <li>Scraping, copying or reproducing the service in an automated manner</li>
+        <li>Creating a competing service based on DrinkCost's concept or code</li>
+        <li>Attempting to circumvent the service's security measures</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">07</div>
+    <div class="section-title">Applicable law and jurisdiction</div>
+    <div class="section-body">
+      <p>These Terms are governed by <strong>Swiss law</strong>. In the event of a dispute, the competent courts shall be those of the canton of Neuchâtel, Switzerland, unless otherwise required by law.</p>
+      <p>For any questions regarding these Terms: <strong>contact@drinkcost.bar</strong></p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== ESPAÑOL ===== -->
+<div class="lang-section" id="lang-es">
+
+  <div class="section">
+    <div class="section-num">01</div>
+    <div class="section-title">Objeto y aceptación</div>
+    <div class="section-body">
+      <p>Las presentes Condiciones Generales de Uso regulan el acceso y el uso del servicio DrinkCost, disponible en <strong>drinkcost.bar</strong>, publicado por Jordan Haïm, con domicilio en Suiza.</p>
+      <p>El uso del servicio implica la aceptación sin reservas de estas Condiciones. Si no acepta estas condiciones, por favor no utilice el servicio.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">02</div>
+    <div class="section-title">Descripción del servicio</div>
+    <div class="section-body">
+      <p>DrinkCost es una herramienta en línea de cálculo de costes para profesionales de bares y restaurantes. Permite:</p>
+      <ul>
+        <li>Crear fichas técnicas de cócteles con cálculo automático del coste de materia prima</li>
+        <li>Calcular el food cost, el margen bruto y el margen neto</li>
+        <li>Analizar la rentabilidad de un servicio o evento</li>
+      </ul>
+      <p>El servicio se ofrece actualmente de forma gratuita en su versión básica. En el futuro podrán ofrecerse funciones premium.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">03</div>
+    <div class="section-title">Propiedad intelectual</div>
+    <div class="section-body">
+      <p>Todos los elementos del servicio DrinkCost — código fuente, diseño, interfaz, logotipo, nombre comercial, concepto y métodos de cálculo — son propiedad exclusiva de Jordan Haïm y están protegidos por las leyes suizas e internacionales de propiedad intelectual.</p>
+      <p><strong>Cualquier reproducción, copia, modificación, distribución o explotación comercial</strong>, total o parcial, del servicio o sus componentes, sin autorización escrita previa, está estrictamente prohibida y podrá dar lugar a acciones legales.</p>
+      <p>La marca "DrinkCost" y el dominio drinkcost.bar están reservados. El uso no autorizado de estos elementos constituye una infracción.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">04</div>
+    <div class="section-title">Datos personales y privacidad</div>
+    <div class="section-body">
+      <p>DrinkCost no recopila datos personales directamente. Los datos introducidos en la herramienta (recetas, costes, precios) permanecen en su navegador y no se transmiten a nuestros servidores.</p>
+      <p>Utilizamos <strong>Google Analytics</strong> para medir el tráfico del sitio. Esta herramienta recopila datos anonimizados (país, idioma, tipo de dispositivo, páginas visitadas). No se recopila ningún dato que pueda identificar personalmente a un usuario.</p>
+      <p>De conformidad con el RGPD y la ley suiza de protección de datos (LPD), usted tiene derecho a acceder, corregir y eliminar sus datos. Contacto: <strong>contact@drinkcost.bar</strong></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">05</div>
+    <div class="section-title">Responsabilidad y garantías</div>
+    <div class="section-body">
+      <p>Los cálculos proporcionados por DrinkCost son meramente orientativos. DrinkCost no garantiza la exactitud absoluta de los resultados y no puede ser responsable de las decisiones comerciales tomadas sobre la base de estos cálculos.</p>
+      <p>El usuario es el único responsable de verificar los datos introducidos y su adecuación a su situación real (precios de proveedores, tipos de IVA locales, legislación aplicable).</p>
+      <p>DrinkCost se reserva el derecho de modificar, suspender o interrumpir el servicio en cualquier momento, sin previo aviso ni indemnización.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">06</div>
+    <div class="section-title">Uso aceptable</div>
+    <div class="section-body">
+      <p>Está prohibido utilizar DrinkCost para:</p>
+      <ul>
+        <li>Cualquier actividad ilegal o fraudulenta</li>
+        <li>Extraer, copiar o reproducir el servicio de forma automatizada</li>
+        <li>Crear un servicio competidor basado en el concepto o código de DrinkCost</li>
+        <li>Intentar eludir las medidas de seguridad del servicio</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">07</div>
+    <div class="section-title">Ley aplicable y jurisdicción</div>
+    <div class="section-body">
+      <p>Las presentes Condiciones se rigen por el <strong>derecho suizo</strong>. En caso de litigio, los tribunales competentes serán los del cantón de Neuchâtel, Suiza, salvo disposición legal contraria.</p>
+      <p>Para cualquier pregunta sobre estas Condiciones: <strong>contact@drinkcost.bar</strong></p>
+    </div>
+  </div>
+
+</div>
+
+<div class="cgu-footer">
+  <p>© 2026 DrinkCost — Jordan Haïm — Neuchâtel, Suisse<br>
+  <a href="/">drinkcost.bar</a> · <a href="mailto:contact@drinkcost.bar">contact@drinkcost.bar</a></p>
+</div>
+
+</div>
+
+<script>
+function setLang(lang, btn) {
+  document.querySelectorAll('.lang-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('lang-' + lang).classList.add('active');
+  btn.classList.add('active');
+  document.documentElement.lang = lang;
+}
+
+// Auto-detect
+const lang = (navigator.language || 'fr').toLowerCase();
+let detected = 'fr';
+if (lang.startsWith('en')) detected = 'en';
+else if (lang.startsWith('es')) detected = 'es';
+if (detected !== 'fr') {
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.toLowerCase() === detected);
+  });
+  document.querySelectorAll('.lang-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('lang-' + detected).classList.add('active');
+  document.documentElement.lang = detected;
+}
+</script>
+</body>
+</html>
