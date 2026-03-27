@@ -941,7 +941,7 @@ select option { background: var(--bg3); }
     <div class="renta-grid">
       <div class="ri"><div class="ri-label" data-i18n="rr_gross">Marge brute / cocktail</div><div class="ri-value" id="rr-gross"></div><div class="ri-unit cur-label">CHF</div></div>
       <div class="ri"><div class="ri-label" data-i18n="rr_labor">Coût MO / cocktail</div><div class="ri-value" id="rr-labor"></div><div class="ri-unit cur-label">CHF</div></div>
-      <div class="ri"><div class="ri-label" data-i18n="rr_net">Marge nette / cocktail</div><div class="ri-value" id="rr-net"></div><div class="ri-unit"><span class="cur-label">CHF</span> <span data-i18n="rr_unit_net">après TVA & MO</span></div></div>
+      <div class="ri"><div class="ri-label" data-i18n="rr_net">Marge nette / cocktail</div><div class="ri-value" id="rr-net"></div><div class="ri-unit"><span class="cur-label">CHF</span> <span id="rr-unit-net-label">après TVA & MO</span></div></div>
       <div class="ri"><div class="ri-label" data-i18n="rr_rev">Revenus / service</div><div class="ri-value" id="rr-rev"></div><div class="ri-unit cur-label">CHF</div></div>
       <div class="ri"><div class="ri-label" data-i18n="rr_break">Seuil de rentabilité</div><div class="ri-value" id="rr-break"></div><div class="ri-unit">cocktails / soir</div></div>
       <div class="ri"><div class="ri-label" data-i18n="rr_profit">Bénéfice net / service</div><div class="ri-value" id="rr-profit"></div><div class="ri-unit cur-label">CHF</div></div>
@@ -1190,6 +1190,8 @@ function applyTranslations(){
   document.querySelector('.tagline').textContent=t('tagline');
   // data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.getAttribute('data-i18n')));
+  const netLbl=document.getElementById('rr-unit-net-label');
+  if(netLbl) netLbl.textContent=t('rr_unit_net');
   // data-i18n-html elements
   document.querySelectorAll('[data-i18n-html]').forEach(el=>el.innerHTML=t(el.getAttribute('data-i18n-html')));
   // Panel titles
