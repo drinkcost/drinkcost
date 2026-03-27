@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DrinkCost — Fiches Techniques</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@300;400&display=swap');
+
+:root {
+  /* Brand palette — deep navy + amber glow */
+  --bg:        #0d1117;
+  --bg2:       #161b22;
+  --bg3:       #1c2330;
+  --bg4:       #21293a;
+  --accent:    #e8a020;
+  --accent2:   #f5c842;
+  --accent-dim:#7a520f;
+  --accent-bg: rgba(232,160,32,0.08);
+  --teal:      #1fb88a;
+  --teal-bg:   rgba(31,184,138,0.1);
+  --red:       #e05252;
+  --red-bg:    rgba(224,82,82,0.1);
+  --blue:      #4d8fd4;
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(232,160,32,0.2);
+  --text:      #e6edf3;
+  --text2:     #8b949e;
+  --text3:     #484f58;
+  --radius:    10px;
+  --radius-sm: 6px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* Subtle background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(232,160,32,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(77,143,212,0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 48px 24px 100px;
+}
+
+/* ── HEADER ── */
+header { text-align: center; margin-bottom: 40px; }
+
+.logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.logo-icon {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.logo-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.02em;
+}
+.logo-text span { color: var(--accent); }
+
+.header-sub {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  letter-spacing: -.01em;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+.header-sub em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+.tagline {
+  font-size: 12px;
+  color: var(--text2);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.header-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 24px auto;
+  max-width: 300px;
+}
+.header-divider::before,
+.header-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border2));
+}
+.header-divider::after { background: linear-gradient(90deg, var(--border2), transparent); }
+.header-divider-dot {
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: .6;
+}
+
+/* Currency pill */
+.currency-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 999px;
+  padding: 6px 16px 6px 12px;
+  margin-top: 4px;
+}
+.currency-pill .cur-icon { font-size: 13px; }
+.currency-pill label {
+  font-size: 10px;
+  letter-spacing: .15em;
+  color: var(--text2);
+  text-transform: uppercase;
+  margin: 0;
+}
+.currency-pill select {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  min-width: 130px;
+}
+
+/* ── TABS ── */
+.nav-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 5px;
+}
+.nav-tab {
+  flex: 1;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 10px 16px;
+  cursor: pointer;
+  border: none;
+  color: var(--text2);
+  background: transparent;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  border-radius: 7px;
+  transition: all .2s;
+}
+.nav-tab.active {
+  color: var(--bg);
+  background: var(--accent);
+  font-weight: 600;
+}
+.nav-tab:hover:not(.active) { color: var(--text); background: var(--bg3); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ── PANELS ── */
+.panel {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 12px;
+  transition: border-color .2s;
+}
+.panel:hover { border-color: rgba(255,255,255,0.1); }
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.panel-title-icon {
+  width: 22px; height: 22px;
+  background: var(--accent-bg);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+}
+.panel-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── FORM ── */
+.form-row { display: grid; gap: 12px; margin-bottom: 12px; }
+.cols-2 { grid-template-columns: 1fr 1fr; }
+.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: var(--text2);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+input, select {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 13px;
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  outline: none;
+  transition: border-color .15s, background .15s;
+  -webkit-appearance: none;
+}
+input:focus, select:focus {
+  border-color: var(--accent-dim);
+  background: var(--bg4);
+}
+input::placeholder { color: var(--text3); font-style: italic; }
+input:disabled { opacity: .28; cursor: not-allowed; }
+select option { background: var(--bg3); }
+
+/* ── TOGGLE ── */
+.toggle-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.toggle-wrap { position: relative; width: 38px; height: 21px; flex-shrink: 0; }
+.toggle-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
+.toggle-slider {
+  position: absolute; inset: 0;
+  background: var(--bg4);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: .2s;
+}
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 13px; height: 13px;
+  left: 3px; top: 3px;
+  background: var(--text3);
+  border-radius: 50%;
+  transition: .2s;
+}
+.toggle-wrap input:checked + .toggle-slider { background: var(--accent-dim); border-color: var(--accent); }
+.toggle-wrap input:checked + .toggle-slider::before { transform: translateX(17px); background: var(--accent); }
+.toggle-label { font-size: 12px; color: var(--text2); }
+.toggle-label.on { color: var(--text); }
+
+/* Advanced btn */
+.advanced-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text2);
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  padding: 8px 14px;
+  margin-top: 12px;
+  border-radius: var(--radius-sm);
+  transition: all .2s;
+}
+.advanced-btn:hover { color: var(--accent); border-color: var(--border2); background: var(--bg4); }
+.adv-chev { display: inline-block; transition: transform .2s; font-size: 9px; }
+.adv-chev.open { transform: rotate(180deg); }
+.adv-sec { display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); animation: fi .2s ease; }
+.adv-sec.open { display: block; }
+
+/* ── INGREDIENT ROWS ── */
+#ingredients-list { margin-bottom: 12px; }
+.ingredient-row {
+  display: grid;
+  grid-template-columns: 2fr 65px 58px 1.1fr 80px 34px;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: end;
+  animation: fi .2s ease;
+}
+.produce-row {
+  display: grid;
+  grid-template-columns: 2fr 110px 80px 80px 70px 34px;
+  gap: 8px;
+  margin-bottom: 12px;
+  align-items: end;
+  animation: fi .2s ease;
+}
+.produce-cost {
+  background: var(--bg4);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+@keyframes fi { from{opacity:0;transform:translateY(-5px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: all .15s;
+}
+.btn-ghost {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.btn-ghost:hover { border-color: var(--border2); color: var(--accent); background: var(--bg4); }
+.btn-remove {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text3);
+  cursor: pointer;
+  padding: 9px;
+  font-size: 14px;
+  line-height: 1;
+  transition: all .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-remove:hover { border-color: var(--red); color: var(--red); background: var(--red-bg); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #0d1117;
+  font-weight: 700;
+  width: 100%;
+  justify-content: center;
+  font-size: 12px;
+  padding: 14px;
+  margin-top: 10px;
+  border-radius: var(--radius-sm);
+  letter-spacing: .12em;
+}
+.btn-primary:hover { filter: brightness(1.08); }
+
+/* ── COMPLEXITY ── */
+.cplx-bar { display: flex; gap: 4px; margin-top: 6px; }
+.cplx-dot {
+  width: 28px; height: 5px;
+  border-radius: 3px;
+  background: var(--bg4);
+  border: 1px solid var(--border);
+  transition: .2s;
+}
+.cplx-dot.on { background: var(--accent); border-color: var(--accent); }
+.cplx-dot.hi { background: var(--red); border-color: var(--red); }
+
+/* ── RESULT ── */
+#result { display: none; }
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.rname {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.1;
+}
+.rbadge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  padding: 5px 14px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+.bg { background: var(--teal-bg); color: var(--teal); border: 1px solid rgba(31,184,138,.3); }
+.bo { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--border2); }
+.bb { background: var(--red-bg); color: var(--red); border: 1px solid rgba(224,82,82,.3); }
+
+/* KPI grid */
+.kpi-row { display: grid; gap: 8px; margin-bottom: 20px; }
+.k4 { grid-template-columns: repeat(4,1fr); }
+.k5 { grid-template-columns: repeat(5,1fr); }
+.kpi {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 14px;
+  text-align: center;
+  transition: border-color .2s;
+}
+.kpi:hover { border-color: var(--border2); }
+.kpi-label { font-size: 9px; font-weight: 600; letter-spacing: .18em; color: var(--text2); text-transform: uppercase; margin-bottom: 8px; }
+.kpi-value { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; line-height: 1; }
+.kv-g { color: var(--teal); }
+.kv-b { color: var(--red); }
+.kv-o { color: var(--accent); }
+.kpi-unit { font-size: 10px; color: var(--text2); margin-top: 3px; font-family: 'JetBrains Mono', monospace; }
+
+/* Margin bar */
+.mbar-wrap { margin-bottom: 20px; }
+.mbar-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text2); margin-bottom: 6px; font-weight: 500; }
+.mbar-track { height: 6px; background: var(--bg4); border-radius: 999px; overflow: hidden; }
+.mbar-fill { height: 100%; border-radius: 999px; transition: width .7s cubic-bezier(.4,0,.2,1); }
+
+/* Table */
+.itbl { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+.itbl th {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .15em; color: var(--text3);
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.itbl th:last-child { text-align: right; }
+.itbl td {
+  padding: 10px 12px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: middle;
+}
+.itbl td:last-child { text-align: right; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+.itbl tr:hover td { background: rgba(255,255,255,0.02); }
+.in { color: var(--text); font-weight: 500; }
+.id { color: var(--text2); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+.ipct {
+  font-size: 10px; font-family: 'JetBrains Mono', monospace;
+  padding: 2px 7px; background: var(--bg4);
+  border-radius: 4px; color: var(--text2); margin-left: 6px;
+}
+.itot td { border-top: 1px solid var(--border2); font-weight: 600; padding-top: 12px; }
+.itot td:last-child { color: var(--accent); font-size: 15px; }
+
+/* Reco box */
+.reco {
+  background: linear-gradient(135deg, var(--bg3), var(--bg4));
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text2);
+}
+.reco strong { color: var(--text); font-weight: 600; }
+
+/* Actions */
+.actions-row { display: flex; gap: 8px; margin-top: 12px; }
+.actions-row .btn { flex: 1; justify-content: center; }
+
+/* Rentability grid */
+.renta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+.ri {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  transition: border-color .2s;
+}
+.ri:hover { border-color: var(--border2); }
+.ri-label { font-size: 9px; font-weight: 700; letter-spacing: .15em; color: var(--text2); text-transform: uppercase; margin-bottom: 6px; }
+.ri-value { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--accent); line-height: 1.1; }
+.ri-value.g { color: var(--teal); }
+.ri-value.b { color: var(--red); }
+.ri-unit { font-size: 10px; color: var(--text2); margin-top: 3px; font-family: 'JetBrains Mono', monospace; }
+
+/* Suggest price */
+#r-suggest {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* Helper text */
+.helper { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 14px; }
+
+@media(max-width:640px){
+  .ingredient-row{grid-template-columns:1fr 60px 52px 1fr 70px 32px;}
+  .produce-row{grid-template-columns:1fr 90px 70px 70px 60px 32px;}
+  .cols-3,.cols-4{grid-template-columns:1fr 1fr;}
+  .k5{grid-template-columns:repeat(3,1fr);}
+  .k4{grid-template-columns:repeat(2,1fr);}
+  .renta-grid{grid-template-columns:1fr;}
+  .panel{padding:18px 16px;}
+  .nav-tabs{gap:4px;}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="logo-wrap">
+    <div class="logo-icon">🍸</div>
+    <div class="logo-text">Drink<span>Cost</span></div>
+  </div>
+  <div class="header-sub">Fiche <em>Technique</em></div>
+  <div class="tagline">Calcul coût · marge · rentabilité</div>
+  <div class="header-divider"><div class="header-divider-dot"></div></div>
+  <div class="currency-pill">
+    <span class="cur-icon">💱</span>
+    <label>Devise</label>
+    <select id="currency-select" onchange="setCurrency(this.value)">
+      <option value="CHF">CHF — Franc suisse</option>
+      <option value="EUR">EUR — Euro</option>
+      <option value="USD">USD — Dollar US</option>
+      <option value="GBP">GBP — Livre sterling</option>
+      <option value="CAD">CAD — Dollar canadien</option>
+      <option value="XCD">XCD — Dollar des Caraïbes</option>
+      <option value="MAD">MAD — Dirham marocain</option>
+      <option value="AED">AED — Dirham des EAU</option>
+      <option value="JPY">JPY — Yen japonais</option>
+      <option value="AUD">AUD — Dollar australien</option>
+    </select>
+    <span id="currency-symbol" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent)">CHF</span>
+  </div>
+</header>
+
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="switchTab('fiche',this)">Fiche technique</button>
+  <button class="nav-tab" onclick="switchTab('renta',this)">Rentabilité</button>
+</div>
+
+<!-- ===== TAB FICHE ===== -->
+<div class="tab-content active" id="tab-fiche">
+<div id="form-section">
+
+  <div class="panel">
+    <div class="panel-title"><span class="panel-title-icon">🍹</span> Informations cocktail</div>
+    <div class="form-row cols-2">
+      <div><label>Nom du cocktail</label><input type="text" id="cocktail-name" placeholder="ex. Negroni…"></div>
+      <div><label>Prix de vente (CHF)</label><input type="number" id="sell-price" placeholder="18" min="0" step="0.5"></div>
+    </div>
+    <div class="form-row cols-3">
+      <div><label>Catégorie</label>
+        <select id="category">
+          <option>Classique</option><option>Signature</option><option>Mocktail</option>
+          <option>Champagne / Bulles</option><option>Shot</option>
+        </select>
+      </div>
+      <div><label>Verre</label><input type="text" id="glass" placeholder="Coupe, Highball…"></div>
+      <div><label>Méthode</label>
+        <select id="method" onchange="setCplx('complexity-bar','complexity-text',this.value)">
+          <option value="direct">Direct (build)</option>
+          <option value="shaker">Shaker</option>
+          <option value="verre-melange">Verre à mélange</option>
+          <option value="blender">Blender</option>
+          <option value="infusion">Infusion / Macération</option>
+          <option value="carbonation">Carbonation</option>
+          <option value="multi">Multi-techniques</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:2px">
+      <label>Complexité estimée selon méthode</label>
+      <div class="cplx-bar" id="complexity-bar"><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div></div>
+      <div style="font-size:10px;color:var(--text-faint);margin-top:4px" id="complexity-text">Direct (build) — faible complexité</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title"><span class="panel-title-icon">🫙</span> Ingrédients liquides</div>
+    <div class="helper">Spiritueux, sirops, jus en bouteille, sodas — tout ce qui se mesure en ml ou cl.</div>
+    <div id="ingredients-list"></div>
+    <button class="btn btn-ghost" onclick="addIng()">+ Ajouter un liquide</button>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title"><span class="panel-title-icon">🌿</span> Ingrédients frais & solides</div>
+    <div class="helper">Menthe, citrons, fruits, sucre en morceaux, épices — tout ce qui se vend au g ou au kg. Le coût à la dose est calculé automatiquement selon le rendement du paquet.</div>
+    <div id="produce-list"></div>
+    <button class="btn btn-ghost" onclick="addProduce()">+ Ajouter un ingrédient frais</button>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title"><span class="panel-title-icon">⚙️</span> Paramètres</div>
+    <div class="form-row cols-3">
+      <div><label>Food cost cible (%)</label><input type="number" id="target-fc" value="20" min="1" max="100"></div>
+      <div><label>Coût garnish (CHF)</label><input type="number" id="garnish-cost" value="0.30" step="0.05" min="0"></div>
+      <div><label>Coût glace (CHF)</label><input type="number" id="ice-cost" value="0.15" step="0.05" min="0"></div>
+    </div>
+    <div class="form-row cols-2">
+      <div>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+    <label class="toggle-wrap" style="margin-bottom:0">
+      <input type="checkbox" id="labor-toggle" onchange="toggleLabor(this)">
+      <span class="toggle-slider"></span>
+    </label>
+    <label style="margin-bottom:0;cursor:pointer" onclick="document.getElementById('labor-toggle').click()">Coût main d'œuvre (CHF)</label>
+  </div>
+  <input type="number" id="labor-cost" value="1.50" step="0.10" min="0" disabled style="opacity:.3;cursor:not-allowed">
+</div>
+      <div><label>TVA (%)</label><input type="number" id="tva-rate" value="7.7" step="0.1" min="0" placeholder="7.7 CH · 10 FR…"></div>
+    </div>
+
+    <button class="advanced-btn" onclick="toggleAdv()">
+      <span class="adv-chev" id="adv-chev">▼</span>&nbsp;+ de paramètres
+    </button>
+    <div class="adv-sec" id="adv-sec">
+      <div class="toggle-row" style="margin-top:4px">
+        <label class="toggle-wrap"><input type="checkbox" id="waste-toggle" onchange="toggleWaste(this)"><span class="toggle-slider"></span></label>
+        <span class="toggle-label" id="waste-lbl">Taux de perte / gaspillage</span>
+      </div>
+      <div id="waste-row" style="opacity:.3;pointer-events:none;transition:opacity .2s">
+        <div class="form-row cols-2">
+          <div><label>Taux de perte (%)</label><input type="number" id="waste-pct" value="3" min="0" max="30" step="0.5" disabled></div>
+          <div style="display:flex;align-items:flex-end;padding-bottom:4px"><span style="font-size:11px;color:var(--text-dim);line-height:1.5">Majore le coût matière des pertes réelles au service.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="calculate()">Calculer la fiche technique</button>
+  </div>
+
+</div><!-- /form-section -->
+
+<!-- RESULT -->
+<div class="panel" id="result">
+  <div class="result-header">
+    <div>
+      <div style="font-size:9px;letter-spacing:.2em;color:var(--text-dim);text-transform:uppercase;margin-bottom:3px">Fiche technique</div>
+      <div class="rname" id="r-name"></div>
+      <div style="font-size:11px;color:var(--text-dim);margin-top:3px" id="r-meta"></div>
+      <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
+        <div class="cplx-bar" id="r-cplx-bar"><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div></div>
+        <span style="font-size:11px;color:var(--text-dim)" id="r-cplx-text"></span>
+      </div>
+    </div>
+    <span class="rbadge" id="r-badge"></span>
+  </div>
+
+  <div class="toggle-row" style="margin-bottom:14px">
+    <label class="toggle-wrap"><input type="checkbox" id="net-toggle" onchange="toggleNet()"><span class="toggle-slider"></span></label>
+    <span style="font-size:11px;color:var(--text-dim)">Afficher la marge nette (après TVA)</span>
+  </div>
+
+  <div class="kpi-row k5">
+    <div class="kpi"><div class="kpi-label">Coût matière</div><div class="kpi-value kv-o" id="r-cost"></div><div class="kpi-unit">CHF</div></div>
+    <div class="kpi"><div class="kpi-label">Prix de vente</div><div class="kpi-value" id="r-price"></div><div class="kpi-unit">CHF</div></div>
+    <div class="kpi"><div class="kpi-label">Food cost</div><div class="kpi-value" id="r-fc"></div><div class="kpi-unit">%</div></div>
+    <div class="kpi"><div class="kpi-label">Marge brute</div><div class="kpi-value" id="r-margin"></div><div class="kpi-unit">CHF</div></div>
+    <div class="kpi" id="kpi-net" style="display:none"><div class="kpi-label">Marge nette</div><div class="kpi-value" id="r-net"></div><div class="kpi-unit">CHF</div></div>
+  </div>
+
+  <div class="mbar-wrap">
+    <div class="mbar-labels"><span>Coût matière</span><span id="r-fc-lbl"></span></div>
+    <div class="mbar-track"><div class="mbar-fill" id="r-bar" style="width:0%"></div></div>
+  </div>
+
+  <table class="itbl">
+    <thead><tr><th>Ingrédient</th><th>Dosage</th><th>Réf.</th><th style="text-align:right">Coût dose</th></tr></thead>
+    <tbody id="r-ing-body"></tbody>
+    <tfoot>
+      <tr class="itot"><td colspan="3"><strong>Total ingrédients</strong></td><td id="r-ing-total"></td></tr>
+      <tr><td colspan="3" style="color:var(--text-dim);font-size:11px">Garnish + glace + main d'œuvre</td><td id="r-overhead" style="color:var(--text-dim)"></td></tr>
+      <tr id="r-waste-tr" style="display:none"><td colspan="3" style="color:var(--text-dim);font-size:11px">Taux de perte</td><td id="r-waste-val" style="color:var(--red)"></td></tr>
+      <tr class="itot"><td colspan="3"><strong>Coût total</strong></td><td id="r-total"></td></tr>
+    </tfoot>
+  </table>
+
+  <div class="reco" id="r-reco"></div>
+  <div id="r-suggest-wrap" style="display:none;margin-bottom:18px">
+    <div style="font-size:9px;letter-spacing:.25em;color:var(--text-dim);text-transform:uppercase;margin-bottom:5px">Prix suggéré pour atteindre l'objectif food cost</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--gold)" id="r-suggest"></div>
+  </div>
+
+  <div class="actions-row">
+    <button class="btn btn-ghost" onclick="window.print()">Imprimer</button>
+    <button class="btn btn-ghost" onclick="newRecipe()">Nouvelle fiche</button>
+    <button class="btn btn-ghost" onclick="copyRes()">Copier résumé</button>
+  </div>
+</div>
+</div><!-- /tab-fiche -->
+
+<!-- ===== TAB RENTABILITÉ ===== -->
+<div class="tab-content" id="tab-renta">
+
+  <div class="panel">
+    <div class="panel-title"><span class="panel-title-icon">🍹</span> Paramètres du cocktail</div>
+    <div class="form-row cols-3">
+      <div><label>Nom (optionnel)</label><input type="text" id="r2-name" placeholder="ex. Signature Mango…"></div>
+      <div><label>Prix de vente (CHF)</label><input type="number" id="r2-price" placeholder="18" min="0" step="0.5"></div>
+      <div><label>Coût matière total (CHF)</label><input type="number" id="r2-cost" placeholder="3.20" min="0" step="0.1"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title"><span class="panel-title-icon">🏛️</span> Type de service</div>
+    <div class="form-row cols-3">
+      <div><label>Type d'établissement</label>
+        <select id="r2-type" onchange="onServiceType()">
+          <option value="bar">Bar standard</option>
+          <option value="gastro">Bar gastronomique / Hôtel</option>
+          <option value="envoi">Bar d'envoi / Volume</option>
+          <option value="event">Événement / Privatisation</option>
+        </select>
+      </div>
+      <div><label>Durée du service (h)</label><input type="number" id="r2-hours" value="6" min="1" max="24" step="0.5"></div>
+      <div id="r2-pax-div"><label>Pax attendus</label><input type="number" id="r2-pax" placeholder="ex. 80" min="1"></div>
+    </div>
+    <div class="form-row cols-2">
+      <div><label>Cocktails vendus / soir (estimation)</label><input type="number" id="r2-qty" placeholder="ex. 40" min="1"></div>
+      <div><label>Seuil de rentabilité (calculé)</label><input type="number" id="r2-break" placeholder="auto" readonly style="color:var(--gold)"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title"><span class="panel-title-icon">⏱️</span> Technique & temps</div>
+    <div class="form-row cols-3">
+      <div><label>Méthode</label>
+        <select id="r2-method" onchange="onR2Method()">
+          <option value="direct">Direct (build)</option>
+          <option value="shaker">Shaker</option>
+          <option value="verre-melange">Verre à mélange</option>
+          <option value="blender">Blender</option>
+          <option value="infusion">Infusion / Macération</option>
+          <option value="carbonation">Carbonation</option>
+          <option value="multi">Multi-techniques</option>
+        </select>
+      </div>
+      <div><label>Temps de préparation (min)</label><input type="number" id="r2-preptime" value="3" min="0.5" step="0.5"></div>
+      <div><label>Taux horaire barman (CHF/h)</label><input type="number" id="r2-hourly" value="35" min="0" step="1"></div>
+    </div>
+    <div>
+      <label>Complexité selon méthode</label>
+      <div class="cplx-bar" id="r2-cplx-bar"><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div></div>
+      <div style="font-size:10px;color:var(--text-faint);margin-top:4px" id="r2-cplx-text"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title"><span class="panel-title-icon">📊</span> Charges fixes du service</div>
+    <div class="form-row cols-3">
+      <div><label>Coût barman / service (CHF)</label><input type="number" id="r2-staff" value="210" min="0" step="10"></div>
+      <div><label>Frais fixes / soir (CHF)</label><input type="number" id="r2-fixed" value="80" min="0" step="10" placeholder="loyer, énergie…"></div>
+      <div><label>TVA (%)</label><input type="number" id="r2-tva" value="7.7" step="0.1" min="0"></div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" onclick="calcRenta()" style="width:100%;margin-bottom:14px">Analyser la rentabilité</button>
+
+  <div class="panel" id="renta-result" style="display:none">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;font-style:italic;margin-bottom:18px" id="rr-title"></div>
+    <div class="renta-grid">
+      <div class="ri"><div class="ri-label">Marge brute / cocktail</div><div class="ri-value" id="rr-gross"></div><div class="ri-unit">CHF</div></div>
+      <div class="ri"><div class="ri-label">Coût MO / cocktail</div><div class="ri-value" id="rr-labor"></div><div class="ri-unit">CHF</div></div>
+      <div class="ri"><div class="ri-label">Marge nette / cocktail</div><div class="ri-value" id="rr-net"></div><div class="ri-unit">CHF (après TVA & MO)</div></div>
+      <div class="ri"><div class="ri-label">Revenus / service</div><div class="ri-value" id="rr-rev"></div><div class="ri-unit">CHF</div></div>
+      <div class="ri"><div class="ri-label">Seuil de rentabilité</div><div class="ri-value" id="rr-break"></div><div class="ri-unit">cocktails / soir</div></div>
+      <div class="ri"><div class="ri-label">Bénéfice net / service</div><div class="ri-value" id="rr-profit"></div><div class="ri-unit">CHF</div></div>
+      <div class="ri"><div class="ri-label">Temps total préparation</div><div class="ri-value" id="rr-time"></div><div class="ri-unit">min / service</div></div>
+      <div class="ri"><div class="ri-label">Complexité</div><div class="ri-value" style="font-size:14px;margin-top:6px" id="rr-cplx"></div></div>
+    </div>
+    <div class="reco" id="rr-reco"></div>
+  </div>
+
+</div><!-- /tab-renta -->
+</div><!-- /app -->
+
+<script>
+// ===== DATA =====
+const CPLX = {
+  'direct':        {lvl:1, label:'Direct (build) — faible complexité', t:2},
+  'shaker':        {lvl:2, label:'Shaker — complexité modérée', t:3},
+  'verre-melange': {lvl:3, label:'Verre à mélange — bonne maîtrise requise', t:4},
+  'blender':       {lvl:2, label:'Blender — complexité modérée', t:3},
+  'infusion':      {lvl:4, label:'Infusion / Macération — préparation longue', t:10},
+  'carbonation':   {lvl:4, label:'Carbonation — technique avancée', t:8},
+  'multi':         {lvl:5, label:'Multi-techniques — haute complexité', t:7},
+};
+const VOLS = [
+  {v:200,l:'20 cl — Canette'},{v:250,l:'25 cl — Canette'},{v:330,l:'33 cl — Canette'},
+  {v:500,l:'50 cl — Demi-bouteille'},{v:700,l:'70 cl — Standard'},{v:750,l:'75 cl — Vin/Champagne'},
+  {v:1000,l:'100 cl — Litre'},{v:1500,l:'150 cl — Magnum'},
+  {v:0,l:'Autre — saisir le volume'},
+];
+let ingCount=0, prodCount=0, lastRes={};
+
+// ===== CURRENCY =====
+const CURRENCIES = {
+  'CHF': { symbol: 'CHF', locale: 'fr-CH' },
+  'EUR': { symbol: '€',   locale: 'fr-FR' },
+  'USD': { symbol: '$',   locale: 'en-US' },
+  'GBP': { symbol: '£',   locale: 'en-GB' },
+  'CAD': { symbol: 'CA$', locale: 'fr-CA' },
+  'XCD': { symbol: 'EC$', locale: 'en-AG' },
+  'MAD': { symbol: 'MAD', locale: 'fr-MA' },
+  'AED': { symbol: 'AED', locale: 'ar-AE' },
+  'JPY': { symbol: '¥',   locale: 'ja-JP' },
+  'AUD': { symbol: 'A$',  locale: 'en-AU' },
+};
+let currentCurrency = 'CHF';
+
+function setCurrency(code) {
+  currentCurrency = code;
+  const cur = CURRENCIES[code] || CURRENCIES['CHF'];
+  document.getElementById('currency-symbol').textContent = cur.symbol;
+  // Update all CHF labels in the UI dynamically
+  document.querySelectorAll('.cur-label').forEach(el => el.textContent = cur.symbol);
+}
+
+function curSym() {
+  return (CURRENCIES[currentCurrency] || CURRENCIES['CHF']).symbol;
+}
+
+function detectCurrency() {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    const lang = (navigator.language || 'fr-CH').toLowerCase();
+    let code = 'CHF'; // default
+    if (tz.includes('Zurich') || tz.includes('Geneva') || lang.includes('ch')) code = 'CHF';
+    else if (tz.includes('London') || lang.startsWith('en-gb')) code = 'GBP';
+    else if (tz.includes('America/New_York') || tz.includes('America/Los_Angeles') || lang.startsWith('en-us')) code = 'USD';
+    else if (tz.includes('Paris') || tz.includes('Berlin') || tz.includes('Rome') || tz.includes('Madrid') || lang.startsWith('fr-fr') || lang.startsWith('de') || lang.startsWith('it') || lang.startsWith('es')) code = 'EUR';
+    else if (tz.includes('Toronto') || tz.includes('Montreal') || lang.startsWith('fr-ca') || lang.startsWith('en-ca')) code = 'CAD';
+    else if (tz.includes('Antigua') || tz.includes('Barbados')) code = 'XCD';
+    else if (tz.includes('Guadeloupe') || tz.includes('Martinique') || tz.includes('Reunion') || tz.includes('Mayotte')) code = 'EUR';
+    else if (tz.includes('Casablanca')) code = 'MAD';
+    else if (tz.includes('Dubai') || tz.includes('Abu_Dhabi')) code = 'AED';
+    else if (tz.includes('Tokyo')) code = 'JPY';
+    else if (tz.includes('Sydney') || tz.includes('Melbourne')) code = 'AUD';
+    document.getElementById('currency-select').value = code;
+    setCurrency(code);
+  } catch(e) { setCurrency('CHF'); }
+}
+
+// ===== TABS =====
+function switchTab(t,btn){
+  document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(x=>x.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ===== COMPLEXITY =====
+function setCplx(barId, txtId, method) {
+  const c = CPLX[method]||CPLX['direct'];
+  document.querySelectorAll('#'+barId+' .cplx-dot').forEach((d,i)=>{
+    d.classList.remove('on','hi');
+    if(i<c.lvl){ d.classList.add('on'); if(c.lvl>=4) d.classList.add('hi'); }
+  });
+  document.getElementById(txtId).textContent = c.label;
+  return c;
+}
+
+// ===== ADVANCED =====
+function toggleAdv(){
+  document.getElementById('adv-sec').classList.toggle('open');
+  document.getElementById('adv-chev').classList.toggle('open');
+}
+function toggleWaste(cb){
+  const row=document.getElementById('waste-row');
+  const inp=document.getElementById('waste-pct');
+  const lbl=document.getElementById('waste-lbl');
+  row.style.opacity=cb.checked?'1':'.3';
+  row.style.pointerEvents=cb.checked?'auto':'none';
+  inp.disabled=!cb.checked;
+  lbl.classList.toggle('on',cb.checked);
+}
+
+// ===== INGREDIENTS =====
+function addIng(name='',dose='',vol=700,cost='',unit='ml'){
+  const id=++ingCount;
+  const opts=VOLS.map(v=>`<option value="${v.v}"${v.v===vol?' selected':''}>${v.l}</option>`).join('');
+  const row=document.createElement('div');
+  row.className='ingredient-row'; row.id='ing-'+id;
+  row.innerHTML=`
+    <div><label>Ingrédient</label><input type="text" placeholder="ex. Gin Hendrick's" value="${name}"></div>
+    <div><label>Quantité</label><input type="number" class="ing-dose-input" placeholder="45" value="${dose}" min="0" step="0.1" oninput="updateIngUnit(${id})"></div>
+    <div><label>Unité</label>
+      <select class="ing-unit-select" onchange="updateIngUnit(${id})">
+        <option value="ml"${unit==='ml'?' selected':''}>ml</option>
+        <option value="cl"${unit==='cl'?' selected':''}>cl</option>
+        <option value="g"${unit==='g'?' selected':''}>g</option>
+      </select>
+    </div>
+    <div><label>Format bouteille</label><select class="bvs" onchange="toggleCustomVol(${id},this.value)">${opts}</select></div>
+    <div id="vol-field-${id}"><label>Coût bouteille CHF</label><input type="number" placeholder="38.00" value="${cost}" min="0" step="0.5"></div>
+    <div><label style="opacity:0">—</label><button class="btn-remove" onclick="document.getElementById('ing-${id}').remove()">×</button></div>
+    <div id="custom-vol-${id}" style="display:none;grid-column:4/5;margin-top:-6px">
+      <label>Volume personnalisé (ml)</label>
+      <input type="number" class="custom-vol-input" placeholder="ex. 375" min="1" step="1">
+    </div>`;
+  document.getElementById('ingredients-list').appendChild(row);
+}
+
+function toggleCustomVol(id, val) {
+  const customDiv = document.getElementById('custom-vol-'+id);
+  if (customDiv) customDiv.style.display = val === '0' ? '' : 'none';
+}
+
+function updateIngUnit(id){
+  // live feedback only — conversion happens in getIngs()
+}
+function getIngs(){
+  return Array.from(document.querySelectorAll('.ingredient-row')).map(row=>{
+    const inp=row.querySelectorAll('input');
+    const n=inp[0].value.trim();
+    const rawDose=parseFloat(inp[1].value)||0;
+    const unitSel=row.querySelector('.ing-unit-select');
+    const unit=unitSel?unitSel.value:'ml';
+    const doseInMl = unit==='cl' ? rawDose*10 : rawDose;
+    const bvsSel=row.querySelector('.bvs');
+    const selectedVol=parseFloat(bvsSel?bvsSel.value:700);
+    // If "Autre" selected, use custom vol input
+    let v = selectedVol;
+    if (selectedVol === 0) {
+      const customInp = row.querySelector('.custom-vol-input');
+      v = parseFloat(customInp?customInp.value:0)||0;
+    }
+    const c=parseFloat(inp[2].value)||0;
+    if(!n||!rawDose||!c||!v) return null;
+    return {name:n, dose:rawDose, unit, doseInMl, bVol:v, bCost:c, doseCost:(c/v)*doseInMl};
+  }).filter(Boolean);
+}
+
+// ===== PRODUCE =====
+function addProduce(){
+  const id=++prodCount;
+  const row=document.createElement('div');
+  row.className='produce-row'; row.id='prod-'+id;
+  row.innerHTML=`
+    <div><label>Produit</label><input type="text" placeholder="ex. Menthe, Citron vert…" oninput="calcProd(${id})"></div>
+    <div>
+      <label>Unité paquet</label>
+      <select class="prod-unit" onchange="calcProd(${id})">
+        <option value="g">grammes (g)</option>
+        <option value="kg">kilogrammes (kg)</option>
+        <option value="piece">pièces</option>
+      </select>
+    </div>
+    <div><label>Taille paquet</label><input type="number" placeholder="250" min="0" step="0.1" oninput="calcProd(${id})" class="prod-pkg"></div>
+    <div><label>Prix paquet (CHF)</label><input type="number" placeholder="2.50" min="0" step="0.1" oninput="calcProd(${id})" class="prod-price"></div>
+    <div><label>Qté utilisée</label><input type="number" placeholder="8" min="0" step="0.1" oninput="calcProd(${id})" class="prod-qty"></div>
+    <div><label style="opacity:0">—</label><button class="btn-remove" onclick="document.getElementById('prod-${id}').remove()">×</button></div>
+    <div style="grid-column:1/-1;margin-top:-4px;display:flex;align-items:center;gap:12px">
+      <div class="produce-cost" id="pc-${id}" style="color:var(--text-faint);flex:1">— CHF</div>
+      <div style="font-size:10px;color:var(--text-faint)" id="pc-hint-${id}"></div>
+    </div>`;
+  document.getElementById('produce-list').appendChild(row);
+}
+function calcProd(id){
+  const row=document.getElementById('prod-'+id);
+  const unit=row.querySelector('.prod-unit').value;
+  const pkgSize=parseFloat(row.querySelector('.prod-pkg').value)||0;
+  const pkgCost=parseFloat(row.querySelector('.prod-price').value)||0;
+  const usedQty=parseFloat(row.querySelector('.prod-qty').value)||0;
+  const el=document.getElementById('pc-'+id);
+  const hint=document.getElementById('pc-hint-'+id);
+  if(pkgSize>0&&pkgCost>0&&usedQty>0){
+    const costPerUnit=pkgCost/pkgSize;
+    const doseCost=costPerUnit*usedQty;
+    const pct=(usedQty/pkgSize*100).toFixed(1);
+    const uLabel=unit==='piece'?'pièce(s)':unit;
+    el.textContent=doseCost.toFixed(4)+' '+curSym();
+    el.style.color='var(--gold)';
+    hint.textContent=usedQty+' '+uLabel+' utilisé(s) — '+pct+'% du paquet · '+costPerUnit.toFixed(4)+' '+curSym()+'/'+uLabel;
+  } else { el.textContent='— CHF'; el.style.color='var(--text-faint)'; hint.textContent=''; }
+}
+function getProdCost(){
+  let t=0;
+  document.querySelectorAll('.produce-row').forEach(row=>{
+    const pkgSize=parseFloat(row.querySelector('.prod-pkg')?.value)||0;
+    const pkgCost=parseFloat(row.querySelector('.prod-price')?.value)||0;
+    const usedQty=parseFloat(row.querySelector('.prod-qty')?.value)||0;
+    if(pkgSize>0&&pkgCost>0&&usedQty>0) t+=(pkgCost/pkgSize)*usedQty;
+  });
+  return t;
+}
+
+// ===== CALCULATE FICHE =====
+function calculate(){
+  const name=document.getElementById('cocktail-name').value.trim();
+  if(!name){document.getElementById('cocktail-name').focus();return;}
+  const ings=getIngs();
+  if(!ings.length){alert('Ajoutez au moins un ingrédient avec dosage et coût.');return;}
+
+  const sp=parseFloat(document.getElementById('sell-price').value)||0;
+  const fc=parseFloat(document.getElementById('target-fc').value)||20;
+  const gar=parseFloat(document.getElementById('garnish-cost').value)||0;
+  const ice=parseFloat(document.getElementById('ice-cost').value)||0;
+  const laborOn=document.getElementById('labor-toggle').checked;
+  const lab=laborOn?(parseFloat(document.getElementById('labor-cost').value)||0):0;
+  const tva=parseFloat(document.getElementById('tva-rate').value)||7.7;
+  const wasteOn=document.getElementById('waste-toggle').checked;
+  const wastePct=wasteOn?(parseFloat(document.getElementById('waste-pct').value)||0):0;
+  const method=document.getElementById('method').value;
+  const cplx=CPLX[method]||CPLX['direct'];
+  const prodCost=getProdCost();
+
+  const ingTotal=ings.reduce((s,i)=>s+i.doseCost,0);
+  const baseM=ingTotal+prodCost+gar+ice;
+  const wasteAmt=baseM*(wastePct/100);
+  const totalM=baseM+wasteAmt;
+  const totalC=totalM+lab;
+  const margin=sp>0?sp-totalC:null;
+  const fcPct=sp>0?(totalC/sp)*100:null;
+  const suggested=totalC/(fc/100);
+  const netM=margin!==null?margin-(sp*tva/100):null;
+
+  lastRes={name,totalC,sp,margin,fcPct,suggested,fc,netM,tva};
+
+  document.getElementById('form-section').style.display='none';
+  document.getElementById('result').style.display='block';
+
+  document.getElementById('r-name').textContent=name;
+  document.getElementById('r-meta').textContent=[document.getElementById('category').value,document.getElementById('glass').value||null,method].filter(Boolean).join(' · ');
+  setCplx('r-cplx-bar','r-cplx-text',method);
+
+  document.getElementById('r-cost').textContent=totalC.toFixed(2);
+  document.getElementById('r-price').textContent=sp>0?sp.toFixed(2):'—';
+  document.getElementById('r-net').textContent=netM!==null?netM.toFixed(2):'—';
+
+  if(fcPct!==null){
+    const cls=fcPct<=fc?'kpi-value kv-g':fcPct<=fc*1.3?'kpi-value kv-o':'kpi-value kv-b';
+    document.getElementById('r-fc').textContent=fcPct.toFixed(1); document.getElementById('r-fc').className=cls;
+    document.getElementById('r-margin').textContent=margin.toFixed(2); document.getElementById('r-margin').className=cls;
+    document.getElementById('r-net').className=netM>=0?'kpi-value kv-g':'kpi-value kv-b';
+    document.getElementById('r-bar').style.width=Math.min(fcPct,100)+'%';
+    document.getElementById('r-bar').style.background=fcPct<=fc?'var(--green)':fcPct<=fc*1.3?'var(--gold)':'var(--red)';
+    document.getElementById('r-fc-lbl').textContent=fcPct.toFixed(1)+'%';
+    const b=document.getElementById('r-badge');
+    b.textContent=fcPct<=fc?'Rentable':fcPct<=fc*1.3?'Limite':'À revoir';
+    b.className='rbadge '+(fcPct<=fc?'bg':fcPct<=fc*1.3?'bo':'bb');
+  } else {
+    document.getElementById('r-fc').textContent='—';
+    document.getElementById('r-margin').textContent='—';
+    document.getElementById('r-badge').style.display='none';
+  }
+
+  const tbody=document.getElementById('r-ing-body'); tbody.innerHTML='';
+  ings.forEach(i=>{
+    const pct=sp>0?((i.doseCost/sp)*100).toFixed(1)+'%':'';
+    tbody.innerHTML+=`<tr><td class="in">${i.name}</td><td class="id">${i.dose}${i.unit}</td><td class="id">${i.bCost.toFixed(2)} ${curSym()}/${i.bVol}ml</td><td>${i.doseCost.toFixed(3)} ${curSym()}${pct?` <span class="ipct">${pct}</span>`:''}</td></tr>`;
+  });
+  if(prodCost>0) tbody.innerHTML+=`<tr><td class="id">Produits frais</td><td class="id">—</td><td class="id">—</td><td>${prodCost.toFixed(3)} ${curSym()}</td></tr>`;
+
+  document.getElementById('r-ing-total').textContent=ingTotal.toFixed(3)+' '+curSym();
+  document.getElementById('r-overhead').textContent=(gar+ice+lab).toFixed(2)+' '+curSym();
+  if(wasteOn&&wastePct>0){document.getElementById('r-waste-tr').style.display='';document.getElementById('r-waste-val').textContent='+'+wasteAmt.toFixed(3)+' '+curSym()+' ('+wastePct+'%)';}
+  else document.getElementById('r-waste-tr').style.display='none';
+  document.getElementById('r-total').textContent=totalC.toFixed(2)+' '+curSym();
+
+  let reco='';
+  if(sp<=0){
+    reco=`<strong>Coût de production : ${totalC.toFixed(2)} ${curSym()}.</strong> Prix suggéré pour un food cost de ${fc}% : <strong>${suggested.toFixed(2)} ${curSym()}</strong>.`;
+    document.getElementById('r-suggest-wrap').style.display='block';
+    document.getElementById('r-suggest').textContent=suggested.toFixed(2)+' '+curSym();
+  } else if(fcPct<=fc){
+    reco=`<strong>Excellent.</strong> Food cost de ${fcPct.toFixed(1)}% — objectif atteint. Marge brute de ${margin.toFixed(2)} ${curSym()} par service.`;
+  } else if(fcPct<=fc*1.3){
+    reco=`<strong>Food cost légèrement élevé</strong> (${fcPct.toFixed(1)}% vs objectif ${fc}%). Prix suggéré : <strong>${suggested.toFixed(2)} ${curSym()}</strong> (+${(suggested-sp).toFixed(2)} ${curSym()}).`;
+    document.getElementById('r-suggest-wrap').style.display='block';
+    document.getElementById('r-suggest').textContent=suggested.toFixed(2)+' '+curSym();
+  } else {
+    const worst=ings.reduce((a,b)=>a.doseCost>b.doseCost?a:b);
+    reco=`<strong>Food cost critique (${fcPct.toFixed(1)}%).</strong> Ingrédient le plus impactant : <strong>${worst.name}</strong> (${worst.doseCost.toFixed(3)} ${curSym()}/dose). Prix minimum : <strong>${suggested.toFixed(2)} ${curSym()}</strong>.`;
+    document.getElementById('r-suggest-wrap').style.display='block';
+    document.getElementById('r-suggest').textContent=suggested.toFixed(2)+' '+curSym();
+  }
+  document.getElementById('r-reco').innerHTML=reco;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleNet(){
+  document.getElementById('kpi-net').style.display=document.getElementById('net-toggle').checked?'':'none';
+}
+function newRecipe(){
+  document.getElementById('result').style.display='none';
+  document.getElementById('form-section').style.display='block';
+  document.getElementById('r-suggest-wrap').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function copyRes(){
+  const r=lastRes;
+  const sym=curSym();navigator.clipboard.writeText(`FICHE TECHNIQUE — ${r.name}\nCoût matière : ${(r.totalC||0).toFixed(2)} ${sym}\nPrix de vente : ${r.sp||'—'} ${sym}\nFood cost : ${r.fcPct?r.fcPct.toFixed(1):'—'}%\nMarge brute : ${r.margin?r.margin.toFixed(2):'—'} ${sym}`).then(()=>alert('Résumé copié.'));
+}
+
+// ===== RENTABILITÉ =====
+function onServiceType(){
+  document.getElementById('r2-pax-div').style.display=document.getElementById('r2-type').value==='event'?'':'none';
+}
+function onR2Method(){
+  const c=setCplx('r2-cplx-bar','r2-cplx-text',document.getElementById('r2-method').value);
+  document.getElementById('r2-preptime').value=c.t;
+}
+function calcRenta(){
+  const name=document.getElementById('r2-name').value||'Cocktail';
+  const price=parseFloat(document.getElementById('r2-price').value)||0;
+  const cost=parseFloat(document.getElementById('r2-cost').value)||0;
+  const qty=parseFloat(document.getElementById('r2-qty').value)||0;
+  const prepT=parseFloat(document.getElementById('r2-preptime').value)||3;
+  const hourly=parseFloat(document.getElementById('r2-hourly').value)||35;
+  const staff=parseFloat(document.getElementById('r2-staff').value)||0;
+  const fixed=parseFloat(document.getElementById('r2-fixed').value)||0;
+  const tva=parseFloat(document.getElementById('r2-tva').value)||7.7;
+  const method=document.getElementById('r2-method').value;
+  const cplx=CPLX[method]||CPLX['direct'];
+
+  if(!price||!cost){alert('Renseignez le prix de vente et le coût matière.');return;}
+
+  const laborUnit=(prepT/60)*hourly;
+  const grossUnit=price-cost;
+  const netUnit=grossUnit-laborUnit-(price*tva/100);
+  const revenue=price*qty;
+  const totalCosts=(cost*qty)+staff+fixed;
+  const profit=revenue-totalCosts-(revenue*tva/100);
+  const breakEven=(staff+fixed)/Math.max(grossUnit,0.01);
+  const totalPrepT=qty*prepT;
+  const cLabels=['','Faible','Modérée','Modérée+','Élevée','Très élevée'];
+
+  document.getElementById('r2-break').value=Math.ceil(breakEven);
+  document.getElementById('renta-result').style.display='block';
+  document.getElementById('rr-title').textContent=name;
+
+  const sv=(id,val,good)=>{
+    const el=document.getElementById(id); el.textContent=val;
+    if(good!==undefined) el.className='ri-value '+(good?'g':'b');
+  };
+  sv('rr-gross',grossUnit.toFixed(2)+' '+curSym(),grossUnit>0);
+  sv('rr-labor',laborUnit.toFixed(2)+' '+curSym());
+  sv('rr-net',netUnit.toFixed(2)+' '+curSym(),netUnit>0);
+  sv('rr-rev',revenue.toFixed(2)+' '+curSym());
+  sv('rr-break',Math.ceil(breakEven)+'');
+  sv('rr-profit',profit.toFixed(2)+' '+curSym(),profit>0);
+  sv('rr-time',totalPrepT.toFixed(0)+' min');
+  document.getElementById('rr-cplx').textContent=(cLabels[cplx.lvl]||'')+' — '+cplx.label.split('—')[0].trim();
+
+  let reco='';
+  if(qty>=breakEven*1.3) reco=`<strong>Excellente rentabilité.</strong> Vous vendez ${qty} cocktails pour un seuil à ${Math.ceil(breakEven)}. Bénéfice net estimé à <strong>${profit.toFixed(2)} ${curSym()}</strong> sur ce service.`;
+  else if(qty>=breakEven) reco=`<strong>Rentable mais serré.</strong> Vous dépassez juste le seuil (${Math.ceil(breakEven)} cocktails). +20% de volume améliorerait sensiblement le résultat.`;
+  else reco=`<strong>Attention — sous le seuil de rentabilité.</strong> Il vous faut <strong>${Math.ceil(breakEven)} cocktails</strong> pour couvrir vos charges, vous en prévoyez ${qty}. Envisagez d'ajuster le prix de vente ou de réduire les charges fixes.`;
+  document.getElementById('rr-reco').innerHTML=reco;
+  document.getElementById('renta-result').scrollIntoView({behavior:'smooth'});
+}
+
+function toggleLabor(cb){
+  const inp=document.getElementById('labor-cost');
+  inp.disabled=!cb.checked;
+  inp.style.opacity=cb.checked?'1':'.3';
+  inp.style.cursor=cb.checked?'auto':'not-allowed';
+}
+
+// ===== INIT =====
+detectCurrency();
+addIng(); addIng(); addIng();
+setCplx('complexity-bar','complexity-text','direct');
+setCplx('r2-cplx-bar','r2-cplx-text','direct');
+onServiceType();
+</script>
+</body>
+</html>
