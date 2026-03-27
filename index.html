@@ -11,7 +11,7 @@
   gtag('config', 'G-CBMJ6CRX0N');
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DrinkCost — Fiches Techniques</title>
+<title>DrinkCost — Cost Sheet / Fiche Technique / Ficha Técnica</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@300;400&display=swap');
@@ -551,6 +551,10 @@ select option { background: var(--bg3); }
 
 /* Helper text */
 .helper { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 14px; }
+.lang-pill { display:inline-flex;align-items:center;gap:4px;background:var(--bg2);border:1px solid var(--border);border-radius:999px;padding:4px 6px;margin-top:10px; }
+.lang-btn { font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;padding:4px 12px;border-radius:999px;border:none;background:transparent;color:var(--text2);cursor:pointer;transition:all .15s;letter-spacing:.05em; }
+.lang-btn.active { background:var(--accent);color:#0d1117; }
+.lang-btn:hover:not(.active) { color:var(--text);background:var(--bg3); }
 
 @media(max-width:640px){
   .ingredient-row{grid-template-columns:1fr 60px 52px 1fr 70px 32px;}
@@ -591,11 +595,16 @@ select option { background: var(--bg3); }
     </select>
     <span id="currency-symbol" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent)">CHF</span>
   </div>
+  <div class="lang-pill">
+    <button class="lang-btn active" onclick="setLang('fr',this)">FR</button>
+    <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+    <button class="lang-btn" onclick="setLang('es',this)">ES</button>
+  </div>
 </header>
 
 <div class="nav-tabs">
   <button class="nav-tab active" onclick="switchTab('fiche',this)">Fiche technique</button>
-  <button class="nav-tab" onclick="switchTab('renta',this)">Rentabilité</button>
+  <button class="nav-tab" onclick="switchTab('renta',this)" data-i18n="tab_renta">Rentabilité</button>
 </div>
 
 <!-- ===== TAB FICHE ===== -->
@@ -603,7 +612,7 @@ select option { background: var(--bg3); }
 <div id="form-section">
 
   <div class="panel">
-    <div class="panel-title"><span class="panel-title-icon">🍹</span> Informations cocktail</div>
+    <div class="panel-title" data-i18n-panel="p_cocktail"><span class="panel-title-icon">🍹</span> Informations cocktail</div>
     <div class="form-row cols-2">
       <div><label>Nom du cocktail</label><input type="text" id="cocktail-name" placeholder="ex. Negroni…"></div>
       <div><label>Prix de vente (CHF)</label><input type="number" id="sell-price" placeholder="18" min="0" step="0.5"></div>
@@ -636,21 +645,21 @@ select option { background: var(--bg3); }
   </div>
 
   <div class="panel">
-    <div class="panel-title"><span class="panel-title-icon">🫙</span> Ingrédients liquides</div>
-    <div class="helper">Spiritueux, sirops, jus en bouteille, sodas — tout ce qui se mesure en ml ou cl.</div>
+    <div class="panel-title" data-i18n-panel="p_liquids"><span class="panel-title-icon">🫙</span> Ingrédients liquides</div>
+    <div class="helper" data-i18n="h_liquids">Spiritueux, sirops, jus en bouteille, sodas — tout ce qui se mesure en ml ou cl.</div>
     <div id="ingredients-list"></div>
-    <button class="btn btn-ghost" onclick="addIng()">+ Ajouter un liquide</button>
+    <button class="btn btn-ghost" onclick="addIng()" data-i18n="btn_add_liquid">+ Ajouter un liquide</button>
   </div>
 
   <div class="panel">
-    <div class="panel-title"><span class="panel-title-icon">🌿</span> Ingrédients frais & solides</div>
-    <div class="helper">Menthe, citrons, fruits, sucre en morceaux, épices — tout ce qui se vend au g ou au kg. Le coût à la dose est calculé automatiquement selon le rendement du paquet.</div>
+    <div class="panel-title" data-i18n-panel="p_fresh"><span class="panel-title-icon">🌿</span> Ingrédients frais & solides</div>
+    <div class="helper" data-i18n="h_fresh">Menthe, citrons, fruits, sucre en morceaux, épices — tout ce qui se vend au g ou au kg. Le coût à la dose est calculé automatiquement selon le rendement du paquet.</div>
     <div id="produce-list"></div>
-    <button class="btn btn-ghost" onclick="addProduce()">+ Ajouter un ingrédient frais</button>
+    <button class="btn btn-ghost" onclick="addProduce()" data-i18n="btn_add_fresh">+ Ajouter un ingrédient frais</button>
   </div>
 
   <div class="panel">
-    <div class="panel-title"><span class="panel-title-icon">⚙️</span> Paramètres</div>
+    <div class="panel-title" data-i18n-panel="p_params"><span class="panel-title-icon">⚙️</span> Paramètres</div>
     <div class="form-row cols-3">
       <div><label>Food cost cible (%)</label><input type="number" id="target-fc" value="20" min="1" max="100"></div>
       <div><label>Coût garnish (CHF)</label><input type="number" id="garnish-cost" value="0.30" step="0.05" min="0"></div>
@@ -676,7 +685,7 @@ select option { background: var(--bg3); }
     <div class="adv-sec" id="adv-sec">
       <div class="toggle-row" style="margin-top:4px">
         <label class="toggle-wrap"><input type="checkbox" id="waste-toggle" onchange="toggleWaste(this)"><span class="toggle-slider"></span></label>
-        <span class="toggle-label" id="waste-lbl">Taux de perte / gaspillage</span>
+        <span class="toggle-label" id="waste-lbl" data-i18n="l_waste">Taux de perte / gaspillage</span>
       </div>
       <div id="waste-row" style="opacity:.3;pointer-events:none;transition:opacity .2s">
         <div class="form-row cols-2">
@@ -686,7 +695,7 @@ select option { background: var(--bg3); }
       </div>
     </div>
 
-    <button class="btn btn-primary" onclick="calculate()">Calculer la fiche technique</button>
+    <button class="btn btn-primary" onclick="calculate()" data-i18n="btn_calculate">Calculer la fiche technique</button>
   </div>
 
 </div><!-- /form-section -->
@@ -695,7 +704,7 @@ select option { background: var(--bg3); }
 <div class="panel" id="result">
   <div class="result-header">
     <div>
-      <div style="font-size:9px;letter-spacing:.2em;color:var(--text-dim);text-transform:uppercase;margin-bottom:3px">Fiche technique</div>
+      <div style="font-size:9px;letter-spacing:.2em;color:var(--text-dim);text-transform:uppercase;margin-bottom:3px" data-i18n="r_sheet">Fiche technique</div>
       <div class="rname" id="r-name"></div>
       <div style="font-size:11px;color:var(--text-dim);margin-top:3px" id="r-meta"></div>
       <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
@@ -708,24 +717,24 @@ select option { background: var(--bg3); }
 
   <div class="toggle-row" style="margin-bottom:14px">
     <label class="toggle-wrap"><input type="checkbox" id="net-toggle" onchange="toggleNet()"><span class="toggle-slider"></span></label>
-    <span style="font-size:11px;color:var(--text-dim)">Afficher la marge nette (après TVA)</span>
+    <span style="font-size:11px;color:var(--text-dim)" data-i18n="l_net_toggle">Afficher la marge nette (après TVA)</span>
   </div>
 
   <div class="kpi-row k5">
-    <div class="kpi"><div class="kpi-label">Coût matière</div><div class="kpi-value kv-o" id="r-cost"></div><div class="kpi-unit">CHF</div></div>
-    <div class="kpi"><div class="kpi-label">Prix de vente</div><div class="kpi-value" id="r-price"></div><div class="kpi-unit">CHF</div></div>
-    <div class="kpi"><div class="kpi-label">Food cost</div><div class="kpi-value" id="r-fc"></div><div class="kpi-unit">%</div></div>
-    <div class="kpi"><div class="kpi-label">Marge brute</div><div class="kpi-value" id="r-margin"></div><div class="kpi-unit">CHF</div></div>
-    <div class="kpi" id="kpi-net" style="display:none"><div class="kpi-label">Marge nette</div><div class="kpi-value" id="r-net"></div><div class="kpi-unit">CHF</div></div>
+    <div class="kpi"><div class="kpi-label" data-i18n="kpi_cost">Coût matière</div><div class="kpi-value kv-o" id="r-cost"></div><div class="kpi-unit">CHF</div></div>
+    <div class="kpi"><div class="kpi-label" data-i18n="kpi_price">Prix de vente</div><div class="kpi-value" id="r-price"></div><div class="kpi-unit">CHF</div></div>
+    <div class="kpi"><div class="kpi-label" data-i18n="kpi_fc">Food cost</div><div class="kpi-value" id="r-fc"></div><div class="kpi-unit">%</div></div>
+    <div class="kpi"><div class="kpi-label" data-i18n="kpi_margin">Marge brute</div><div class="kpi-value" id="r-margin"></div><div class="kpi-unit">CHF</div></div>
+    <div class="kpi" id="kpi-net" style="display:none"><div class="kpi-label" data-i18n="kpi_net">Marge nette</div><div class="kpi-value" id="r-net"></div><div class="kpi-unit">CHF</div></div>
   </div>
 
   <div class="mbar-wrap">
-    <div class="mbar-labels"><span>Coût matière</span><span id="r-fc-lbl"></span></div>
+    <div class="mbar-labels"><span data-i18n="cost_mat">Coût matière</span><span id="r-fc-lbl"></span></div>
     <div class="mbar-track"><div class="mbar-fill" id="r-bar" style="width:0%"></div></div>
   </div>
 
   <table class="itbl">
-    <thead><tr><th>Ingrédient</th><th>Dosage</th><th>Réf.</th><th style="text-align:right">Coût dose</th></tr></thead>
+    <thead><tr><th data-i18n="tbl_ing">Ingrédient</th><th data-i18n="tbl_dose">Dosage</th><th data-i18n="tbl_ref">Réf.</th><th style="text-align:right" data-i18n="tbl_cost">Coût dose</th></tr></thead>
     <tbody id="r-ing-body"></tbody>
     <tfoot>
       <tr class="itot"><td colspan="3"><strong>Total ingrédients</strong></td><td id="r-ing-total"></td></tr>
@@ -737,14 +746,14 @@ select option { background: var(--bg3); }
 
   <div class="reco" id="r-reco"></div>
   <div id="r-suggest-wrap" style="display:none;margin-bottom:18px">
-    <div style="font-size:9px;letter-spacing:.25em;color:var(--text-dim);text-transform:uppercase;margin-bottom:5px">Prix suggéré pour atteindre l'objectif food cost</div>
+    <div style="font-size:9px;letter-spacing:.25em;color:var(--text-dim);text-transform:uppercase;margin-bottom:5px" data-i18n="suggest_label">Prix suggéré pour atteindre l'objectif food cost</div>
     <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--gold)" id="r-suggest"></div>
   </div>
 
   <div class="actions-row">
-    <button class="btn btn-ghost" onclick="window.print()">Imprimer</button>
-    <button class="btn btn-ghost" onclick="newRecipe()">Nouvelle fiche</button>
-    <button class="btn btn-ghost" onclick="copyRes()">Copier résumé</button>
+    <button class="btn btn-ghost" onclick="window.print()" data-i18n="btn_print">Imprimer</button>
+    <button class="btn btn-ghost" onclick="newRecipe()" data-i18n="btn_new">Nouvelle fiche</button>
+    <button class="btn btn-ghost" onclick="copyRes()" data-i18n="btn_copy">Copier résumé</button>
   </div>
 </div>
 </div><!-- /tab-fiche -->
@@ -753,7 +762,7 @@ select option { background: var(--bg3); }
 <div class="tab-content" id="tab-renta">
 
   <div class="panel">
-    <div class="panel-title"><span class="panel-title-icon">🍹</span> Paramètres du cocktail</div>
+    <div class="panel-title" data-i18n-panel="p_renta_cocktail"><span class="panel-title-icon">🍹</span> Paramètres du cocktail</div>
     <div class="form-row cols-3">
       <div><label>Nom (optionnel)</label><input type="text" id="r2-name" placeholder="ex. Signature Mango…"></div>
       <div><label>Prix de vente (CHF)</label><input type="number" id="r2-price" placeholder="18" min="0" step="0.5"></div>
@@ -762,7 +771,7 @@ select option { background: var(--bg3); }
   </div>
 
   <div class="panel">
-    <div class="panel-title"><span class="panel-title-icon">🏛️</span> Type de service</div>
+    <div class="panel-title" data-i18n-panel="p_service"><span class="panel-title-icon">🏛️</span> Type de service</div>
     <div class="form-row cols-3">
       <div><label>Type d'établissement</label>
         <select id="r2-type" onchange="onServiceType()">
@@ -782,7 +791,7 @@ select option { background: var(--bg3); }
   </div>
 
   <div class="panel">
-    <div class="panel-title"><span class="panel-title-icon">⏱️</span> Technique & temps</div>
+    <div class="panel-title" data-i18n-panel="p_technique"><span class="panel-title-icon">⏱️</span> Technique & temps</div>
     <div class="form-row cols-3">
       <div><label>Méthode</label>
         <select id="r2-method" onchange="onR2Method()">
@@ -806,7 +815,7 @@ select option { background: var(--bg3); }
   </div>
 
   <div class="panel">
-    <div class="panel-title"><span class="panel-title-icon">📊</span> Charges fixes du service</div>
+    <div class="panel-title" data-i18n-panel="p_charges"><span class="panel-title-icon">📊</span> Charges fixes du service</div>
     <div class="form-row cols-3">
       <div><label>Coût barman / service (CHF)</label><input type="number" id="r2-staff" value="210" min="0" step="10"></div>
       <div><label>Frais fixes / soir (CHF)</label><input type="number" id="r2-fixed" value="80" min="0" step="10" placeholder="loyer, énergie…"></div>
@@ -814,19 +823,19 @@ select option { background: var(--bg3); }
     </div>
   </div>
 
-  <button class="btn btn-primary" onclick="calcRenta()" style="width:100%;margin-bottom:14px">Analyser la rentabilité</button>
+  <button class="btn btn-primary" onclick="calcRenta()" style="width:100%;margin-bottom:14px" data-i18n="btn_analyze">Analyser la rentabilité</button>
 
   <div class="panel" id="renta-result" style="display:none">
     <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;font-style:italic;margin-bottom:18px" id="rr-title"></div>
     <div class="renta-grid">
-      <div class="ri"><div class="ri-label">Marge brute / cocktail</div><div class="ri-value" id="rr-gross"></div><div class="ri-unit">CHF</div></div>
-      <div class="ri"><div class="ri-label">Coût MO / cocktail</div><div class="ri-value" id="rr-labor"></div><div class="ri-unit">CHF</div></div>
-      <div class="ri"><div class="ri-label">Marge nette / cocktail</div><div class="ri-value" id="rr-net"></div><div class="ri-unit">CHF (après TVA & MO)</div></div>
-      <div class="ri"><div class="ri-label">Revenus / service</div><div class="ri-value" id="rr-rev"></div><div class="ri-unit">CHF</div></div>
-      <div class="ri"><div class="ri-label">Seuil de rentabilité</div><div class="ri-value" id="rr-break"></div><div class="ri-unit">cocktails / soir</div></div>
-      <div class="ri"><div class="ri-label">Bénéfice net / service</div><div class="ri-value" id="rr-profit"></div><div class="ri-unit">CHF</div></div>
-      <div class="ri"><div class="ri-label">Temps total préparation</div><div class="ri-value" id="rr-time"></div><div class="ri-unit">min / service</div></div>
-      <div class="ri"><div class="ri-label">Complexité</div><div class="ri-value" style="font-size:14px;margin-top:6px" id="rr-cplx"></div></div>
+      <div class="ri"><div class="ri-label" data-i18n="rr_gross">Marge brute / cocktail</div><div class="ri-value" id="rr-gross"></div><div class="ri-unit">CHF</div></div>
+      <div class="ri"><div class="ri-label" data-i18n="rr_labor">Coût MO / cocktail</div><div class="ri-value" id="rr-labor"></div><div class="ri-unit">CHF</div></div>
+      <div class="ri"><div class="ri-label" data-i18n="rr_net">Marge nette / cocktail</div><div class="ri-value" id="rr-net"></div><div class="ri-unit">CHF (après TVA & MO)</div></div>
+      <div class="ri"><div class="ri-label" data-i18n="rr_rev">Revenus / service</div><div class="ri-value" id="rr-rev"></div><div class="ri-unit">CHF</div></div>
+      <div class="ri"><div class="ri-label" data-i18n="rr_break">Seuil de rentabilité</div><div class="ri-value" id="rr-break"></div><div class="ri-unit">cocktails / soir</div></div>
+      <div class="ri"><div class="ri-label" data-i18n="rr_profit">Bénéfice net / service</div><div class="ri-value" id="rr-profit"></div><div class="ri-unit">CHF</div></div>
+      <div class="ri"><div class="ri-label" data-i18n="rr_time">Temps total préparation</div><div class="ri-value" id="rr-time"></div><div class="ri-unit">min / service</div></div>
+      <div class="ri"><div class="ri-label" data-i18n="rr_complexity">Complexité</div><div class="ri-value" style="font-size:14px;margin-top:6px" id="rr-cplx"></div></div>
     </div>
     <div class="reco" id="rr-reco"></div>
   </div>
@@ -845,12 +854,7 @@ const CPLX = {
   'carbonation':   {lvl:4, label:'Carbonation — technique avancée', t:8},
   'multi':         {lvl:5, label:'Multi-techniques — haute complexité', t:7},
 };
-const VOLS = [
-  {v:200,l:'20 cl — Canette'},{v:250,l:'25 cl — Canette'},{v:330,l:'33 cl — Canette'},
-  {v:500,l:'50 cl — Demi-bouteille'},{v:700,l:'70 cl — Standard'},{v:750,l:'75 cl — Vin/Champagne'},
-  {v:1000,l:'100 cl — Litre'},{v:1500,l:'150 cl — Magnum'},
-  {v:0,l:'Autre — saisir le volume'},
-];
+function getVOLS(){return [{v:200,k:'v200'},{v:250,k:'v250'},{v:330,k:'v330'},{v:500,k:'v500'},{v:700,k:'v700'},{v:750,k:'v750'},{v:1000,k:'v1000'},{v:1500,k:'v1500'},{v:0,k:'v0'}];}
 let ingCount=0, prodCount=0, lastRes={};
 
 // ===== CURRENCY =====
@@ -901,6 +905,226 @@ function detectCurrency() {
   } catch(e) { setCurrency('CHF'); }
 }
 
+// ===== i18n =====
+const T = {
+  fr:{
+    tab_fiche:'Fiche technique',tab_renta:'Rentabilité',
+    p_cocktail:'Informations cocktail',p_liquids:'Ingrédients liquides',p_fresh:'Ingrédients frais & solides',
+    p_params:'Paramètres',p_renta_cocktail:'Paramètres du cocktail',p_service:'Type de service',
+    p_technique:'Technique & temps',p_charges:'Charges fixes du service',
+    kpi_cost:'Coût matière',kpi_price:'Prix de vente',kpi_fc:'Food cost',kpi_margin:'Marge brute',kpi_net:'Marge nette',
+    cost_mat:'Coût matière',
+    tbl_ing:'Ingrédient',tbl_dose:'Dosage',tbl_ref:'Réf.',tbl_cost:'Coût dose',
+    tbl_total_ing:'Total ingrédients',tbl_overhead:"Garnish + glace + main d'œuvre",tbl_waste:'Taux de perte',tbl_total:'Coût total',tbl_fresh:'Produits frais',
+    suggest_label:"Prix suggéré pour atteindre l'objectif food cost",r_sheet:'Fiche technique',
+    h_liquids:'Spiritueux, sirops, jus en bouteille, sodas — tout ce qui se mesure en ml ou cl.',
+    h_fresh:"Menthe, citrons, fruits, sucre en morceaux, épices — tout ce qui se vend au g ou au kg. Le coût à la dose est calculé automatiquement selon le rendement du paquet.",
+    btn_calculate:'Calculer la fiche technique',btn_add_liquid:'+ Ajouter un liquide',btn_add_fresh:"+ Ajouter un ingrédient frais",
+    btn_print:'Imprimer',btn_new:'Nouvelle fiche',btn_copy:'Copier résumé',btn_analyze:'Analyser la rentabilité',
+    l_name:'Nom du cocktail',l_price:'Prix de vente',l_category:'Catégorie',l_glass:'Verre',l_method:'Méthode',
+    l_complexity:'Complexité estimée selon méthode',l_target_fc:'Food cost cible (%)',l_garnish:'Coût garnish',l_ice:'Coût glace',
+    l_labor:"Coût main d'œuvre",l_tva:'TVA (%)',l_waste:'Taux de perte / gaspillage',l_waste_pct:'Taux de perte (%)',
+    l_waste_hint:'Majore le coût matière des pertes réelles au service.',l_adv:'+ de paramètres',
+    l_net_toggle:'Afficher la marge nette (après TVA)',
+    i_name:'Ingrédient',i_qty:'Quantité',i_unit:'Unité',i_format:'Format bouteille',i_cost:'Coût bouteille',i_custom_vol:'Volume personnalisé (ml)',
+    pr_name:'Produit',pr_pkg:'Poids paquet (g)',pr_price:'Prix paquet (CHF)',pr_qty:'Qté utilisée (g)',
+    ph_cocktail:'ex. Negroni…',ph_glass:'Coupe, Highball…',ph_dose:'45',ph_bottle:'38.00',ph_custom_vol:'ex. 375',
+    pu_g:'grammes (g)',pu_kg:'kilogrammes (kg)',pu_piece:'pièces',
+    v200:'20 cl — Canette',v250:'25 cl — Canette',v330:'33 cl — Canette',v500:'50 cl — Demi-bouteille',
+    v700:'70 cl — Standard',v750:'75 cl — Vin/Champagne',v1000:'100 cl — Litre',v1500:'150 cl — Magnum',v0:'Autre — saisir le volume',
+    m_direct:'Direct (build)',m_shaker:'Shaker',m_mixing:'Verre à mélange',m_blender:'Blender',
+    m_infusion:'Infusion / Macération',m_carb:'Carbonation',m_multi:'Multi-techniques',
+    cat_classic:'Classique',cat_sig:'Signature',cat_mock:'Mocktail',cat_champ:'Champagne / Bulles',cat_shot:'Shot',
+    badge_good:'Rentable',badge_ok:'Limite',badge_bad:'À revoir',
+    rr_gross:'Marge brute / cocktail',rr_labor:'Coût MO / cocktail',rr_net:'Marge nette / cocktail',rr_rev:'Revenus / service',
+    rr_break:'Seuil de rentabilité',rr_profit:'Bénéfice net / service',rr_time:'Temps total préparation',rr_complexity:'Complexité',
+    rr_unit_cocktails:'cocktails / soir',rr_unit_min:'min / service',
+    r2_name:'Nom (optionnel)',r2_price:'Prix de vente',r2_cost:'Coût matière total',
+    r2_type:"Type d'établissement",r2_hours:'Durée du service (h)',r2_pax:'Pax attendus',
+    r2_qty:'Cocktails vendus / soir (estimation)',r2_break:'Seuil de rentabilité (calculé)',
+    r2_method:'Méthode',r2_prep:'Temps de préparation (min)',r2_hourly:'Taux horaire barman (CHF/h)',
+    r2_complexity:'Complexité selon méthode',r2_staff:'Coût barman / service (CHF)',r2_fixed:'Frais fixes / soir (CHF)',r2_tva:'TVA (%)',
+    svc_bar:'Bar standard',svc_gastro:'Bar gastronomique / Hôtel',svc_envoi:"Bar d'envoi / Volume",svc_event:'Événement / Privatisation',
+    copied:'Résumé copié.',err_name:'Veuillez saisir le nom du cocktail.',err_ing:'Ajoutez au moins un ingrédient avec dosage et coût.',err_renta:'Renseignez le prix de vente et le coût matière.',
+    reco_no_price:(tc,fc,s,sym)=>`<strong>Coût de production : ${tc} ${sym}.</strong> Prix suggéré pour un food cost de ${fc}% : <strong>${s} ${sym}</strong>.`,
+    reco_good:(fp,m,sym)=>`<strong>Excellent.</strong> Food cost de ${fp}% — objectif atteint. Marge brute de ${m} ${sym} par service.`,
+    reco_ok:(fp,fc,s,diff,sym)=>`<strong>Food cost légèrement élevé</strong> (${fp}% vs objectif ${fc}%). Prix suggéré : <strong>${s} ${sym}</strong> (+${diff} ${sym}).`,
+    reco_bad:(fp,wn,wc,s,sym)=>`<strong>Food cost critique (${fp}%).</strong> Ingrédient le plus impactant : <strong>${wn}</strong> (${wc} ${sym}/dose). Prix minimum : <strong>${s} ${sym}</strong>.`,
+    reco_renta_good:(qty,be,p,sym)=>`<strong>Excellente rentabilité.</strong> Vous vendez ${qty} cocktails pour un seuil à ${be}. Bénéfice net estimé à <strong>${p} ${sym}</strong> sur ce service.`,
+    reco_renta_ok:(be)=>`<strong>Rentable mais serré.</strong> Vous dépassez juste le seuil (${be} cocktails). +20% de volume améliorerait sensiblement le résultat.`,
+    reco_renta_bad:(be,qty)=>`<strong>Attention — sous le seuil de rentabilité.</strong> Il vous faut <strong>${be} cocktails</strong> pour couvrir vos charges, vous en prévoyez ${qty}.`,
+    copy_text:(n,c,p,fp,m,sym)=>`FICHE TECHNIQUE — ${n}\nCoût matière : ${c} ${sym}\nPrix de vente : ${p} ${sym}\nFood cost : ${fp}%\nMarge brute : ${m} ${sym}`,
+    cplx:{direct:'Direct (build) — faible complexité',shaker:'Shaker — complexité modérée','verre-melange':'Verre à mélange — bonne maîtrise requise',blender:'Blender — complexité modérée',infusion:'Infusion / Macération — préparation longue',carbonation:'Carbonation — technique avancée',multi:'Multi-techniques — haute complexité'},
+    cplx_levels:['','Faible','Modérée','Modérée+','Élevée','Très élevée'],
+    title:'Fiche <em>Technique</em>',tagline:'Calcul coût · marge · rentabilité',currency_label:'Devise',
+  },
+  en:{
+    tab_fiche:'Cost Sheet',tab_renta:'Profitability',
+    p_cocktail:'Cocktail Info',p_liquids:'Liquid Ingredients',p_fresh:'Fresh & Solid Ingredients',
+    p_params:'Parameters',p_renta_cocktail:'Cocktail Parameters',p_service:'Service Type',
+    p_technique:'Technique & Time',p_charges:'Fixed Service Costs',
+    kpi_cost:'Material cost',kpi_price:'Selling price',kpi_fc:'Food cost',kpi_margin:'Gross margin',kpi_net:'Net margin',
+    cost_mat:'Material cost',
+    tbl_ing:'Ingredient',tbl_dose:'Dose',tbl_ref:'Ref.',tbl_cost:'Dose cost',
+    tbl_total_ing:'Total ingredients',tbl_overhead:'Garnish + ice + labor',tbl_waste:'Waste rate',tbl_total:'Total cost',tbl_fresh:'Fresh produce',
+    suggest_label:'Suggested price to hit food cost target',r_sheet:'Cost Sheet',
+    h_liquids:'Spirits, syrups, bottled juices, sodas — anything measured in ml or cl.',
+    h_fresh:'Mint, lemons, fruits, sugar, spices — anything sold by g or kg. Dose cost is calculated automatically from the pack yield.',
+    btn_calculate:'Calculate cost sheet',btn_add_liquid:'+ Add a liquid',btn_add_fresh:'+ Add a fresh ingredient',
+    btn_print:'Print',btn_new:'New sheet',btn_copy:'Copy summary',btn_analyze:'Analyze profitability',
+    l_name:'Cocktail name',l_price:'Selling price',l_category:'Category',l_glass:'Glass',l_method:'Method',
+    l_complexity:'Estimated complexity by method',l_target_fc:'Target food cost (%)',l_garnish:'Garnish cost',l_ice:'Ice cost',
+    l_labor:'Labor cost',l_tva:'VAT (%)',l_waste:'Waste / spillage rate',l_waste_pct:'Waste rate (%)',
+    l_waste_hint:'Increases material cost by this % to reflect real service losses.',l_adv:'+ More parameters',
+    l_net_toggle:'Show net margin (after VAT)',
+    i_name:'Ingredient',i_qty:'Quantity',i_unit:'Unit',i_format:'Bottle format',i_cost:'Bottle cost',i_custom_vol:'Custom volume (ml)',
+    pr_name:'Product',pr_pkg:'Pack weight (g)',pr_price:'Pack price',pr_qty:'Qty used (g)',
+    ph_cocktail:'e.g. Negroni…',ph_glass:'Coupe, Highball…',ph_dose:'45',ph_bottle:'38.00',ph_custom_vol:'e.g. 375',
+    pu_g:'grams (g)',pu_kg:'kilograms (kg)',pu_piece:'pieces',
+    v200:'20 cl — Can',v250:'25 cl — Can',v330:'33 cl — Can',v500:'50 cl — Half bottle',
+    v700:'70 cl — Standard',v750:'75 cl — Wine/Champagne',v1000:'100 cl — Litre',v1500:'150 cl — Magnum',v0:'Other — enter volume',
+    m_direct:'Direct (build)',m_shaker:'Shaker',m_mixing:'Mixing glass',m_blender:'Blender',
+    m_infusion:'Infusion / Maceration',m_carb:'Carbonation',m_multi:'Multi-technique',
+    cat_classic:'Classic',cat_sig:'Signature',cat_mock:'Mocktail',cat_champ:'Champagne / Sparkling',cat_shot:'Shot',
+    badge_good:'Profitable',badge_ok:'Borderline',badge_bad:'Review needed',
+    rr_gross:'Gross margin / cocktail',rr_labor:'Labor cost / cocktail',rr_net:'Net margin / cocktail',rr_rev:'Revenue / service',
+    rr_break:'Break-even',rr_profit:'Net profit / service',rr_time:'Total prep time',rr_complexity:'Complexity',
+    rr_unit_cocktails:'cocktails / evening',rr_unit_min:'min / service',
+    r2_name:'Name (optional)',r2_price:'Selling price',r2_cost:'Total material cost',
+    r2_type:'Establishment type',r2_hours:'Service duration (h)',r2_pax:'Expected guests',
+    r2_qty:'Cocktails sold / evening (estimate)',r2_break:'Break-even (calculated)',
+    r2_method:'Method',r2_prep:'Prep time (min)',r2_hourly:'Bartender hourly rate',
+    r2_complexity:'Complexity by method',r2_staff:'Bartender cost / service',r2_fixed:'Fixed costs / evening',r2_tva:'VAT (%)',
+    svc_bar:'Standard bar',svc_gastro:'Gastro bar / Hotel',svc_envoi:'High-volume bar',svc_event:'Event / Private hire',
+    copied:'Summary copied.',err_name:'Please enter the cocktail name.',err_ing:'Add at least one ingredient with dose and cost.',err_renta:'Please enter selling price and material cost.',
+    reco_no_price:(tc,fc,s,sym)=>`<strong>Production cost: ${tc} ${sym}.</strong> Suggested price for a ${fc}% food cost: <strong>${s} ${sym}</strong>.`,
+    reco_good:(fp,m,sym)=>`<strong>Excellent.</strong> Food cost at ${fp}% — target achieved. Gross margin of ${m} ${sym} per service.`,
+    reco_ok:(fp,fc,s,diff,sym)=>`<strong>Food cost slightly high</strong> (${fp}% vs target ${fc}%). Suggested price: <strong>${s} ${sym}</strong> (+${diff} ${sym}).`,
+    reco_bad:(fp,wn,wc,s,sym)=>`<strong>Critical food cost (${fp}%).</strong> Most expensive: <strong>${wn}</strong> (${wc} ${sym}/dose). Minimum price: <strong>${s} ${sym}</strong>.`,
+    reco_renta_good:(qty,be,p,sym)=>`<strong>Excellent profitability.</strong> You sell ${qty} cocktails vs a break-even of ${be}. Estimated net profit: <strong>${p} ${sym}</strong>.`,
+    reco_renta_ok:(be)=>`<strong>Profitable but tight.</strong> You just clear the break-even (${be} cocktails). +20% volume would meaningfully improve results.`,
+    reco_renta_bad:(be,qty)=>`<strong>Warning — below break-even.</strong> You need <strong>${be} cocktails</strong> to cover costs, but estimate ${qty}.`,
+    copy_text:(n,c,p,fp,m,sym)=>`COST SHEET — ${n}\nMaterial cost: ${c} ${sym}\nSelling price: ${p} ${sym}\nFood cost: ${fp}%\nGross margin: ${m} ${sym}`,
+    cplx:{direct:'Direct (build) — low complexity',shaker:'Shaker — moderate complexity','verre-melange':'Mixing glass — good technique required',blender:'Blender — moderate complexity',infusion:'Infusion / Maceration — long preparation',carbonation:'Carbonation — advanced technique',multi:'Multi-technique — high complexity'},
+    cplx_levels:['','Low','Moderate','Moderate+','High','Very high'],
+    title:'Recipe <em>Cost Sheet</em>',tagline:'Cost · margin · profitability',currency_label:'Currency',
+  },
+  es:{
+    tab_fiche:'Ficha técnica',tab_renta:'Rentabilidad',
+    p_cocktail:'Información del cóctel',p_liquids:'Ingredientes líquidos',p_fresh:'Ingredientes frescos & sólidos',
+    p_params:'Parámetros',p_renta_cocktail:'Parámetros del cóctel',p_service:'Tipo de servicio',
+    p_technique:'Técnica & tiempo',p_charges:'Costes fijos del servicio',
+    kpi_cost:'Coste materia',kpi_price:'Precio de venta',kpi_fc:'Food cost',kpi_margin:'Margen bruto',kpi_net:'Margen neto',
+    cost_mat:'Coste materia',
+    tbl_ing:'Ingrediente',tbl_dose:'Dosis',tbl_ref:'Ref.',tbl_cost:'Coste dosis',
+    tbl_total_ing:'Total ingredientes',tbl_overhead:'Guarnición + hielo + MO',tbl_waste:'Merma',tbl_total:'Coste total',tbl_fresh:'Productos frescos',
+    suggest_label:'Precio sugerido para alcanzar el food cost objetivo',r_sheet:'Ficha técnica',
+    h_liquids:'Licores, siropes, zumos embotellados, refrescos — todo lo que se mide en ml o cl.',
+    h_fresh:'Menta, limones, frutas, azúcar, especias — todo lo que se vende por g o kg. El coste por dosis se calcula automáticamente.',
+    btn_calculate:'Calcular ficha técnica',btn_add_liquid:'+ Añadir un líquido',btn_add_fresh:'+ Añadir ingrediente fresco',
+    btn_print:'Imprimir',btn_new:'Nueva ficha',btn_copy:'Copiar resumen',btn_analyze:'Analizar rentabilidad',
+    l_name:'Nombre del cóctel',l_price:'Precio de venta',l_category:'Categoría',l_glass:'Copa',l_method:'Método',
+    l_complexity:'Complejidad estimada según método',l_target_fc:'Food cost objetivo (%)',l_garnish:'Coste guarnición',l_ice:'Coste hielo',
+    l_labor:'Coste mano de obra',l_tva:'IVA (%)',l_waste:'Tasa de merma / desperdicio',l_waste_pct:'Tasa de merma (%)',
+    l_waste_hint:'Aumenta el coste de materia prima en este % para reflejar las pérdidas reales.',l_adv:'+ Más parámetros',
+    l_net_toggle:'Mostrar margen neto (después de IVA)',
+    i_name:'Ingrediente',i_qty:'Cantidad',i_unit:'Unidad',i_format:'Formato botella',i_cost:'Coste botella',i_custom_vol:'Volumen personalizado (ml)',
+    pr_name:'Producto',pr_pkg:'Peso paquete (g)',pr_price:'Precio paquete',pr_qty:'Cantidad usada (g)',
+    ph_cocktail:'ej. Negroni…',ph_glass:'Copa, Highball…',ph_dose:'45',ph_bottle:'38.00',ph_custom_vol:'ej. 375',
+    pu_g:'gramos (g)',pu_kg:'kilogramos (kg)',pu_piece:'unidades',
+    v200:'20 cl — Lata',v250:'25 cl — Lata',v330:'33 cl — Lata',v500:'50 cl — Media botella',
+    v700:'70 cl — Botella estándar',v750:'75 cl — Vino/Champagne',v1000:'100 cl — Litro',v1500:'150 cl — Magnum',v0:'Otro — introducir volumen',
+    m_direct:'Directo (build)',m_shaker:'Coctelera',m_mixing:'Vaso mezclador',m_blender:'Batidora',
+    m_infusion:'Infusión / Maceración',m_carb:'Carbonatación',m_multi:'Multi-técnica',
+    cat_classic:'Clásico',cat_sig:'Signature',cat_mock:'Mocktail',cat_champ:'Champagne / Espumoso',cat_shot:'Chupito',
+    badge_good:'Rentable',badge_ok:'Límite',badge_bad:'Revisar',
+    rr_gross:'Margen bruto / cóctel',rr_labor:'Coste MO / cóctel',rr_net:'Margen neto / cóctel',rr_rev:'Ingresos / servicio',
+    rr_break:'Umbral rentabilidad',rr_profit:'Beneficio neto / servicio',rr_time:'Tiempo total preparación',rr_complexity:'Complejidad',
+    rr_unit_cocktails:'cócteles / noche',rr_unit_min:'min / servicio',
+    r2_name:'Nombre (opcional)',r2_price:'Precio de venta',r2_cost:'Coste materia total',
+    r2_type:'Tipo de establecimiento',r2_hours:'Duración del servicio (h)',r2_pax:'Clientes esperados',
+    r2_qty:'Cócteles vendidos / noche (estimación)',r2_break:'Umbral de rentabilidad (calculado)',
+    r2_method:'Método',r2_prep:'Tiempo de preparación (min)',r2_hourly:'Tarifa horaria barman',
+    r2_complexity:'Complejidad según método',r2_staff:'Coste barman / servicio',r2_fixed:'Costes fijos / noche',r2_tva:'IVA (%)',
+    svc_bar:'Bar estándar',svc_gastro:'Bar gastronómico / Hotel',svc_envoi:'Bar de alto volumen',svc_event:'Evento / Privado',
+    copied:'Resumen copiado.',err_name:'Por favor introduce el nombre del cóctel.',err_ing:'Añade al menos un ingrediente con dosis y coste.',err_renta:'Introduce el precio de venta y el coste de materia prima.',
+    reco_no_price:(tc,fc,s,sym)=>`<strong>Coste de producción: ${tc} ${sym}.</strong> Precio sugerido para un food cost del ${fc}%: <strong>${s} ${sym}</strong>.`,
+    reco_good:(fp,m,sym)=>`<strong>Excelente.</strong> Food cost del ${fp}% — objetivo alcanzado. Margen bruto de ${m} ${sym} por servicio.`,
+    reco_ok:(fp,fc,s,diff,sym)=>`<strong>Food cost ligeramente alto</strong> (${fp}% vs objetivo ${fc}%). Precio sugerido: <strong>${s} ${sym}</strong> (+${diff} ${sym}).`,
+    reco_bad:(fp,wn,wc,s,sym)=>`<strong>Food cost crítico (${fp}%).</strong> Ingrediente más impactante: <strong>${wn}</strong> (${wc} ${sym}/dosis). Precio mínimo: <strong>${s} ${sym}</strong>.`,
+    reco_renta_good:(qty,be,p,sym)=>`<strong>Excelente rentabilidad.</strong> Vendes ${qty} cócteles con un umbral de ${be}. Beneficio neto estimado: <strong>${p} ${sym}</strong>.`,
+    reco_renta_ok:(be)=>`<strong>Rentable pero ajustado.</strong> Superas justo el umbral (${be} cócteles). +20% de volumen mejoraría el resultado.`,
+    reco_renta_bad:(be,qty)=>`<strong>Atención — por debajo del umbral.</strong> Necesitas <strong>${be} cócteles</strong> para cubrir costes, estimas ${qty}.`,
+    copy_text:(n,c,p,fp,m,sym)=>`FICHA TÉCNICA — ${n}\nCoste materia: ${c} ${sym}\nPrecio de venta: ${p} ${sym}\nFood cost: ${fp}%\nMargen bruto: ${m} ${sym}`,
+    cplx:{direct:'Directo (build) — baja complejidad',shaker:'Coctelera — complejidad moderada','verre-melange':'Vaso mezclador — buena técnica requerida',blender:'Batidora — complejidad moderada',infusion:'Infusión / Maceración — preparación larga',carbonation:'Carbonatación — técnica avanzada',multi:'Multi-técnica — alta complejidad'},
+    cplx_levels:['','Baja','Moderada','Moderada+','Alta','Muy alta'],
+    title:'Ficha <em>Técnica</em>',tagline:'Coste · margen · rentabilidad',currency_label:'Moneda',
+  }
+};
+
+let currentLang='fr';
+function t(key,...args){const v=T[currentLang][key];return typeof v==='function'?v(...args):(v||T.fr[key]||key);}
+
+function setLang(lang,btn){
+  currentLang=lang;
+  document.documentElement.lang=lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  if(typeof gtag!=='undefined')gtag('event','language_change',{language:lang});
+  applyTranslations();
+}
+
+function applyTranslations(){
+  // Header
+  document.querySelector('.header-sub').innerHTML=t('title');
+  document.querySelector('.tagline').textContent=t('tagline');
+  // data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.getAttribute('data-i18n')));
+  // data-i18n-html elements
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>el.innerHTML=t(el.getAttribute('data-i18n-html')));
+  // Panel titles
+  document.querySelectorAll('[data-i18n-panel]').forEach(el=>{
+    const k=el.getAttribute('data-i18n-panel');
+    const icon=el.querySelector('.panel-title-icon');
+    const iconHtml=icon?icon.outerHTML+' ':'';
+    el.innerHTML=iconHtml+t(k)+'<span style="flex:1;height:1px;background:var(--border);display:inline-block;margin-left:12px"></span>';
+  });
+  // Placeholders
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>el.placeholder=t(el.getAttribute('data-i18n-ph')));
+  // Rebuild ingredient & produce rows with new lang
+  document.querySelectorAll('.ingredient-row').forEach(row=>{
+    row.querySelectorAll('label').forEach((lbl,i)=>{
+      const keys=['i_name','i_qty','i_unit','i_format','i_cost'];
+      if(keys[i])lbl.textContent=t(keys[i]);
+    });
+    const bvs=row.querySelector('.bvs');
+    if(bvs){Array.from(bvs.options).forEach(o=>{const k='v'+o.value;if(T[currentLang][k])o.text=t(k);});}
+    const ius=row.querySelector('.ing-unit-select');
+    if(ius){Array.from(ius.options).forEach(o=>{const km={ml:'ml',cl:'cl',g:'g'};if(km[o.value])o.text=o.value;});}
+  });
+  document.querySelectorAll('.produce-row').forEach(row=>{
+    row.querySelectorAll('label').forEach((lbl,i)=>{
+      const keys=['pr_name','pr_pkg','pr_price','pr_qty'];
+      if(keys[i])lbl.textContent=t(keys[i]);
+    });
+    const us=row.querySelector('.prod-unit');
+    if(us){Array.from(us.options).forEach(o=>{const km={g:'pu_g',kg:'pu_kg',piece:'pu_piece'};if(km[o.value])o.text=t(km[o.value]);});}
+  });
+}
+
+function detectLang(){
+  const lang=(navigator.language||'fr').toLowerCase();
+  let detected='fr';
+  if(lang.startsWith('en'))detected='en';
+  else if(lang.startsWith('es'))detected='es';
+  currentLang=detected;
+  document.documentElement.lang=detected;
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.classList.toggle('active',btn.textContent.toLowerCase()===detected);
+  });
+  applyTranslations();
+}
+
 // ===== TABS =====
 function switchTab(t,btn){
   document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));
@@ -916,7 +1140,7 @@ function setCplx(barId, txtId, method) {
     d.classList.remove('on','hi');
     if(i<c.lvl){ d.classList.add('on'); if(c.lvl>=4) d.classList.add('hi'); }
   });
-  document.getElementById(txtId).textContent = c.label;
+  document.getElementById(txtId).textContent = T[currentLang].cplx[c.key]||c.label||c.key;
   return c;
 }
 
@@ -938,25 +1162,25 @@ function toggleWaste(cb){
 // ===== INGREDIENTS =====
 function addIng(name='',dose='',vol=700,cost='',unit='ml'){
   const id=++ingCount;
-  const opts=VOLS.map(v=>`<option value="${v.v}"${v.v===vol?' selected':''}>${v.l}</option>`).join('');
+  const opts=getVOLS().map(v=>`<option value="${v.v}"${v.v===vol?' selected':''}>${t(v.k)}</option>`).join('');
   const row=document.createElement('div');
   row.className='ingredient-row'; row.id='ing-'+id;
   row.innerHTML=`
-    <div><label>Ingrédient</label><input type="text" placeholder="ex. Gin Hendrick's" value="${name}"></div>
-    <div><label>Quantité</label><input type="number" class="ing-dose-input" placeholder="45" value="${dose}" min="0" step="0.1" oninput="updateIngUnit(${id})"></div>
-    <div><label>Unité</label>
+    <div><label>${t('i_name')}</label><input type="text" placeholder="${t('ph_cocktail')}" value="${name}"></div>
+    <div><label>${t('i_qty')}</label><input type="number" class="ing-dose-input" placeholder="${t('ph_dose')}" value="${dose}" min="0" step="0.1" oninput="updateIngUnit(${id})"></div>
+    <div><label>${t('i_unit')}</label>
       <select class="ing-unit-select" onchange="updateIngUnit(${id})">
         <option value="ml"${unit==='ml'?' selected':''}>ml</option>
         <option value="cl"${unit==='cl'?' selected':''}>cl</option>
         <option value="g"${unit==='g'?' selected':''}>g</option>
       </select>
     </div>
-    <div><label>Format bouteille</label><select class="bvs" onchange="toggleCustomVol(${id},this.value)">${opts}</select></div>
-    <div id="vol-field-${id}"><label>Coût bouteille CHF</label><input type="number" placeholder="38.00" value="${cost}" min="0" step="0.5"></div>
+    <div><label>${t('i_format')}</label><select class="bvs" onchange="toggleCustomVol(${id},this.value)">${opts}</select></div>
+    <div id="vol-field-${id}"><label>${t('i_cost')}</label><input type="number" placeholder="${t('ph_bottle')}" value="${cost}" min="0" step="0.5"></div>
     <div><label style="opacity:0">—</label><button class="btn-remove" onclick="document.getElementById('ing-${id}').remove()">×</button></div>
     <div id="custom-vol-${id}" style="display:none;grid-column:4/5;margin-top:-6px">
-      <label>Volume personnalisé (ml)</label>
-      <input type="number" class="custom-vol-input" placeholder="ex. 375" min="1" step="1">
+      <label>${t('i_custom_vol')}</label>
+      <input type="number" class="custom-vol-input" placeholder="${t('ph_custom_vol')}" min="1" step="1">
     </div>`;
   document.getElementById('ingredients-list').appendChild(row);
 }
@@ -1048,9 +1272,9 @@ function getProdCost(){
 // ===== CALCULATE FICHE =====
 function calculate(){
   const name=document.getElementById('cocktail-name').value.trim();
-  if(!name){document.getElementById('cocktail-name').focus();return;}
+  if(!name){alert(t('err_name'));document.getElementById('cocktail-name').focus();return;}
   const ings=getIngs();
-  if(!ings.length){alert('Ajoutez au moins un ingrédient avec dosage et coût.');return;}
+  if(!ings.length){alert(t('err_ing'));return;}
 
   const sp=parseFloat(document.getElementById('sell-price').value)||0;
   const fc=parseFloat(document.getElementById('target-fc').value)||20;
@@ -1097,7 +1321,7 @@ function calculate(){
     document.getElementById('r-bar').style.background=fcPct<=fc?'var(--green)':fcPct<=fc*1.3?'var(--gold)':'var(--red)';
     document.getElementById('r-fc-lbl').textContent=fcPct.toFixed(1)+'%';
     const b=document.getElementById('r-badge');
-    b.textContent=fcPct<=fc?'Rentable':fcPct<=fc*1.3?'Limite':'À revoir';
+    b.textContent=fcPct<=fc?t('badge_good'):fcPct<=fc*1.3?t('badge_ok'):t('badge_bad');
     b.className='rbadge '+(fcPct<=fc?'bg':fcPct<=fc*1.3?'bo':'bb');
   } else {
     document.getElementById('r-fc').textContent='—';
@@ -1110,28 +1334,29 @@ function calculate(){
     const pct=sp>0?((i.doseCost/sp)*100).toFixed(1)+'%':'';
     tbody.innerHTML+=`<tr><td class="in">${i.name}</td><td class="id">${i.dose}${i.unit}</td><td class="id">${i.bCost.toFixed(2)} ${curSym()}/${i.bVol}ml</td><td>${i.doseCost.toFixed(3)} ${curSym()}${pct?` <span class="ipct">${pct}</span>`:''}</td></tr>`;
   });
-  if(prodCost>0) tbody.innerHTML+=`<tr><td class="id">Produits frais</td><td class="id">—</td><td class="id">—</td><td>${prodCost.toFixed(3)} ${curSym()}</td></tr>`;
+  if(prodCost>0) tbody.innerHTML+=`<tr><td class="id">${t('tbl_fresh')}</td><td class="id">—</td><td class="id">—</td><td>${prodCost.toFixed(3)} ${curSym()}</td></tr>`;
 
   document.getElementById('r-ing-total').textContent=ingTotal.toFixed(3)+' '+curSym();
   document.getElementById('r-overhead').textContent=(gar+ice+lab).toFixed(2)+' '+curSym();
   if(wasteOn&&wastePct>0){document.getElementById('r-waste-tr').style.display='';document.getElementById('r-waste-val').textContent='+'+wasteAmt.toFixed(3)+' '+curSym()+' ('+wastePct+'%)';}
   else document.getElementById('r-waste-tr').style.display='none';
   document.getElementById('r-total').textContent=totalC.toFixed(2)+' '+curSym();
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.getAttribute('data-i18n')));
 
   let reco='';
   if(sp<=0){
-    reco=`<strong>Coût de production : ${totalC.toFixed(2)} ${curSym()}.</strong> Prix suggéré pour un food cost de ${fc}% : <strong>${suggested.toFixed(2)} ${curSym()}</strong>.`;
+    reco=t('reco_no_price',totalC.toFixed(2),fc,suggested.toFixed(2),curSym());
     document.getElementById('r-suggest-wrap').style.display='block';
     document.getElementById('r-suggest').textContent=suggested.toFixed(2)+' '+curSym();
   } else if(fcPct<=fc){
-    reco=`<strong>Excellent.</strong> Food cost de ${fcPct.toFixed(1)}% — objectif atteint. Marge brute de ${margin.toFixed(2)} ${curSym()} par service.`;
+    reco=t('reco_good',fcPct.toFixed(1),margin.toFixed(2),curSym());
   } else if(fcPct<=fc*1.3){
-    reco=`<strong>Food cost légèrement élevé</strong> (${fcPct.toFixed(1)}% vs objectif ${fc}%). Prix suggéré : <strong>${suggested.toFixed(2)} ${curSym()}</strong> (+${(suggested-sp).toFixed(2)} ${curSym()}).`;
+    reco=t('reco_ok',fcPct.toFixed(1),fc,suggested.toFixed(2),(suggested-sp).toFixed(2),curSym());
     document.getElementById('r-suggest-wrap').style.display='block';
     document.getElementById('r-suggest').textContent=suggested.toFixed(2)+' '+curSym();
   } else {
     const worst=ings.reduce((a,b)=>a.doseCost>b.doseCost?a:b);
-    reco=`<strong>Food cost critique (${fcPct.toFixed(1)}%).</strong> Ingrédient le plus impactant : <strong>${worst.name}</strong> (${worst.doseCost.toFixed(3)} ${curSym()}/dose). Prix minimum : <strong>${suggested.toFixed(2)} ${curSym()}</strong>.`;
+    reco=t('reco_bad',fcPct.toFixed(1),worst.name,worst.doseCost.toFixed(3),suggested.toFixed(2),curSym());
     document.getElementById('r-suggest-wrap').style.display='block';
     document.getElementById('r-suggest').textContent=suggested.toFixed(2)+' '+curSym();
   }
@@ -1150,7 +1375,7 @@ function newRecipe(){
 }
 function copyRes(){
   const r=lastRes;
-  const sym=curSym();navigator.clipboard.writeText(`FICHE TECHNIQUE — ${r.name}\nCoût matière : ${(r.totalC||0).toFixed(2)} ${sym}\nPrix de vente : ${r.sp||'—'} ${sym}\nFood cost : ${r.fcPct?r.fcPct.toFixed(1):'—'}%\nMarge brute : ${r.margin?r.margin.toFixed(2):'—'} ${sym}`).then(()=>alert('Résumé copié.'));
+  const sym=curSym();navigator.clipboard.writeText(t('copy_text',r.name||(r.name||''),(r.totalC||0).toFixed(2),r.sp||'—',r.fcPct?r.fcPct.toFixed(1):'—',r.margin?r.margin.toFixed(2):'—',sym)).then(()=>alert(t('copied')));
 }
 
 // ===== RENTABILITÉ =====
@@ -1174,7 +1399,7 @@ function calcRenta(){
   const method=document.getElementById('r2-method').value;
   const cplx=CPLX[method]||CPLX['direct'];
 
-  if(!price||!cost){alert('Renseignez le prix de vente et le coût matière.');return;}
+  if(!price||!cost){alert(t('err_renta'));return;}
 
   const laborUnit=(prepT/60)*hourly;
   const grossUnit=price-cost;
@@ -1204,9 +1429,9 @@ function calcRenta(){
   document.getElementById('rr-cplx').textContent=(cLabels[cplx.lvl]||'')+' — '+cplx.label.split('—')[0].trim();
 
   let reco='';
-  if(qty>=breakEven*1.3) reco=`<strong>Excellente rentabilité.</strong> Vous vendez ${qty} cocktails pour un seuil à ${Math.ceil(breakEven)}. Bénéfice net estimé à <strong>${profit.toFixed(2)} ${curSym()}</strong> sur ce service.`;
-  else if(qty>=breakEven) reco=`<strong>Rentable mais serré.</strong> Vous dépassez juste le seuil (${Math.ceil(breakEven)} cocktails). +20% de volume améliorerait sensiblement le résultat.`;
-  else reco=`<strong>Attention — sous le seuil de rentabilité.</strong> Il vous faut <strong>${Math.ceil(breakEven)} cocktails</strong> pour couvrir vos charges, vous en prévoyez ${qty}. Envisagez d'ajuster le prix de vente ou de réduire les charges fixes.`;
+  if(qty>=breakEven*1.3) reco=t('reco_renta_good',qty,Math.ceil(breakEven),profit.toFixed(2),curSym());
+  else if(qty>=breakEven) reco=t('reco_renta_ok',Math.ceil(breakEven));
+  else reco=t('reco_renta_bad',Math.ceil(breakEven),qty);
   document.getElementById('rr-reco').innerHTML=reco;
   document.getElementById('renta-result').scrollIntoView({behavior:'smooth'});
 }
@@ -1220,6 +1445,7 @@ function toggleLabor(cb){
 
 // ===== INIT =====
 detectCurrency();
+detectLang();
 addIng(); addIng(); addIng();
 setCplx('complexity-bar','complexity-text','direct');
 setCplx('r2-cplx-bar','r2-cplx-text','direct');
