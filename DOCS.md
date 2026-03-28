@@ -137,3 +137,9 @@ Last updated: 2026-03-28
 2026-03-28 — OG image: og-image.jpg générée (1200×630px, Python Pillow, dark navy + amber) et déployée
 2026-03-28 — Google Search Console: propriété https://drinkcost.bar/ vérifiée (via Google Analytics), sitemap.xml soumis manuellement
 2026-03-28 — SEO content section: texte de référencement trilingue (FR/EN/ES) visible dans la page — <h2> + <p> intro + 2 articles <h3>/<p> ciblant les requêtes "calculer le coût d'un cocktail / cocktail cost / coste cóctel", rendu dynamique par applyTranslations()
+2026-03-28 — No-JS SEO fallback: <title> FR par défaut, #faq-list pré-populé avec 12 Q&A FR en HTML statique (Google sans JS voit le contenu FR complet)
+2026-03-28 — Audit SEO complet + optimisation P0→P3:
+  P0: FAQPage JSON-LD pré-populé statiquement (rich snippets sans délai JS) ; H1 enrichi de "Cocktail" (FR/EN/ES) ; premier nav-tab data-i18n="tab_fiche" (traduction manquante) ; clé rr_unit_net ajoutée dans T.fr/en/es (fix affichage "undefined" onglet Rentabilité)
+  P1: Keywords FR/EN/ES couvrant toutes les requêtes cibles (fiche recette cocktail, pour cost calculator, calcular costo coctel, food cost coctelería…) ; texte SEO enrichi avec les termes manquants (coût de revient d'une recette, drink cost, fiche technique bar, cocktail recipe costing, food cost coctelería)
+  P2: Meta descriptions optimisées CTR ("30 secondes", "10 devises", "100% gratuit") ; bouton paramètres avancés traduit (data-i18n="l_adv") ; Google Fonts chargé en non-blocking (media="print" onload)
+  P3: aria-labels sur lang-pill (role=group) et lang buttons ; role=tablist/tab sur nav-tabs

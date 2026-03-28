@@ -853,16 +853,16 @@ select option { background: var(--bg3); }
     </select>
     <span id="currency-symbol" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent)">CHF</span>
   </div>
-  <div class="lang-pill">
-    <button class="lang-btn active" onclick="setLang('fr',this)">FR</button>
-    <button class="lang-btn" onclick="setLang('en',this)">EN</button>
-    <button class="lang-btn" onclick="setLang('es',this)">ES</button>
+  <div class="lang-pill" role="group" aria-label="Language / Langue / Idioma">
+    <button class="lang-btn active" onclick="setLang('fr',this)" aria-label="Français">FR</button>
+    <button class="lang-btn" onclick="setLang('en',this)" aria-label="English">EN</button>
+    <button class="lang-btn" onclick="setLang('es',this)" aria-label="Español">ES</button>
   </div>
 </header>
 
-<div class="nav-tabs">
-  <button class="nav-tab active" onclick="switchTab('fiche',this)" data-i18n="tab_fiche">Fiche technique</button>
-  <button class="nav-tab" onclick="switchTab('renta',this)" data-i18n="tab_renta">Rentabilité</button>
+<div class="nav-tabs" role="tablist">
+  <button class="nav-tab active" onclick="switchTab('fiche',this)" data-i18n="tab_fiche" role="tab" aria-selected="true">Fiche technique</button>
+  <button class="nav-tab" onclick="switchTab('renta',this)" data-i18n="tab_renta" role="tab" aria-selected="false">Rentabilité</button>
 </div>
 
 <!-- ===== TAB FICHE ===== -->
