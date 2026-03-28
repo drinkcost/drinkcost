@@ -2,6 +2,11 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<!-- Performance — preconnect before any external request -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CBMJ6CRX0N"></script>
 <script>
@@ -16,7 +21,14 @@
 <!-- SEO — Core -->
 <meta name="robots" content="index, follow">
 <meta name="author" content="DrinkCost — Jordan Haniecki">
+<meta name="application-name" content="DrinkCost">
+<meta name="theme-color" content="#e8a020">
+<meta name="rating" content="general">
+<meta name="geo.region" content="CH-NE">
+<meta name="geo.placename" content="Neuchâtel, Switzerland">
 <link rel="canonical" href="https://drinkcost.bar/">
+<!-- SEO — Keywords (dynamic per language) -->
+<meta id="meta-keywords" name="keywords" content="fiche technique cocktail, calcul food cost, food cost bar, coût de revient cocktail, rentabilité bar, calcul marge bar, outil bar manager, ficha técnica cóctel, cocktail cost sheet, food cost calculator">
 
 <!-- SEO — Dynamic (title + description updated by JS on lang change) -->
 <meta id="meta-desc" name="description" content="Calculez le food cost de vos cocktails en quelques secondes. Fiche technique professionnelle, rentabilité, multi-devises. Gratuit pour bar managers et mixologues.">
@@ -54,19 +66,49 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "DrinkCost",
+  "alternateName": ["DrinkCost Bar Tool", "Calculateur Food Cost Cocktail", "Calculadora Food Cost Cóctel"],
   "url": "https://drinkcost.bar/",
   "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Food & Beverage Management",
   "operatingSystem": "Web",
-  "description": "Professional cocktail cost sheet and food cost calculator for bar managers and mixologists. Trilingual FR/EN/ES, multi-currency.",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CHF" },
-  "creator": { "@type": "Person", "name": "Jordan Haniecki", "jobTitle": "Bar Manager & Mixologist" },
+  "browserRequirements": "Requires JavaScript",
+  "description": "Professional cocktail cost sheet and food cost calculator for bar managers and mixologists. Trilingual FR/EN/ES, 10 currencies supported.",
+  "featureList": [
+    "Cocktail food cost calculation",
+    "Bar profitability and break-even analysis",
+    "Multi-currency support (CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY, AUD)",
+    "Trilingual interface: French, English, Spanish",
+    "Liquid and fresh ingredient cost breakdown",
+    "Waste and spillage rate adjustment",
+    "Print and clipboard export"
+  ],
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CHF", "availability": "https://schema.org/InStock" },
+  "creator": { "@type": "Person", "name": "Jordan Haniecki", "jobTitle": "Bar Manager & Mixologist", "worksFor": { "@type": "Organization", "name": "DrinkCost" } },
   "inLanguage": ["fr", "en", "es"],
-  "keywords": "cocktail cost calculator, food cost, fiche technique cocktail, bar manager tool, ficha técnica cóctel, calcul rentabilité bar"
+  "isAccessibleForFree": true,
+  "keywords": "cocktail cost calculator, food cost, fiche technique cocktail, bar manager tool, ficha técnica cóctel, calcul rentabilité bar, beverage cost control"
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<!-- Schema.org — Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "DrinkCost",
+  "url": "https://drinkcost.bar/",
+  "logo": "https://drinkcost.bar/og-image.jpg",
+  "contactPoint": { "@type": "ContactPoint", "email": "contact@drinkcost.bar", "contactType": "customer support", "availableLanguage": ["French", "English", "Spanish"] },
+  "founder": { "@type": "Person", "name": "Jordan Haniecki", "jobTitle": "Bar Manager & Mixologist" },
+  "foundingDate": "2026",
+  "areaServed": "Worldwide",
+  "knowsAbout": ["Cocktail cost management", "Bar profitability", "Food cost calculation", "Mixology", "Bar management"]
+}
+</script>
+<!-- Schema.org — FAQPage (populated by JS on lang change) -->
+<script type="application/ld+json" id="faq-schema">{}</script>
+<!-- Fonts — consolidated <link> (no render-blocking @import) -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@300;400&display=swap');
 
 :root {
   /* Brand palette — deep navy + amber glow */
@@ -760,7 +802,7 @@ select option { background: var(--bg3); }
     <div class="logo-icon">🍸</div>
     <div class="logo-text">Drink<span>Cost</span></div>
   </div>
-  <div class="header-sub">Fiche <em>Technique</em></div>
+  <h1 class="header-sub">Fiche <em>Technique</em></h1>
   <div class="tagline">Calcul coût · marge · rentabilité</div>
   <div class="header-divider"><div class="header-divider-dot"></div></div>
   <div class="currency-pill">
@@ -1161,6 +1203,7 @@ const T = {
     seo_title:'DrinkCost — Fiche Technique Cocktail & Calcul Food Cost | Bar',
     seo_desc:'Calculez le food cost de vos cocktails en quelques secondes. Fiche technique professionnelle, rentabilité, multi-devises. Gratuit pour bar managers et mixologues.',
     seo_og_locale:'fr_FR',
+    seo_keywords:'fiche technique cocktail, calcul food cost, food cost bar, coût de revient cocktail, rentabilité bar, calcul marge bar, outil bar manager gratuit, recette cocktail coût, contrôle coût boissons, seuil rentabilité bar',
     faq_title:'Questions <em>fréquentes</em>',
     faq_tagline:'Tout ce que vous devez savoir sur DrinkCost',
     faq:[
@@ -1231,6 +1274,7 @@ const T = {
     seo_title:'DrinkCost — Cocktail Cost Sheet & Food Cost Calculator | Bar',
     seo_desc:'Calculate your cocktail food cost in seconds. Professional cost sheet, profitability analysis, multi-currency. Free for bar managers and mixologists.',
     seo_og_locale:'en_US',
+    seo_keywords:'cocktail cost sheet, food cost calculator, cocktail food cost, bar manager tool free, beverage cost control, bar profitability calculator, recipe cost cocktail, drink cost calculator, break-even bar, bar cost management',
     faq_title:'Frequently <em>Asked Questions</em>',
     faq_tagline:'Everything you need to know about DrinkCost',
     faq:[
@@ -1301,6 +1345,7 @@ const T = {
     seo_title:'DrinkCost — Ficha Técnica Cóctel & Calculadora Food Cost | Bar',
     seo_desc:'Calcula el food cost de tus cócteles en segundos. Ficha técnica profesional, rentabilidad, multi-moneda. Gratis para jefes de bar y mixólogos.',
     seo_og_locale:'es_ES',
+    seo_keywords:'ficha técnica cóctel, calculadora food cost, coste cóctel, herramienta bar manager gratis, control costes bebidas, rentabilidad bar, calcular precio cóctel, receta cóctel coste, umbral rentabilidad bar, gestión costes bar',
     faq_title:'Preguntas <em>frecuentes</em>',
     faq_tagline:'Todo lo que necesitas saber sobre DrinkCost',
     faq:[
@@ -1416,11 +1461,25 @@ function applyTranslations(){
   document.title=t('seo_title');
   const _m=id=>document.getElementById(id);
   if(_m('meta-desc'))_m('meta-desc').setAttribute('content',t('seo_desc'));
+  if(_m('meta-keywords'))_m('meta-keywords').setAttribute('content',t('seo_keywords'));
   if(_m('og-title'))_m('og-title').setAttribute('content',t('seo_title'));
   if(_m('og-desc'))_m('og-desc').setAttribute('content',t('seo_desc'));
   if(_m('og-locale'))_m('og-locale').setAttribute('content',t('seo_og_locale'));
   if(_m('tw-title'))_m('tw-title').setAttribute('content',t('seo_title'));
   if(_m('tw-desc'))_m('tw-desc').setAttribute('content',t('seo_desc'));
+  // FAQPage schema — inject current language Q&A for Google rich snippets
+  const faqSchema=_m('faq-schema');
+  if(faqSchema&&T[currentLang].faq){
+    faqSchema.textContent=JSON.stringify({
+      '@context':'https://schema.org',
+      '@type':'FAQPage',
+      'mainEntity':T[currentLang].faq.map(item=>({
+        '@type':'Question',
+        'name':item.q,
+        'acceptedAnswer':{'@type':'Answer','text':item.a}
+      }))
+    });
+  }
 }
 
 function detectLang(){
