@@ -732,6 +732,25 @@ select option { background: var(--bg3); }
   .kpi-value{font-size:20px;}
   .nav-tab{padding:8px 6px;font-size:9px;}
 }
+
+/* ── FAQ ── */
+.faq-section{margin-top:60px;padding-top:40px;border-top:1px solid var(--border);}
+.faq-section h2{font-family:'Playfair Display',serif;font-size:clamp(20px,4vw,28px);font-weight:400;font-style:italic;color:var(--text);margin-bottom:8px;text-align:center;}
+.faq-section h2 em{color:var(--accent);font-style:normal;font-weight:600;}
+.faq-tagline{font-size:12px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;text-align:center;margin-bottom:32px;}
+.faq-list{display:flex;flex-direction:column;gap:8px;max-width:720px;margin:0 auto;}
+.faq-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .2s;}
+.faq-item[open]{border-color:var(--border2);}
+.faq-item summary{list-style:none;cursor:pointer;padding:16px 20px;font-weight:600;font-size:14px;color:var(--text);display:flex;align-items:center;justify-content:space-between;gap:12px;user-select:none;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:'＋';color:var(--accent);font-size:16px;line-height:1;flex-shrink:0;transition:transform .2s;}
+.faq-item[open] summary::after{transform:rotate(45deg);}
+.faq-item summary:hover{color:var(--accent);}
+.faq-a{padding:0 20px 16px;font-size:13px;color:var(--text2);line-height:1.7;}
+@media(max-width:640px){
+  .faq-item summary{padding:14px 16px;font-size:13px;}
+  .faq-a{padding:0 16px 14px;}
+}
 </style>
 </head>
 <body>
@@ -1007,6 +1026,14 @@ select option { background: var(--bg3); }
   </div>
 
 </div><!-- /tab-renta -->
+
+<!-- FAQ -->
+<section class="faq-section" aria-label="FAQ">
+  <h2 class="faq-title" id="faq-title">Questions <em>fréquentes</em></h2>
+  <p class="faq-tagline" id="faq-tagline">Tout ce que vous devez savoir sur DrinkCost</p>
+  <div class="faq-list" id="faq-list"></div>
+</section>
+
 <footer style="text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--border);">
   <p style="font-size:11px;color:var(--text3);letter-spacing:.08em;">
     © 2026 DrinkCost ·
@@ -1134,6 +1161,22 @@ const T = {
     seo_title:'DrinkCost — Fiche Technique Cocktail & Calcul Food Cost | Bar',
     seo_desc:'Calculez le food cost de vos cocktails en quelques secondes. Fiche technique professionnelle, rentabilité, multi-devises. Gratuit pour bar managers et mixologues.',
     seo_og_locale:'fr_FR',
+    faq_title:'Questions <em>fréquentes</em>',
+    faq_tagline:'Tout ce que vous devez savoir sur DrinkCost',
+    faq:[
+      {q:'DrinkCost est-il gratuit ?',a:"Oui, l'outil est entièrement gratuit. Toutes les fonctionnalités de calcul sont accessibles sans inscription ni carte bancaire."},
+      {q:'Comment calculer le food cost d\'un cocktail ?',a:'Entrez le nom du cocktail et son prix de vente, puis ajoutez vos ingrédients avec leurs dosages et coûts. Cliquez sur « Calculer la fiche technique » — le food cost, la marge brute et le prix suggéré s\'affichent automatiquement.'},
+      {q:'Qu\'est-ce que le food cost ?',a:'Le food cost est le ratio entre le coût matière d\'un cocktail et son prix de vente, exprimé en pourcentage. Un food cost de 20 % signifie que 20 % du prix de vente est consommé par les ingrédients. L\'objectif standard en bar est de 18–25 %.'},
+      {q:'Quelles devises sont supportées ?',a:'DrinkCost supporte 10 devises : CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY et AUD. La devise est détectée automatiquement selon votre fuseau horaire.'},
+      {q:'Comment fonctionne le seuil de rentabilité ?',a:'L\'onglet Rentabilité calcule le nombre minimum de cocktails à vendre par service pour couvrir vos charges fixes (coût barman + frais fixes). En dessous de ce seuil, le service est déficitaire.'},
+      {q:'Puis-je utiliser DrinkCost sur mobile ?',a:'Oui. L\'outil est entièrement responsive et optimisé pour tous les écrans. Il fonctionne sur iOS et Android, sans application à installer.'},
+      {q:'Comment exporter ma fiche technique ?',a:'Cliquez sur « Imprimer » pour générer un PDF via votre navigateur, ou « Copier résumé » pour copier les données clés dans le presse-papier.'},
+      {q:'Qu\'est-ce que le taux de perte / gaspillage ?',a:'Le taux de perte majore votre coût matière pour refléter les pertes réelles au service : renversements, mesures approximatives, ingrédients gaspillés. Il est activable dans les paramètres avancés.'},
+      {q:'Comment est calculé le prix suggéré ?',a:'Coût matière total ÷ (objectif food cost / 100). Exemple : coût 3,50 CHF, objectif 20 % → prix suggéré 17,50 CHF.'},
+      {q:'Puis-je sauvegarder mes fiches techniques ?',a:'La sauvegarde est prévue en V2 (comptes utilisateurs). Pour l\'instant, utilisez « Copier résumé » ou « Imprimer ».'},
+      {q:'Pour qui est fait DrinkCost ?',a:'Pour les bar managers, chefs barmen, directeurs F&B et mixologues — dans les bars, hôtels, restaurants et entreprises événementielles, partout dans le monde.'},
+      {q:'Quelle est la différence entre marge brute et marge nette ?',a:'La marge brute = prix de vente − coût matière. La marge nette déduit en plus la TVA. Activez « Afficher la marge nette » dans les résultats pour la voir.'},
+    ],
   },
   en:{
     tab_fiche:'Cost Sheet',tab_renta:'Profitability',
@@ -1188,6 +1231,22 @@ const T = {
     seo_title:'DrinkCost — Cocktail Cost Sheet & Food Cost Calculator | Bar',
     seo_desc:'Calculate your cocktail food cost in seconds. Professional cost sheet, profitability analysis, multi-currency. Free for bar managers and mixologists.',
     seo_og_locale:'en_US',
+    faq_title:'Frequently <em>Asked Questions</em>',
+    faq_tagline:'Everything you need to know about DrinkCost',
+    faq:[
+      {q:'Is DrinkCost free?',a:'Yes, the tool is entirely free. All calculation features are accessible without registration or credit card.'},
+      {q:'How do I calculate a cocktail\'s food cost?',a:'Enter the cocktail name and selling price, then add your ingredients with their doses and costs. Click "Calculate cost sheet" — food cost, gross margin and suggested price are displayed automatically.'},
+      {q:'What is food cost?',a:'Food cost is the ratio between a cocktail\'s material cost and its selling price, expressed as a percentage. A 20% food cost means 20% of the selling price is consumed by ingredients. The standard bar target is 18–25%.'},
+      {q:'Which currencies are supported?',a:'DrinkCost supports 10 currencies: CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY and AUD. Currency is auto-detected based on your timezone.'},
+      {q:'How does the break-even calculation work?',a:'The Profitability tab calculates the minimum number of cocktails you need to sell per service to cover your fixed costs (bartender cost + fixed overheads). Below this threshold, the service runs at a loss.'},
+      {q:'Can I use DrinkCost on mobile?',a:'Yes. The tool is fully responsive and optimised for all screen sizes. It works on iOS and Android with no app to install.'},
+      {q:'How do I export my cost sheet?',a:'Click "Print" to generate a PDF via your browser, or "Copy summary" to copy key data to your clipboard.'},
+      {q:'What is the waste / spillage rate?',a:'The waste rate increases your material cost to reflect real service losses: spills, approximate measures, wasted ingredients. Enable it in the advanced parameters.'},
+      {q:'How is the suggested price calculated?',a:'Total material cost ÷ (target food cost / 100). Example: cost 3.50 CHF, target 20% → suggested price 17.50 CHF.'},
+      {q:'Can I save my cost sheets?',a:'Saving recipes is planned for V2 (user accounts). For now, use "Copy summary" or "Print" to keep your data.'},
+      {q:'Who is DrinkCost for?',a:'DrinkCost is built for bar managers, head bartenders, F&B directors and mixologists — in independent bars, hotels, restaurants and event companies, worldwide.'},
+      {q:'What is the difference between gross margin and net margin?',a:'Gross margin = selling price − material cost. Net margin further deducts VAT. Enable "Show net margin" in the results to see it.'},
+    ],
   },
   es:{
     tab_fiche:'Ficha técnica',tab_renta:'Rentabilidad',
@@ -1242,6 +1301,22 @@ const T = {
     seo_title:'DrinkCost — Ficha Técnica Cóctel & Calculadora Food Cost | Bar',
     seo_desc:'Calcula el food cost de tus cócteles en segundos. Ficha técnica profesional, rentabilidad, multi-moneda. Gratis para jefes de bar y mixólogos.',
     seo_og_locale:'es_ES',
+    faq_title:'Preguntas <em>frecuentes</em>',
+    faq_tagline:'Todo lo que necesitas saber sobre DrinkCost',
+    faq:[
+      {q:'¿DrinkCost es gratuito?',a:'Sí, la herramienta es completamente gratuita. Todas las funciones de cálculo son accesibles sin registro ni tarjeta bancaria.'},
+      {q:'¿Cómo calculo el food cost de un cóctel?',a:'Introduce el nombre del cóctel y el precio de venta, luego añade tus ingredientes con sus dosis y costes. Haz clic en «Calcular ficha técnica» — el food cost, el margen bruto y el precio sugerido se muestran automáticamente.'},
+      {q:'¿Qué es el food cost?',a:'El food cost es la relación entre el coste de materia prima de un cóctel y su precio de venta, en porcentaje. Un food cost del 20 % significa que el 20 % del precio de venta lo consumen los ingredientes. El objetivo estándar en un bar es 18–25 %.'},
+      {q:'¿Qué monedas están disponibles?',a:'DrinkCost admite 10 monedas: CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY y AUD. La moneda se detecta automáticamente según tu zona horaria.'},
+      {q:'¿Cómo funciona el umbral de rentabilidad?',a:'La pestaña Rentabilidad calcula el número mínimo de cócteles que debes vender por servicio para cubrir tus costes fijos (coste barman + gastos fijos). Por debajo de ese umbral, el servicio es deficitario.'},
+      {q:'¿Puedo usar DrinkCost en el móvil?',a:'Sí. La herramienta es totalmente responsive y está optimizada para todos los tamaños de pantalla. Funciona en iOS y Android sin necesidad de instalar ninguna aplicación.'},
+      {q:'¿Cómo exporto mi ficha técnica?',a:'Haz clic en «Imprimir» para generar un PDF desde tu navegador, o en «Copiar resumen» para copiar los datos clave al portapapeles.'},
+      {q:'¿Qué es la tasa de merma / desperdicio?',a:'La tasa de merma aumenta el coste de materia prima para reflejar las pérdidas reales en el servicio: derrames, medidas aproximadas, ingredientes desperdiciados. Se activa en los parámetros avanzados.'},
+      {q:'¿Cómo se calcula el precio sugerido?',a:'Coste total de materia prima ÷ (food cost objetivo / 100). Ejemplo: coste 3,50 CHF, objetivo 20 % → precio sugerido 17,50 CHF.'},
+      {q:'¿Puedo guardar mis fichas técnicas?',a:'El guardado está previsto para la V2 (cuentas de usuario). Por ahora, usa «Copiar resumen» o «Imprimir» para conservar tus datos.'},
+      {q:'¿Para quién es DrinkCost?',a:'DrinkCost está diseñado para jefes de bar, bartenders, directores de F&B y mixólogos — en bares, hoteles, restaurantes y empresas de eventos, en todo el mundo.'},
+      {q:'¿Cuál es la diferencia entre margen bruto y margen neto?',a:'Margen bruto = precio de venta − coste de materia prima. El margen neto deduce además el IVA. Activa «Mostrar margen neto» en los resultados para visualizarlo.'},
+    ],
   }
 };
 
@@ -1328,6 +1403,15 @@ function applyTranslations(){
     const us=row.querySelector('.prod-unit');
     if(us){Array.from(us.options).forEach(o=>{const km={g:'pu_g',kg:'pu_kg',piece:'pu_piece'};if(km[o.value])o.text=t(km[o.value]);});}
   });
+  // FAQ — render Q&A for current language
+  const faqList=document.getElementById('faq-list');
+  if(faqList&&T[currentLang].faq){
+    faqList.innerHTML=T[currentLang].faq.map(item=>`<details class="faq-item"><summary>${item.q}</summary><p class="faq-a">${item.a}</p></details>`).join('');
+  }
+  const faqTitle=document.getElementById('faq-title');
+  if(faqTitle)faqTitle.innerHTML=t('faq_title');
+  const faqTagline=document.getElementById('faq-tagline');
+  if(faqTagline)faqTagline.textContent=t('faq_tagline');
   // SEO — update title + metas dynamically on lang change
   document.title=t('seo_title');
   const _m=id=>document.getElementById(id);
