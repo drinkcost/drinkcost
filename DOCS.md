@@ -131,4 +131,9 @@ Last updated: 2026-03-28
 
 ## Changelog
 2026-03-27 — Initial build: full app (Tab 1 + Tab 2), trilingual, multi-currency, GA4, terms.html
-2026-03-28 — SEO: added meta description, Open Graph, Twitter Card, hreflang, Schema.org, dynamic title/meta update per language
+2026-03-28 — SEO meta tags: meta description, Open Graph, Twitter Card, hreflang (fr/en/es/x-default), Schema.org WebApplication, dynamic title/meta update per language via applyTranslations()
+2026-03-28 — FAQ section: FAQ.md créé (12 Q&A × FR/EN/ES) + section accordion <details>/<summary> intégrée au site, rendue dynamiquement par applyTranslations()
+2026-03-28 — SEO maximisation: preconnect/dns-prefetch hints, @import CSS → <link> consolidé (suppression render-blocking), <h1> sur header-sub, Schema.org enrichi (WebApplication featureList + Organization + FAQPage rich snippets), meta keywords dynamique par langue, theme-color / application-name / geo.region metas, sitemap.xml, robots.txt, SEO complet sur terms.html
+2026-03-28 — OG image: og-image.jpg générée (1200×630px, Python Pillow, dark navy + amber) et déployée
+2026-03-28 — Google Search Console: propriété https://drinkcost.bar/ vérifiée (via Google Analytics), sitemap.xml soumis manuellement
+2026-03-28 — SEO content section: texte de référencement trilingue (FR/EN/ES) visible dans la page — <h2> + <p> intro + 2 articles <h3>/<p> ciblant les requêtes "calculer le coût d'un cocktail / cocktail cost / coste cóctel", rendu dynamique par applyTranslations()
