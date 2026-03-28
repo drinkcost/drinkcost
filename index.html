@@ -1177,7 +1177,8 @@ const CPLX = {
   'carbonation':   {lvl:4, key:'carbonation',     label:'Carbonation — technique avancée', t:8},
   'multi':         {lvl:5, key:'multi',           label:'Multi-techniques — haute complexité', t:7},
 };
-function getVOLS(){return [{v:200,k:'v200'},{v:250,k:'v250'},{v:330,k:'v330'},{v:500,k:'v500'},{v:700,k:'v700'},{v:750,k:'v750'},{v:1000,k:'v1000'},{v:1500,k:'v1500'},{v:0,k:'v0'}];}
+function getVOLS(){return [{v:200},{v:250},{v:330},{v:500},{v:700},{v:750},{v:1000},{v:1500},{v:0}];}
+function volLabel(v){return v===0?t('vol_other'):v+' ml';}
 let ingCount=0, prodCount=0, lastRes={};
 
 // ===== CURRENCY =====
@@ -1256,8 +1257,7 @@ const T = {
     pr_name:'Produit',pr_pkg:'Poids paquet (g)',pr_price:'Prix paquet',pr_qty:'Qté utilisée (g)',
     ph_cocktail:'ex. Negroni…',ph_glass:'Coupe, Highball…',ph_dose:'45',ph_bottle:'38.00',ph_custom_vol:'ex. 375',
     pu_g:'grammes (g)',pu_kg:'kilogrammes (kg)',pu_piece:'pièces',
-    v200:'20 cl — Canette',v250:'25 cl — Canette',v330:'33 cl — Canette',v500:'50 cl — Demi-bouteille',
-    v700:'70 cl — Standard',v750:'75 cl — Vin/Champagne',v1000:'100 cl — Litre',v1500:'150 cl — Magnum',v0:'Autre — saisir le volume',
+    vol_other:'Autre — volume personnalisé',
     m_direct:'Direct (build)',m_shaker:'Shaker',m_mixing:'Verre à mélange',m_blender:'Blender',
     m_infusion:'Infusion / Macération',m_carb:'Carbonation',m_multi:'Multi-techniques',
     cat_classic:'Classique',cat_sig:'Signature',cat_mock:'Mocktail',cat_champ:'Champagne / Bulles',cat_shot:'Shot',
@@ -1333,8 +1333,7 @@ const T = {
     pr_name:'Product',pr_pkg:'Pack weight (g)',pr_price:'Pack price',pr_qty:'Qty used (g)',
     ph_cocktail:'e.g. Negroni…',ph_glass:'Coupe, Highball…',ph_dose:'45',ph_bottle:'38.00',ph_custom_vol:'e.g. 375',
     pu_g:'grams (g)',pu_kg:'kilograms (kg)',pu_piece:'pieces',
-    v200:'20 cl — Can',v250:'25 cl — Can',v330:'33 cl — Can',v500:'50 cl — Half bottle',
-    v700:'70 cl — Standard',v750:'75 cl — Wine/Champagne',v1000:'100 cl — Litre',v1500:'150 cl — Magnum',v0:'Other — enter volume',
+    vol_other:'Other — custom volume',
     m_direct:'Direct (build)',m_shaker:'Shaker',m_mixing:'Mixing glass',m_blender:'Blender',
     m_infusion:'Infusion / Maceration',m_carb:'Carbonation',m_multi:'Multi-technique',
     cat_classic:'Classic',cat_sig:'Signature',cat_mock:'Mocktail',cat_champ:'Champagne / Sparkling',cat_shot:'Shot',
@@ -1410,8 +1409,7 @@ const T = {
     pr_name:'Producto',pr_pkg:'Peso paquete (g)',pr_price:'Precio paquete',pr_qty:'Cantidad usada (g)',
     ph_cocktail:'ej. Negroni…',ph_glass:'Copa, Highball…',ph_dose:'45',ph_bottle:'38.00',ph_custom_vol:'ej. 375',
     pu_g:'gramos (g)',pu_kg:'kilogramos (kg)',pu_piece:'unidades',
-    v200:'20 cl — Lata',v250:'25 cl — Lata',v330:'33 cl — Lata',v500:'50 cl — Media botella',
-    v700:'70 cl — Botella estándar',v750:'75 cl — Vino/Champagne',v1000:'100 cl — Litro',v1500:'150 cl — Magnum',v0:'Otro — introducir volumen',
+    vol_other:'Otro — volumen personalizado',
     m_direct:'Directo (build)',m_shaker:'Coctelera',m_mixing:'Vaso mezclador',m_blender:'Batidora',
     m_infusion:'Infusión / Maceración',m_carb:'Carbonatación',m_multi:'Multi-técnica',
     cat_classic:'Clásico',cat_sig:'Signature',cat_mock:'Mocktail',cat_champ:'Champagne / Espumoso',cat_shot:'Chupito',
@@ -1507,7 +1505,7 @@ function applyTranslations(){
       if(keys[i])lbl.textContent=t(keys[i]);
     });
     const bvs=row.querySelector('.bvs');
-    if(bvs){Array.from(bvs.options).forEach(o=>{const k='v'+o.value;if(T[currentLang][k])o.text=t(k);});}
+    if(bvs){Array.from(bvs.options).forEach(o=>{o.text=volLabel(parseFloat(o.value));});}
     const ius=row.querySelector('.ing-unit-select');
     if(ius){Array.from(ius.options).forEach(o=>{const km={ml:'ml',cl:'cl',g:'g'};if(km[o.value])o.text=o.value;});}
   });
@@ -1646,7 +1644,7 @@ function toggleWaste(cb){
 // ===== INGREDIENTS =====
 function addIng(name='',dose='',vol=700,cost='',unit='ml'){
   const id=++ingCount;
-  const opts=getVOLS().map(v=>`<option value="${v.v}"${v.v===vol?' selected':''}>${t(v.k)}</option>`).join('');
+  const opts=getVOLS().map(v=>`<option value="${v.v}"${v.v===vol?' selected':''}>${volLabel(v.v)}</option>`).join('');
   const row=document.createElement('div');
   row.className='ingredient-row'; row.id='ing-'+id;
   row.innerHTML=`
