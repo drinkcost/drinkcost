@@ -14,6 +14,42 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://drinkcost.bar/"/>
   </url>
 
+  <!-- FR landing — food cost cocktail -->
+  <url>
+    <loc>https://drinkcost.bar/food-cost-calculator.html</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drinkcost.bar/food-cost-calculator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drinkcost.bar/cocktail-cost-sheet.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://drinkcost.bar/ficha-tecnica-coctel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://drinkcost.bar/"/>
+  </url>
+
+  <!-- EN landing — cocktail cost sheet / pour cost calculator -->
+  <url>
+    <loc>https://drinkcost.bar/cocktail-cost-sheet.html</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drinkcost.bar/cocktail-cost-sheet.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drinkcost.bar/food-cost-calculator.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://drinkcost.bar/ficha-tecnica-coctel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://drinkcost.bar/"/>
+  </url>
+
+  <!-- ES landing — ficha técnica cóctel / food cost coctelería -->
+  <url>
+    <loc>https://drinkcost.bar/ficha-tecnica-coctel.html</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://drinkcost.bar/ficha-tecnica-coctel.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drinkcost.bar/food-cost-calculator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drinkcost.bar/cocktail-cost-sheet.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://drinkcost.bar/"/>
+  </url>
+
   <!-- Terms of use -->
   <url>
     <loc>https://drinkcost.bar/terms.html</loc>

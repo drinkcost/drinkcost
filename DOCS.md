@@ -143,3 +143,11 @@ Last updated: 2026-03-28
   P1: Keywords FR/EN/ES couvrant toutes les requêtes cibles (fiche recette cocktail, pour cost calculator, calcular costo coctel, food cost coctelería…) ; texte SEO enrichi avec les termes manquants (coût de revient d'une recette, drink cost, fiche technique bar, cocktail recipe costing, food cost coctelería)
   P2: Meta descriptions optimisées CTR ("30 secondes", "10 devises", "100% gratuit") ; bouton paramètres avancés traduit (data-i18n="l_adv") ; Google Fonts chargé en non-blocking (media="print" onload)
   P3: aria-labels sur lang-pill (role=group) et lang buttons ; role=tablist/tab sur nav-tabs
+2026-03-28 — Favicon: favicon.png (32×32), favicon.ico (multi-size 16/32/48), apple-touch-icon.png (180×180) générés via Python Pillow — design amber rounded square sur fond navy avec silhouette verre cocktail
+2026-03-28 — Fix snippet Google: <p id="intro-desc"> ajouté comme premier enfant de .app (avant <header>) — texte optimisé FR/EN/ES mis à jour par applyTranslations() pour guider l'extrait Google vers le bon texte plutôt que le placeholder des ingrédients frais
+2026-03-28 — Pages dédiées SEO (maillage interne + longue traîne):
+  food-cost-calculator.html — FR, cible "food cost cocktail", "fiche technique cocktail", "calcul marge bar" — 500+ mots, Schema WebApplication + FAQPage + BreadcrumbList, hreflang croisé
+  cocktail-cost-sheet.html — EN, cible "cocktail cost sheet", "pour cost calculator free" — 550+ mots, tableau comparatif DrinkCost vs bar inventory software, Schema complet, hreflang croisé
+  ficha-tecnica-coctel.html — ES, cible "ficha técnica cóctel", "calculadora food cost bar" — 500+ mots, liste numérotée pas à pas, og:locale:alternate es_MX + es_AR, Schema complet, hreflang croisé
+2026-03-28 — sitemap.xml mis à jour: 3 nouvelles URLs (priority 0.8) avec xhtml:link hreflang pour chaque page dédiée
+2026-03-28 — index.html footer: liens internes discrets vers les 3 pages dédiées (Calculateur Food Cost · Cocktail Cost Sheet · Ficha Técnica Cóctel)
