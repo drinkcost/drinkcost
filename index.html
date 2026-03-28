@@ -104,8 +104,27 @@
   "knowsAbout": ["Cocktail cost management", "Bar profitability", "Food cost calculation", "Mixology", "Bar management"]
 }
 </script>
-<!-- Schema.org — FAQPage (populated by JS on lang change) -->
-<script type="application/ld+json" id="faq-schema">{}</script>
+<!-- Schema.org — FAQPage (FR static default — overwritten by JS on load/lang change) -->
+<script type="application/ld+json" id="faq-schema">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"DrinkCost est-il gratuit ?","acceptedAnswer":{"@type":"Answer","text":"Oui, l'outil est entièrement gratuit. Toutes les fonctionnalités de calcul sont accessibles sans inscription ni carte bancaire."}},
+    {"@type":"Question","name":"Comment calculer le food cost d'un cocktail ?","acceptedAnswer":{"@type":"Answer","text":"Entrez le nom du cocktail et son prix de vente, puis ajoutez vos ingrédients avec leurs dosages et coûts. Cliquez sur « Calculer la fiche technique » — le food cost, la marge brute et le prix suggéré s'affichent automatiquement."}},
+    {"@type":"Question","name":"Qu'est-ce que le food cost ?","acceptedAnswer":{"@type":"Answer","text":"Le food cost est le ratio entre le coût matière d'un cocktail et son prix de vente, exprimé en pourcentage. Un food cost de 20 % signifie que 20 % du prix de vente est consommé par les ingrédients. L'objectif standard en bar est de 18–25 %."}},
+    {"@type":"Question","name":"Quelles devises sont supportées ?","acceptedAnswer":{"@type":"Answer","text":"DrinkCost supporte 10 devises : CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY et AUD. La devise est détectée automatiquement selon votre fuseau horaire."}},
+    {"@type":"Question","name":"Comment fonctionne le seuil de rentabilité ?","acceptedAnswer":{"@type":"Answer","text":"L'onglet Rentabilité calcule le nombre minimum de cocktails à vendre par service pour couvrir vos charges fixes (coût barman + frais fixes). En dessous de ce seuil, le service est déficitaire."}},
+    {"@type":"Question","name":"Puis-je utiliser DrinkCost sur mobile ?","acceptedAnswer":{"@type":"Answer","text":"Oui. L'outil est entièrement responsive et optimisé pour tous les écrans. Il fonctionne sur iOS et Android, sans application à installer."}},
+    {"@type":"Question","name":"Comment exporter ma fiche technique ?","acceptedAnswer":{"@type":"Answer","text":"Cliquez sur « Imprimer » pour générer un PDF via votre navigateur, ou « Copier résumé » pour copier les données clés dans le presse-papier."}},
+    {"@type":"Question","name":"Qu'est-ce que le taux de perte / gaspillage ?","acceptedAnswer":{"@type":"Answer","text":"Le taux de perte majore votre coût matière pour refléter les pertes réelles au service : renversements, mesures approximatives, ingrédients gaspillés. Il est activable dans les paramètres avancés."}},
+    {"@type":"Question","name":"Comment est calculé le prix suggéré ?","acceptedAnswer":{"@type":"Answer","text":"Coût matière total ÷ (objectif food cost / 100). Exemple : coût 3,50 CHF, objectif 20 % → prix suggéré 17,50 CHF."}},
+    {"@type":"Question","name":"Puis-je sauvegarder mes fiches techniques ?","acceptedAnswer":{"@type":"Answer","text":"La sauvegarde est prévue en V2 (comptes utilisateurs). Pour l'instant, utilisez « Copier résumé » ou « Imprimer »."}},
+    {"@type":"Question","name":"Pour qui est fait DrinkCost ?","acceptedAnswer":{"@type":"Answer","text":"Pour les bar managers, chefs barmen, directeurs F&B et mixologues — dans les bars, hôtels, restaurants et entreprises événementielles, partout dans le monde."}},
+    {"@type":"Question","name":"Quelle est la différence entre marge brute et marge nette ?","acceptedAnswer":{"@type":"Answer","text":"La marge brute = prix de vente − coût matière. La marge nette déduit en plus la TVA. Activez « Afficher la marge nette » dans les résultats pour la voir."}}
+  ]
+}
+</script>
 <!-- Fonts — consolidated <link> (no render-blocking @import) -->
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -813,7 +832,7 @@ select option { background: var(--bg3); }
     <div class="logo-icon">🍸</div>
     <div class="logo-text">Drink<span>Cost</span></div>
   </div>
-  <h1 class="header-sub">Fiche <em>Technique</em></h1>
+  <h1 class="header-sub">Fiche <em>Technique</em> Cocktail</h1>
   <div class="tagline">Calcul coût · marge · rentabilité</div>
   <div class="header-divider"><div class="header-divider-dot"></div></div>
   <div class="currency-pill">
@@ -841,7 +860,7 @@ select option { background: var(--bg3); }
 </header>
 
 <div class="nav-tabs">
-  <button class="nav-tab active" onclick="switchTab('fiche',this)">Fiche technique</button>
+  <button class="nav-tab active" onclick="switchTab('fiche',this)" data-i18n="tab_fiche">Fiche technique</button>
   <button class="nav-tab" onclick="switchTab('renta',this)" data-i18n="tab_renta">Rentabilité</button>
 </div>
 
@@ -1221,7 +1240,7 @@ const T = {
     badge_good:'Rentable',badge_ok:'Limite',badge_bad:'À revoir',
     rr_gross:'Marge brute / cocktail',rr_labor:'Coût MO / cocktail',rr_net:'Marge nette / cocktail',rr_rev:'Revenus / service',
     rr_break:'Seuil de rentabilité',rr_profit:'Bénéfice net / service',rr_time:'Temps total préparation',rr_complexity:'Complexité',
-    rr_unit_cocktails:'cocktails / soir',rr_unit_min:'min / service',
+    rr_unit_cocktails:'cocktails / soir',rr_unit_min:'min / service',rr_unit_net:'après TVA & MO',
     r2_name:'Nom (optionnel)',r2_price:'Prix de vente',r2_cost:'Coût matière total',
     r2_type:"Type d'établissement",r2_hours:'Durée du service (h)',r2_pax:'Pax attendus',
     r2_qty:'Cocktails vendus / soir (estimation)',r2_break:'Seuil de rentabilité (calculé)',
@@ -1239,7 +1258,7 @@ const T = {
     copy_text:(n,c,p,fp,m,sym)=>`FICHE TECHNIQUE — ${n}\nCoût matière : ${c} ${sym}\nPrix de vente : ${p} ${sym}\nFood cost : ${fp}%\nMarge brute : ${m} ${sym}`,
     cplx:{direct:'Direct (build) — faible complexité',shaker:'Shaker — complexité modérée','verre-melange':'Verre à mélange — bonne maîtrise requise',blender:'Blender — complexité modérée',infusion:'Infusion / Macération — préparation longue',carbonation:'Carbonation — technique avancée',multi:'Multi-techniques — haute complexité'},
     cplx_levels:['','Faible','Modérée','Modérée+','Élevée','Très élevée'],
-    title:'Fiche <em>Technique</em>',tagline:'Calcul coût · marge · rentabilité',currency_label:'Devise',
+    title:'Fiche <em>Technique</em> Cocktail',tagline:'Calcul coût · marge · rentabilité',currency_label:'Devise',
     seo_title:'DrinkCost — Fiche Technique Cocktail & Calcul Food Cost | Bar',
     seo_desc:'Calculez le food cost de vos cocktails en quelques secondes. Fiche technique professionnelle, rentabilité, multi-devises. Gratuit pour bar managers et mixologues.',
     seo_og_locale:'fr_FR',
@@ -1298,7 +1317,7 @@ const T = {
     badge_good:'Profitable',badge_ok:'Borderline',badge_bad:'Review needed',
     rr_gross:'Gross margin / cocktail',rr_labor:'Labor cost / cocktail',rr_net:'Net margin / cocktail',rr_rev:'Revenue / service',
     rr_break:'Break-even',rr_profit:'Net profit / service',rr_time:'Total prep time',rr_complexity:'Complexity',
-    rr_unit_cocktails:'cocktails / evening',rr_unit_min:'min / service',
+    rr_unit_cocktails:'cocktails / evening',rr_unit_min:'min / service',rr_unit_net:'after VAT & labor',
     r2_name:'Name (optional)',r2_price:'Selling price',r2_cost:'Total material cost',
     r2_type:'Establishment type',r2_hours:'Service duration (h)',r2_pax:'Expected guests',
     r2_qty:'Cocktails sold / evening (estimate)',r2_break:'Break-even (calculated)',
@@ -1316,7 +1335,7 @@ const T = {
     copy_text:(n,c,p,fp,m,sym)=>`COST SHEET — ${n}\nMaterial cost: ${c} ${sym}\nSelling price: ${p} ${sym}\nFood cost: ${fp}%\nGross margin: ${m} ${sym}`,
     cplx:{direct:'Direct (build) — low complexity',shaker:'Shaker — moderate complexity','verre-melange':'Mixing glass — good technique required',blender:'Blender — moderate complexity',infusion:'Infusion / Maceration — long preparation',carbonation:'Carbonation — advanced technique',multi:'Multi-technique — high complexity'},
     cplx_levels:['','Low','Moderate','Moderate+','High','Very high'],
-    title:'Recipe <em>Cost Sheet</em>',tagline:'Cost · margin · profitability',currency_label:'Currency',
+    title:'Cocktail <em>Cost Sheet</em>',tagline:'Cost · margin · profitability',currency_label:'Currency',
     seo_title:'DrinkCost — Cocktail Cost Sheet & Food Cost Calculator | Bar',
     seo_desc:'Calculate your cocktail food cost in seconds. Professional cost sheet, profitability analysis, multi-currency. Free for bar managers and mixologists.',
     seo_og_locale:'en_US',
@@ -1375,7 +1394,7 @@ const T = {
     badge_good:'Rentable',badge_ok:'Límite',badge_bad:'Revisar',
     rr_gross:'Margen bruto / cóctel',rr_labor:'Coste MO / cóctel',rr_net:'Margen neto / cóctel',rr_rev:'Ingresos / servicio',
     rr_break:'Umbral rentabilidad',rr_profit:'Beneficio neto / servicio',rr_time:'Tiempo total preparación',rr_complexity:'Complejidad',
-    rr_unit_cocktails:'cócteles / noche',rr_unit_min:'min / servicio',
+    rr_unit_cocktails:'cócteles / noche',rr_unit_min:'min / servicio',rr_unit_net:'tras IVA y MO',
     r2_name:'Nombre (opcional)',r2_price:'Precio de venta',r2_cost:'Coste materia total',
     r2_type:'Tipo de establecimiento',r2_hours:'Duración del servicio (h)',r2_pax:'Clientes esperados',
     r2_qty:'Cócteles vendidos / noche (estimación)',r2_break:'Umbral de rentabilidad (calculado)',
@@ -1393,7 +1412,7 @@ const T = {
     copy_text:(n,c,p,fp,m,sym)=>`FICHA TÉCNICA — ${n}\nCoste materia: ${c} ${sym}\nPrecio de venta: ${p} ${sym}\nFood cost: ${fp}%\nMargen bruto: ${m} ${sym}`,
     cplx:{direct:'Directo (build) — baja complejidad',shaker:'Coctelera — complejidad moderada','verre-melange':'Vaso mezclador — buena técnica requerida',blender:'Batidora — complejidad moderada',infusion:'Infusión / Maceración — preparación larga',carbonation:'Carbonatación — técnica avanzada',multi:'Multi-técnica — alta complejidad'},
     cplx_levels:['','Baja','Moderada','Moderada+','Alta','Muy alta'],
-    title:'Ficha <em>Técnica</em>',tagline:'Coste · margen · rentabilidad',currency_label:'Moneda',
+    title:'Ficha <em>Técnica</em> Cóctel',tagline:'Coste · margen · rentabilidad',currency_label:'Moneda',
     seo_title:'DrinkCost — Ficha Técnica Cóctel & Calculadora Food Cost | Bar',
     seo_desc:'Calcula el food cost de tus cócteles en segundos. Ficha técnica profesional, rentabilidad, multi-moneda. Gratis para jefes de bar y mixólogos.',
     seo_og_locale:'es_ES',
