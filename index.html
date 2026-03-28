@@ -12,6 +12,58 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>DrinkCost — Cost Sheet / Fiche Technique / Ficha Técnica</title>
+
+<!-- SEO — Core -->
+<meta name="robots" content="index, follow">
+<meta name="author" content="DrinkCost — Jordan Haniecki">
+<link rel="canonical" href="https://drinkcost.bar/">
+
+<!-- SEO — Dynamic (title + description updated by JS on lang change) -->
+<meta id="meta-desc" name="description" content="Calculez le food cost de vos cocktails en quelques secondes. Fiche technique professionnelle, rentabilité, multi-devises. Gratuit pour bar managers et mixologues.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DrinkCost">
+<meta property="og:url" content="https://drinkcost.bar/">
+<meta id="og-title" property="og:title" content="DrinkCost — Fiche Technique Cocktail &amp; Calcul Food Cost | Bar">
+<meta id="og-desc" property="og:description" content="Calculez le food cost de vos cocktails en quelques secondes. Fiche technique professionnelle, rentabilité, multi-devises. Gratuit pour bar managers et mixologues.">
+<meta id="og-locale" property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:image" content="https://drinkcost.bar/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DrinkCost — Cocktail cost calculator for bar professionals">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta id="tw-title" name="twitter:title" content="DrinkCost — Fiche Technique Cocktail &amp; Calcul Food Cost | Bar">
+<meta id="tw-desc" name="twitter:description" content="Calculez le food cost de vos cocktails en quelques secondes. Fiche technique professionnelle, rentabilité, multi-devises. Gratuit pour bar managers et mixologues.">
+<meta name="twitter:image" content="https://drinkcost.bar/og-image.jpg">
+<meta name="twitter:image:alt" content="DrinkCost — Cocktail cost calculator for bar professionals">
+
+<!-- hreflang -->
+<link rel="alternate" hreflang="fr" href="https://drinkcost.bar/">
+<link rel="alternate" hreflang="en" href="https://drinkcost.bar/">
+<link rel="alternate" hreflang="es" href="https://drinkcost.bar/">
+<link rel="alternate" hreflang="x-default" href="https://drinkcost.bar/">
+
+<!-- Schema.org — WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "DrinkCost",
+  "url": "https://drinkcost.bar/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "description": "Professional cocktail cost sheet and food cost calculator for bar managers and mixologists. Trilingual FR/EN/ES, multi-currency.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CHF" },
+  "creator": { "@type": "Person", "name": "Jordan Haniecki", "jobTitle": "Bar Manager & Mixologist" },
+  "inLanguage": ["fr", "en", "es"],
+  "keywords": "cocktail cost calculator, food cost, fiche technique cocktail, bar manager tool, ficha técnica cóctel, calcul rentabilité bar"
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@300;400&display=swap');
@@ -1079,6 +1131,9 @@ const T = {
     cplx:{direct:'Direct (build) — faible complexité',shaker:'Shaker — complexité modérée','verre-melange':'Verre à mélange — bonne maîtrise requise',blender:'Blender — complexité modérée',infusion:'Infusion / Macération — préparation longue',carbonation:'Carbonation — technique avancée',multi:'Multi-techniques — haute complexité'},
     cplx_levels:['','Faible','Modérée','Modérée+','Élevée','Très élevée'],
     title:'Fiche <em>Technique</em>',tagline:'Calcul coût · marge · rentabilité',currency_label:'Devise',
+    seo_title:'DrinkCost — Fiche Technique Cocktail & Calcul Food Cost | Bar',
+    seo_desc:'Calculez le food cost de vos cocktails en quelques secondes. Fiche technique professionnelle, rentabilité, multi-devises. Gratuit pour bar managers et mixologues.',
+    seo_og_locale:'fr_FR',
   },
   en:{
     tab_fiche:'Cost Sheet',tab_renta:'Profitability',
@@ -1130,6 +1185,9 @@ const T = {
     cplx:{direct:'Direct (build) — low complexity',shaker:'Shaker — moderate complexity','verre-melange':'Mixing glass — good technique required',blender:'Blender — moderate complexity',infusion:'Infusion / Maceration — long preparation',carbonation:'Carbonation — advanced technique',multi:'Multi-technique — high complexity'},
     cplx_levels:['','Low','Moderate','Moderate+','High','Very high'],
     title:'Recipe <em>Cost Sheet</em>',tagline:'Cost · margin · profitability',currency_label:'Currency',
+    seo_title:'DrinkCost — Cocktail Cost Sheet & Food Cost Calculator | Bar',
+    seo_desc:'Calculate your cocktail food cost in seconds. Professional cost sheet, profitability analysis, multi-currency. Free for bar managers and mixologists.',
+    seo_og_locale:'en_US',
   },
   es:{
     tab_fiche:'Ficha técnica',tab_renta:'Rentabilidad',
@@ -1181,6 +1239,9 @@ const T = {
     cplx:{direct:'Directo (build) — baja complejidad',shaker:'Coctelera — complejidad moderada','verre-melange':'Vaso mezclador — buena técnica requerida',blender:'Batidora — complejidad moderada',infusion:'Infusión / Maceración — preparación larga',carbonation:'Carbonatación — técnica avanzada',multi:'Multi-técnica — alta complejidad'},
     cplx_levels:['','Baja','Moderada','Moderada+','Alta','Muy alta'],
     title:'Ficha <em>Técnica</em>',tagline:'Coste · margen · rentabilidad',currency_label:'Moneda',
+    seo_title:'DrinkCost — Ficha Técnica Cóctel & Calculadora Food Cost | Bar',
+    seo_desc:'Calcula el food cost de tus cócteles en segundos. Ficha técnica profesional, rentabilidad, multi-moneda. Gratis para jefes de bar y mixólogos.',
+    seo_og_locale:'es_ES',
   }
 };
 
@@ -1267,6 +1328,15 @@ function applyTranslations(){
     const us=row.querySelector('.prod-unit');
     if(us){Array.from(us.options).forEach(o=>{const km={g:'pu_g',kg:'pu_kg',piece:'pu_piece'};if(km[o.value])o.text=t(km[o.value]);});}
   });
+  // SEO — update title + metas dynamically on lang change
+  document.title=t('seo_title');
+  const _m=id=>document.getElementById(id);
+  if(_m('meta-desc'))_m('meta-desc').setAttribute('content',t('seo_desc'));
+  if(_m('og-title'))_m('og-title').setAttribute('content',t('seo_title'));
+  if(_m('og-desc'))_m('og-desc').setAttribute('content',t('seo_desc'));
+  if(_m('og-locale'))_m('og-locale').setAttribute('content',t('seo_og_locale'));
+  if(_m('tw-title'))_m('tw-title').setAttribute('content',t('seo_title'));
+  if(_m('tw-desc'))_m('tw-desc').setAttribute('content',t('seo_desc'));
 }
 
 function detectLang(){
