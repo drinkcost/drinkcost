@@ -775,6 +775,17 @@ select option { background: var(--bg3); }
   .nav-tab{padding:8px 6px;font-size:9px;}
 }
 
+/* ── SEO Content Section ── */
+.seo-section{margin-top:60px;padding-top:40px;border-top:1px solid var(--border);}
+.seo-intro-h2{font-family:'Playfair Display',serif;font-size:clamp(20px,4vw,28px);font-weight:400;font-style:italic;color:var(--text);margin-bottom:14px;line-height:1.3;}
+.seo-intro-h2 em{color:var(--accent);font-style:normal;font-weight:600;}
+.seo-intro-p{font-size:14px;color:var(--text2);line-height:1.8;max-width:700px;margin-bottom:32px;}
+.seo-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.seo-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;}
+.seo-card h3{font-size:14px;font-weight:600;color:var(--accent);margin-bottom:10px;letter-spacing:.01em;}
+.seo-card p{font-size:13px;color:var(--text2);line-height:1.78;}
+@media(max-width:640px){.seo-cards{grid-template-columns:1fr;}}
+
 /* ── FAQ ── */
 .faq-section{margin-top:60px;padding-top:40px;border-top:1px solid var(--border);}
 .faq-section h2{font-family:'Playfair Display',serif;font-size:clamp(20px,4vw,28px);font-weight:400;font-style:italic;color:var(--text);margin-bottom:8px;text-align:center;}
@@ -1069,6 +1080,22 @@ select option { background: var(--bg3); }
 
 </div><!-- /tab-renta -->
 
+<!-- SEO Content -->
+<section class="seo-section" aria-label="À propos de DrinkCost">
+  <h2 class="seo-intro-h2" id="seo-h2">Comment calculer le <em>coût de revient</em> d'un cocktail ?</h2>
+  <p class="seo-intro-p" id="seo-p1">Le food cost est l'indicateur clé de tout bar professionnel : il exprime le ratio entre le coût des ingrédients et le prix de vente d'un cocktail, en pourcentage. Un food cost maîtrisé entre 18 et 25 % garantit la rentabilité de votre service. DrinkCost vous permet de calculer ce ratio en quelques secondes, à partir du coût réel de chaque ingrédient — spiritueux, sirops, fruits frais, glace et garnish.</p>
+  <div class="seo-cards">
+    <article class="seo-card">
+      <h3 id="seo-h3a">Une fiche technique professionnelle, en quelques secondes</h3>
+      <p id="seo-p2">Renseignez vos ingrédients liquides (spiritueux, sirops, jus) et vos produits frais (menthe, citrons, épices), leurs formats et coûts d'achat. DrinkCost calcule automatiquement le coût à la dose, le coût matière total, la marge brute et la marge nette après TVA. Si le food cost est trop élevé, le prix de vente suggéré vous indique exactement à quel tarif fixer votre cocktail pour atteindre votre objectif.</p>
+    </article>
+    <article class="seo-card">
+      <h3 id="seo-h3b">Pour les bar managers et mixologues du monde entier</h3>
+      <p id="seo-p3">Que vous gériez un bar indépendant, un restaurant gastronomique, un hôtel 5 étoiles ou un événement privé, DrinkCost est conçu pour les professionnels du bar. L'outil supporte 10 devises (CHF, EUR, USD, GBP et plus) et 3 langues — français, anglais, espagnol — pour s'adapter à chaque contexte de travail, partout dans le monde.</p>
+    </article>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="faq-section" aria-label="FAQ">
   <h2 class="faq-title" id="faq-title">Questions <em>fréquentes</em></h2>
@@ -1204,6 +1231,12 @@ const T = {
     seo_desc:'Calculez le food cost de vos cocktails en quelques secondes. Fiche technique professionnelle, rentabilité, multi-devises. Gratuit pour bar managers et mixologues.',
     seo_og_locale:'fr_FR',
     seo_keywords:'fiche technique cocktail, calcul food cost, food cost bar, coût de revient cocktail, rentabilité bar, calcul marge bar, outil bar manager gratuit, recette cocktail coût, contrôle coût boissons, seuil rentabilité bar',
+    seo_h2:'Comment calculer le <em>coût de revient</em> d\'un cocktail ?',
+    seo_p1:'Le food cost est l\'indicateur clé de tout bar professionnel : il exprime le ratio entre le coût des ingrédients et le prix de vente d\'un cocktail, en pourcentage. Un food cost maîtrisé entre 18 et 25 % garantit la rentabilité de votre service. DrinkCost vous permet de calculer ce ratio en quelques secondes, à partir du coût réel de chaque ingrédient — spiritueux, sirops, fruits frais, glace et garnish.',
+    seo_h3a:'Une fiche technique professionnelle, en quelques secondes',
+    seo_p2:'Renseignez vos ingrédients liquides (spiritueux, sirops, jus) et vos produits frais (menthe, citrons, épices), leurs formats et coûts d\'achat. DrinkCost calcule automatiquement le coût à la dose, le coût matière total, la marge brute et la marge nette après TVA. Si le food cost est trop élevé, le prix de vente suggéré vous indique exactement à quel tarif fixer votre cocktail pour atteindre votre objectif.',
+    seo_h3b:'Pour les bar managers et mixologues du monde entier',
+    seo_p3:'Que vous gériez un bar indépendant, un restaurant gastronomique, un hôtel 5 étoiles ou un événement privé, DrinkCost est conçu pour les professionnels du bar. L\'outil supporte 10 devises (CHF, EUR, USD, GBP et plus) et 3 langues — français, anglais, espagnol — pour s\'adapter à chaque contexte de travail, partout dans le monde.',
     faq_title:'Questions <em>fréquentes</em>',
     faq_tagline:'Tout ce que vous devez savoir sur DrinkCost',
     faq:[
@@ -1275,6 +1308,12 @@ const T = {
     seo_desc:'Calculate your cocktail food cost in seconds. Professional cost sheet, profitability analysis, multi-currency. Free for bar managers and mixologists.',
     seo_og_locale:'en_US',
     seo_keywords:'cocktail cost sheet, food cost calculator, cocktail food cost, bar manager tool free, beverage cost control, bar profitability calculator, recipe cost cocktail, drink cost calculator, break-even bar, bar cost management',
+    seo_h2:'How to Calculate Your <em>Cocktail Cost</em>',
+    seo_p1:'Food cost is the key metric for any professional bar: it expresses the ratio between the cost of ingredients and the selling price of a cocktail, as a percentage. A controlled food cost between 18 and 25% ensures service profitability. DrinkCost lets you calculate this ratio in seconds, based on the real cost of each ingredient — spirits, syrups, fresh fruit, ice and garnishes.',
+    seo_h3a:'A professional cost sheet, in seconds',
+    seo_p2:'Enter your liquid ingredients (spirits, syrups, juices) and fresh produce (mint, lemons, spices), their formats and purchase costs. DrinkCost automatically calculates the dose cost, total material cost, gross margin and net margin after VAT. If the food cost is too high, the suggested selling price tells you exactly where to price your cocktail to hit your target.',
+    seo_h3b:'For bar managers and mixologists worldwide',
+    seo_p3:'Whether you run an independent bar, a fine dining restaurant, a 5-star hotel or a private event, DrinkCost is built for bar professionals. The tool supports 10 currencies (CHF, EUR, USD, GBP and more) and 3 languages — French, English, Spanish — to suit any working context, anywhere in the world.',
     faq_title:'Frequently <em>Asked Questions</em>',
     faq_tagline:'Everything you need to know about DrinkCost',
     faq:[
@@ -1346,6 +1385,12 @@ const T = {
     seo_desc:'Calcula el food cost de tus cócteles en segundos. Ficha técnica profesional, rentabilidad, multi-moneda. Gratis para jefes de bar y mixólogos.',
     seo_og_locale:'es_ES',
     seo_keywords:'ficha técnica cóctel, calculadora food cost, coste cóctel, herramienta bar manager gratis, control costes bebidas, rentabilidad bar, calcular precio cóctel, receta cóctel coste, umbral rentabilidad bar, gestión costes bar',
+    seo_h2:'Cómo calcular el <em>coste de un cóctel</em>',
+    seo_p1:'El food cost es el indicador clave de cualquier bar profesional: expresa la relación entre el coste de los ingredientes y el precio de venta de un cóctel, en porcentaje. Un food cost controlado entre el 18 y el 25 % garantiza la rentabilidad del servicio. DrinkCost te permite calcular este ratio en segundos, a partir del coste real de cada ingrediente — licores, siropes, frutas frescas, hielo y decoración.',
+    seo_h3a:'Una ficha técnica profesional en segundos',
+    seo_p2:'Introduce tus ingredientes líquidos (licores, siropes, zumos) y productos frescos (menta, limones, especias), sus formatos y costes de compra. DrinkCost calcula automáticamente el coste por dosis, el coste de materia prima total, el margen bruto y el margen neto tras el IVA. Si el food cost es demasiado alto, el precio de venta sugerido te indica exactamente a qué precio vender tu cóctel para alcanzar tu objetivo.',
+    seo_h3b:'Para jefes de bar y mixólogos de todo el mundo',
+    seo_p3:'Tanto si gestionas un bar independiente, un restaurante gastronómico, un hotel de 5 estrellas o un evento privado, DrinkCost está diseñado para profesionales del bar. La herramienta es compatible con 10 monedas (CHF, EUR, USD, GBP y más) y 3 idiomas — francés, inglés, español — para adaptarse a cualquier contexto de trabajo, en cualquier parte del mundo.',
     faq_title:'Preguntas <em>frecuentes</em>',
     faq_tagline:'Todo lo que necesitas saber sobre DrinkCost',
     faq:[
@@ -1448,6 +1493,14 @@ function applyTranslations(){
     const us=row.querySelector('.prod-unit');
     if(us){Array.from(us.options).forEach(o=>{const km={g:'pu_g',kg:'pu_kg',piece:'pu_piece'};if(km[o.value])o.text=t(km[o.value]);});}
   });
+  // SEO content section
+  const _si=id=>document.getElementById(id);
+  if(_si('seo-h2'))_si('seo-h2').innerHTML=t('seo_h2');
+  if(_si('seo-p1'))_si('seo-p1').textContent=t('seo_p1');
+  if(_si('seo-h3a'))_si('seo-h3a').textContent=t('seo_h3a');
+  if(_si('seo-p2'))_si('seo-p2').textContent=t('seo_p2');
+  if(_si('seo-h3b'))_si('seo-h3b').textContent=t('seo_h3b');
+  if(_si('seo-p3'))_si('seo-p3').textContent=t('seo_p3');
   // FAQ — render Q&A for current language
   const faqList=document.getElementById('faq-list');
   if(faqList&&T[currentLang].faq){
