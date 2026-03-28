@@ -2,6 +2,10 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <!-- Performance — preconnect before any external request -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +20,7 @@
   gtag('config', 'G-CBMJ6CRX0N');
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>DrinkCost — Fiche Technique Cocktail &amp; Calcul Food Cost | Bar</title>
+<title>DrinkCost — Food Cost Cocktail | Fiche Technique Gratuite | Calculadora Cóctel</title>
 
 <!-- SEO — Core -->
 <meta name="robots" content="index, follow">
@@ -31,14 +35,14 @@
 <meta id="meta-keywords" name="keywords" content="fiche technique cocktail, calcul food cost, food cost bar, coût de revient cocktail, rentabilité bar, calcul marge bar, outil bar manager, ficha técnica cóctel, cocktail cost sheet, food cost calculator">
 
 <!-- SEO — Dynamic (title + description updated by JS on lang change) -->
-<meta id="meta-desc" name="description" content="Calculez le food cost de vos cocktails en 30 secondes. Fiche technique professionnelle, analyse de rentabilité, 10 devises. 100 % gratuit pour bar managers et mixologues.">
+<meta id="meta-desc" name="description" content="Calculez le food cost, le coût de revient et la marge de vos cocktails en 30 secondes. Fiche technique gratuite pour bar managers et barmans. Outil professionnel FR / EN / ES.">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DrinkCost">
 <meta property="og:url" content="https://drinkcost.bar/">
-<meta id="og-title" property="og:title" content="DrinkCost — Fiche Technique Cocktail &amp; Calcul Food Cost | Bar">
-<meta id="og-desc" property="og:description" content="Calculez le food cost de vos cocktails en 30 secondes. Fiche technique professionnelle, analyse de rentabilité, 10 devises. 100 % gratuit pour bar managers et mixologues.">
+<meta id="og-title" property="og:title" content="DrinkCost — Food Cost Cocktail | Fiche Technique Gratuite | Calculadora Cóctel">
+<meta id="og-desc" property="og:description" content="Calculez le food cost, le coût de revient et la marge de vos cocktails en 30 secondes. Fiche technique gratuite pour bar managers et barmans. Outil professionnel FR / EN / ES.">
 <meta id="og-locale" property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
@@ -49,8 +53,8 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta id="tw-title" name="twitter:title" content="DrinkCost — Fiche Technique Cocktail &amp; Calcul Food Cost | Bar">
-<meta id="tw-desc" name="twitter:description" content="Calculez le food cost de vos cocktails en 30 secondes. Fiche technique professionnelle, analyse de rentabilité, 10 devises. 100 % gratuit pour bar managers et mixologues.">
+<meta id="tw-title" name="twitter:title" content="DrinkCost — Food Cost Cocktail | Fiche Technique Gratuite | Calculadora Cóctel">
+<meta id="tw-desc" name="twitter:description" content="Calculez le food cost, le coût de revient et la marge de vos cocktails en 30 secondes. Fiche technique gratuite pour bar managers et barmans. Outil professionnel FR / EN / ES.">
 <meta name="twitter:image" content="https://drinkcost.bar/og-image.jpg">
 <meta name="twitter:image:alt" content="DrinkCost — Cocktail cost calculator for bar professionals">
 
@@ -232,6 +236,16 @@ header { text-align: center; margin-bottom: 40px; }
   color: var(--text2);
   letter-spacing: .12em;
   text-transform: uppercase;
+}
+
+.intro-desc {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text2);
+  max-width: 600px;
+  margin: 0 auto 24px;
+  line-height: 1.65;
+  padding: 0 16px;
 }
 
 .header-divider {
@@ -828,6 +842,7 @@ select option { background: var(--bg3); }
 </head>
 <body>
 <div class="app">
+<p class="intro-desc" id="intro-desc">DrinkCost — L'outil gratuit pour calculer le food cost, le coût de revient et la marge de vos cocktails. Conçu par et pour les professionnels du bar.</p>
 <header>
   <div class="logo-wrap">
     <div class="logo-icon">🍸</div>
@@ -1259,9 +1274,9 @@ const T = {
     copy_text:(n,c,p,fp,m,sym)=>`FICHE TECHNIQUE — ${n}\nCoût matière : ${c} ${sym}\nPrix de vente : ${p} ${sym}\nFood cost : ${fp}%\nMarge brute : ${m} ${sym}`,
     cplx:{direct:'Direct (build) — faible complexité',shaker:'Shaker — complexité modérée','verre-melange':'Verre à mélange — bonne maîtrise requise',blender:'Blender — complexité modérée',infusion:'Infusion / Macération — préparation longue',carbonation:'Carbonation — technique avancée',multi:'Multi-techniques — haute complexité'},
     cplx_levels:['','Faible','Modérée','Modérée+','Élevée','Très élevée'],
-    title:'Fiche <em>Technique</em> Cocktail',tagline:'Calcul coût · marge · rentabilité',currency_label:'Devise',
-    seo_title:'DrinkCost — Fiche Technique Cocktail & Calcul Food Cost | Bar',
-    seo_desc:'Calculez le food cost de vos cocktails en 30 secondes. Fiche technique professionnelle, analyse de rentabilité, 10 devises. 100 % gratuit pour bar managers et mixologues.',
+    title:'Fiche <em>Technique</em> Cocktail',tagline:'Calcul coût · marge · rentabilité',currency_label:'Devise',intro_desc:'DrinkCost — L\'outil gratuit pour calculer le food cost, le coût de revient et la marge de vos cocktails. Conçu par et pour les professionnels du bar.',
+    seo_title:'DrinkCost — Fiche Technique Cocktail Gratuite | Calcul Food Cost Bar',
+    seo_desc:'Calculez le food cost, le coût de revient et la marge de vos cocktails en 30 secondes. Fiche technique gratuite pour bar managers et barmans. Outil professionnel FR / EN / ES.',
     seo_og_locale:'fr_FR',
     seo_keywords:'fiche technique cocktail, fiche recette cocktail, fiche technique bar, calcul food cost, food cost cocktail, coût de revient cocktail, calculer coût de revient recette, calcul marge cocktail, calcul marge bar, drink cost, rentabilité bar, outil bar manager gratuit, contrôle coût boissons, seuil rentabilité bar',
     seo_h2:'Comment calculer le <em>coût de revient</em> d\'un cocktail ?',
@@ -1336,9 +1351,9 @@ const T = {
     copy_text:(n,c,p,fp,m,sym)=>`COST SHEET — ${n}\nMaterial cost: ${c} ${sym}\nSelling price: ${p} ${sym}\nFood cost: ${fp}%\nGross margin: ${m} ${sym}`,
     cplx:{direct:'Direct (build) — low complexity',shaker:'Shaker — moderate complexity','verre-melange':'Mixing glass — good technique required',blender:'Blender — moderate complexity',infusion:'Infusion / Maceration — long preparation',carbonation:'Carbonation — advanced technique',multi:'Multi-technique — high complexity'},
     cplx_levels:['','Low','Moderate','Moderate+','High','Very high'],
-    title:'Cocktail <em>Cost Sheet</em>',tagline:'Cost · margin · profitability',currency_label:'Currency',
-    seo_title:'DrinkCost — Cocktail Cost Sheet & Food Cost Calculator | Bar',
-    seo_desc:'Calculate your cocktail food cost in 30 seconds. Professional cost sheet, profitability & break-even analysis, 10 currencies. 100% free for bar managers and mixologists worldwide.',
+    title:'Cocktail <em>Cost Sheet</em>',tagline:'Cost · margin · profitability',currency_label:'Currency',intro_desc:'DrinkCost — The free tool to calculate cocktail food cost, recipe cost and gross margin. Built by bar professionals, for bar professionals.',
+    seo_title:'DrinkCost — Free Cocktail Food Cost Calculator | Cost Sheet for Bar Managers',
+    seo_desc:'Free cocktail food cost calculator for bar managers. Calculate recipe cost, gross margin and profitability in seconds. The professional bar tool — FR / EN / ES.',
     seo_og_locale:'en_US',
     seo_keywords:'cocktail food cost calculator, cocktail cost sheet, drink cost calculator, pour cost calculator free, bar recipe cost calculator, cocktail recipe costing, food cost calculator, bar manager tool free, beverage cost control, bar profitability calculator, recipe cost cocktail, break-even bar, bar cost management',
     seo_h2:'How to Calculate Your <em>Cocktail Cost</em>',
@@ -1413,9 +1428,9 @@ const T = {
     copy_text:(n,c,p,fp,m,sym)=>`FICHA TÉCNICA — ${n}\nCoste materia: ${c} ${sym}\nPrecio de venta: ${p} ${sym}\nFood cost: ${fp}%\nMargen bruto: ${m} ${sym}`,
     cplx:{direct:'Directo (build) — baja complejidad',shaker:'Coctelera — complejidad moderada','verre-melange':'Vaso mezclador — buena técnica requerida',blender:'Batidora — complejidad moderada',infusion:'Infusión / Maceración — preparación larga',carbonation:'Carbonatación — técnica avanzada',multi:'Multi-técnica — alta complejidad'},
     cplx_levels:['','Baja','Moderada','Moderada+','Alta','Muy alta'],
-    title:'Ficha <em>Técnica</em> Cóctel',tagline:'Coste · margen · rentabilidad',currency_label:'Moneda',
-    seo_title:'DrinkCost — Ficha Técnica Cóctel & Calculadora Food Cost | Bar',
-    seo_desc:'Calcula el food cost de tus cócteles en 30 segundos. Ficha técnica profesional, análisis de rentabilidad, 10 monedas. 100 % gratis para jefes de bar y mixólogos.',
+    title:'Ficha <em>Técnica</em> Cóctel',tagline:'Coste · margen · rentabilidad',currency_label:'Moneda',intro_desc:'DrinkCost — La herramienta gratuita para calcular el food cost, el coste de receta y el margen de tus cócteles. Creada por y para profesionales del bar.',
+    seo_title:'DrinkCost — Calculadora Food Cost Cóctel Gratis | Ficha Técnica Bar',
+    seo_desc:'Calculadora gratuita de food cost para bartenders. Calcula el coste de receta, margen bruto y rentabilidad en segundos. Herramienta profesional FR / EN / ES.',
     seo_og_locale:'es_ES',
     seo_keywords:'ficha técnica cóctel, calcular costo coctel, calcular coste cóctel, food cost coctelería, costo de receta coctel, calculadora food cost, ficha técnica bar, rentabilidad bar, herramienta bar manager gratis, control costes bebidas, gestión costes bar, umbral rentabilidad bar',
     seo_h2:'Cómo calcular el <em>coste de un cóctel</em>',
@@ -1456,6 +1471,9 @@ function setLang(lang,btn){
 }
 
 function applyTranslations(){
+  // Intro description (first DOM text — guides Google snippet)
+  const introEl=document.getElementById('intro-desc');
+  if(introEl)introEl.textContent=t('intro_desc');
   // Header
   document.querySelector('.header-sub').innerHTML=t('title');
   document.querySelector('.tagline').textContent=t('tagline');
