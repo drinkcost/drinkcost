@@ -76,11 +76,11 @@
   "applicationSubCategory": "Food & Beverage Management",
   "operatingSystem": "Web",
   "browserRequirements": "Requires JavaScript",
-  "description": "Professional cocktail cost sheet and food cost calculator for bar managers and mixologists. Trilingual FR/EN/ES, 10 currencies supported.",
+  "description": "Professional cocktail cost sheet and food cost calculator for bar managers and mixologists. Trilingual FR/EN/ES, 11 currencies supported.",
   "featureList": [
     "Cocktail food cost calculation",
     "Bar profitability and break-even analysis",
-    "Multi-currency support (CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY, AUD)",
+    "Multi-currency support (CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY, AUD, CNY)",
     "Trilingual interface: French, English, Spanish",
     "Liquid and fresh ingredient cost breakdown",
     "Waste and spillage rate adjustment",
@@ -117,7 +117,7 @@
     {"@type":"Question","name":"DrinkCost est-il gratuit ?","acceptedAnswer":{"@type":"Answer","text":"Oui, l'outil est entièrement gratuit. Toutes les fonctionnalités de calcul sont accessibles sans inscription ni carte bancaire."}},
     {"@type":"Question","name":"Comment calculer le food cost d'un cocktail ?","acceptedAnswer":{"@type":"Answer","text":"Entrez le nom du cocktail et son prix de vente, puis ajoutez vos ingrédients avec leurs dosages et coûts. Cliquez sur « Calculer la fiche technique » — le food cost, la marge brute et le prix suggéré s'affichent automatiquement."}},
     {"@type":"Question","name":"Qu'est-ce que le food cost ?","acceptedAnswer":{"@type":"Answer","text":"Le food cost est le ratio entre le coût matière d'un cocktail et son prix de vente, exprimé en pourcentage. Un food cost de 20 % signifie que 20 % du prix de vente est consommé par les ingrédients. L'objectif standard en bar est de 18–25 %."}},
-    {"@type":"Question","name":"Quelles devises sont supportées ?","acceptedAnswer":{"@type":"Answer","text":"DrinkCost supporte 10 devises : CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY et AUD. La devise est détectée automatiquement selon votre fuseau horaire."}},
+    {"@type":"Question","name":"Quelles devises sont supportées ?","acceptedAnswer":{"@type":"Answer","text":"DrinkCost supporte 11 devises : CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY, AUD et CNY (Yuan chinois). La devise est détectée automatiquement selon votre fuseau horaire."}},
     {"@type":"Question","name":"Comment fonctionne le seuil de rentabilité ?","acceptedAnswer":{"@type":"Answer","text":"L'onglet Rentabilité calcule le nombre minimum de cocktails à vendre par service pour couvrir vos charges fixes (coût barman + frais fixes). En dessous de ce seuil, le service est déficitaire."}},
     {"@type":"Question","name":"Puis-je utiliser DrinkCost sur mobile ?","acceptedAnswer":{"@type":"Answer","text":"Oui. L'outil est entièrement responsive et optimisé pour tous les écrans. Il fonctionne sur iOS et Android, sans application à installer."}},
     {"@type":"Question","name":"Comment exporter ma fiche technique ?","acceptedAnswer":{"@type":"Answer","text":"Cliquez sur « Imprimer » pour générer un PDF via votre navigateur, ou « Copier résumé » pour copier les données clés dans le presse-papier."}},
@@ -865,6 +865,7 @@ select option { background: var(--bg3); }
       <option value="AED">AED — Dirham des EAU</option>
       <option value="JPY">JPY — Yen japonais</option>
       <option value="AUD">AUD — Dollar australien</option>
+      <option value="CNY">CNY — Yuan chinois</option>
     </select>
     <span id="currency-symbol" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent)">CHF</span>
   </div>
@@ -1126,7 +1127,7 @@ select option { background: var(--bg3); }
     </article>
     <article class="seo-card">
       <h3 id="seo-h3b">Pour les bar managers et mixologues du monde entier</h3>
-      <p id="seo-p3">Que vous gériez un bar indépendant, un restaurant gastronomique, un hôtel 5 étoiles ou un événement privé, DrinkCost est conçu pour les professionnels du bar. L'outil supporte 10 devises (CHF, EUR, USD, GBP et plus) et 3 langues — français, anglais, espagnol — pour s'adapter à chaque contexte de travail, partout dans le monde.</p>
+      <p id="seo-p3">Que vous gériez un bar indépendant, un restaurant gastronomique, un hôtel 5 étoiles ou un événement privé, DrinkCost est conçu pour les professionnels du bar. L'outil supporte 11 devises (CHF, EUR, USD, GBP, CNY et plus) et 3 langues — français, anglais, espagnol — pour s'adapter à chaque contexte de travail, partout dans le monde.</p>
     </article>
   </div>
 </section>
@@ -1139,7 +1140,7 @@ select option { background: var(--bg3); }
     <details class="faq-item"><summary>DrinkCost est-il gratuit ?</summary><p class="faq-a">Oui, l'outil est entièrement gratuit. Toutes les fonctionnalités de calcul sont accessibles sans inscription ni carte bancaire.</p></details>
     <details class="faq-item"><summary>Comment calculer le food cost d'un cocktail ?</summary><p class="faq-a">Entrez le nom du cocktail et son prix de vente, puis ajoutez vos ingrédients avec leurs dosages et coûts. Cliquez sur « Calculer la fiche technique » — le food cost, la marge brute et le prix suggéré s'affichent automatiquement.</p></details>
     <details class="faq-item"><summary>Qu'est-ce que le food cost ?</summary><p class="faq-a">Le food cost est le ratio entre le coût matière d'un cocktail et son prix de vente, exprimé en pourcentage. Un food cost de 20 % signifie que 20 % du prix de vente est consommé par les ingrédients. L'objectif standard en bar est de 18–25 %.</p></details>
-    <details class="faq-item"><summary>Quelles devises sont supportées ?</summary><p class="faq-a">DrinkCost supporte 10 devises : CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY et AUD. La devise est détectée automatiquement selon votre fuseau horaire.</p></details>
+    <details class="faq-item"><summary>Quelles devises sont supportées ?</summary><p class="faq-a">DrinkCost supporte 11 devises : CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY, AUD et CNY (Yuan chinois). La devise est détectée automatiquement selon votre fuseau horaire.</p></details>
     <details class="faq-item"><summary>Comment fonctionne le seuil de rentabilité ?</summary><p class="faq-a">L'onglet Rentabilité calcule le nombre minimum de cocktails à vendre par service pour couvrir vos charges fixes (coût barman + frais fixes). En dessous de ce seuil, le service est déficitaire.</p></details>
     <details class="faq-item"><summary>Puis-je utiliser DrinkCost sur mobile ?</summary><p class="faq-a">Oui. L'outil est entièrement responsive et optimisé pour tous les écrans. Il fonctionne sur iOS et Android, sans application à installer.</p></details>
     <details class="faq-item"><summary>Comment exporter ma fiche technique ?</summary><p class="faq-a">Cliquez sur « Imprimer » pour générer un PDF via votre navigateur, ou « Copier résumé » pour copier les données clés dans le presse-papier.</p></details>
@@ -1191,6 +1192,7 @@ const CURRENCIES = {
   'AED': { symbol: 'AED', locale: 'ar-AE' },
   'JPY': { symbol: '¥',   locale: 'ja-JP' },
   'AUD': { symbol: 'A$',  locale: 'en-AU' },
+  'CNY': { symbol: 'CN¥', locale: 'zh-CN' },
 };
 let currentCurrency = 'CHF';
 
@@ -1223,6 +1225,7 @@ function detectCurrency() {
     else if (tz.includes('Dubai') || tz.includes('Abu_Dhabi')) code = 'AED';
     else if (tz.includes('Tokyo')) code = 'JPY';
     else if (tz.includes('Sydney') || tz.includes('Melbourne')) code = 'AUD';
+    else if (tz.includes('Shanghai') || tz.includes('Chongqing') || tz.includes('Harbin') || tz.includes('Urumqi') || lang.startsWith('zh')) code = 'CNY';
     document.getElementById('currency-select').value = code;
     setCurrency(code);
   } catch(e) { setCurrency('CHF'); }
@@ -1289,14 +1292,14 @@ const T = {
     seo_h3a:'Une fiche technique professionnelle, en quelques secondes',
     seo_p2:'Renseignez vos ingrédients liquides (spiritueux, sirops, jus) et vos produits frais (menthe, citrons, épices), leurs formats et coûts d\'achat. DrinkCost calcule automatiquement le coût à la dose, le coût matière total, la marge brute et la marge nette après TVA. Si le food cost est trop élevé, le prix de vente suggéré vous indique exactement à quel tarif fixer votre cocktail pour atteindre votre objectif. Chaque fiche recette cocktail peut être imprimée ou copiée en un clic — le drink cost de chaque création s\'affiche avec une précision au centième.',
     seo_h3b:'Pour les bar managers et mixologues du monde entier',
-    seo_p3:'Que vous gériez un bar indépendant, un restaurant gastronomique, un hôtel 5 étoiles ou un événement privé, DrinkCost est conçu pour les professionnels du bar. L\'outil supporte 10 devises (CHF, EUR, USD, GBP et plus) et 3 langues — français, anglais, espagnol — pour s\'adapter à chaque contexte de travail, partout dans le monde.',
+    seo_p3:'Que vous gériez un bar indépendant, un restaurant gastronomique, un hôtel 5 étoiles ou un événement privé, DrinkCost est conçu pour les professionnels du bar. L\'outil supporte 11 devises (CHF, EUR, USD, GBP, CNY et plus) et 3 langues — français, anglais, espagnol — pour s\'adapter à chaque contexte de travail, partout dans le monde.',
     faq_title:'Questions <em>fréquentes</em>',
     faq_tagline:'Tout ce que vous devez savoir sur DrinkCost',
     faq:[
       {q:'DrinkCost est-il gratuit ?',a:"Oui, l'outil est entièrement gratuit. Toutes les fonctionnalités de calcul sont accessibles sans inscription ni carte bancaire."},
       {q:'Comment calculer le food cost d\'un cocktail ?',a:'Entrez le nom du cocktail et son prix de vente, puis ajoutez vos ingrédients avec leurs dosages et coûts. Cliquez sur « Calculer la fiche technique » — le food cost, la marge brute et le prix suggéré s\'affichent automatiquement.'},
       {q:'Qu\'est-ce que le food cost ?',a:'Le food cost est le ratio entre le coût matière d\'un cocktail et son prix de vente, exprimé en pourcentage. Un food cost de 20 % signifie que 20 % du prix de vente est consommé par les ingrédients. L\'objectif standard en bar est de 18–25 %.'},
-      {q:'Quelles devises sont supportées ?',a:'DrinkCost supporte 10 devises : CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY et AUD. La devise est détectée automatiquement selon votre fuseau horaire.'},
+      {q:'Quelles devises sont supportées ?',a:'DrinkCost supporte 11 devises : CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY, AUD et CNY (Yuan chinois). La devise est détectée automatiquement selon votre fuseau horaire.'},
       {q:'Comment fonctionne le seuil de rentabilité ?',a:'L\'onglet Rentabilité calcule le nombre minimum de cocktails à vendre par service pour couvrir vos charges fixes (coût barman + frais fixes). En dessous de ce seuil, le service est déficitaire.'},
       {q:'Puis-je utiliser DrinkCost sur mobile ?',a:'Oui. L\'outil est entièrement responsive et optimisé pour tous les écrans. Il fonctionne sur iOS et Android, sans application à installer.'},
       {q:'Comment exporter ma fiche technique ?',a:'Cliquez sur « Imprimer » pour générer un PDF via votre navigateur, ou « Copier résumé » pour copier les données clés dans le presse-papier.'},
@@ -1366,14 +1369,14 @@ const T = {
     seo_h3a:'A professional cost sheet, in seconds',
     seo_p2:'Enter your liquid ingredients (spirits, syrups, juices) and fresh produce (mint, lemons, spices), their formats and purchase costs. DrinkCost automatically calculates the dose cost, total material cost, gross margin and net margin after VAT. If the food cost is too high, the suggested selling price tells you exactly where to price your cocktail to hit your target. Every bar recipe cost is displayed to three decimal places — the precision a serious bar manager or beverage director needs.',
     seo_h3b:'For bar managers and mixologists worldwide',
-    seo_p3:'Whether you run an independent bar, a fine dining restaurant, a 5-star hotel or a private event, DrinkCost is built for bar professionals. The tool supports 10 currencies (CHF, EUR, USD, GBP and more) and 3 languages — French, English, Spanish — to suit any working context, anywhere in the world.',
+    seo_p3:'Whether you run an independent bar, a fine dining restaurant, a 5-star hotel or a private event, DrinkCost is built for bar professionals. The tool supports 11 currencies (CHF, EUR, USD, GBP, CNY and more) and 3 languages — French, English, Spanish — to suit any working context, anywhere in the world.',
     faq_title:'Frequently <em>Asked Questions</em>',
     faq_tagline:'Everything you need to know about DrinkCost',
     faq:[
       {q:'Is DrinkCost free?',a:'Yes, the tool is entirely free. All calculation features are accessible without registration or credit card.'},
       {q:'How do I calculate a cocktail\'s food cost?',a:'Enter the cocktail name and selling price, then add your ingredients with their doses and costs. Click "Calculate cost sheet" — food cost, gross margin and suggested price are displayed automatically.'},
       {q:'What is food cost?',a:'Food cost is the ratio between a cocktail\'s material cost and its selling price, expressed as a percentage. A 20% food cost means 20% of the selling price is consumed by ingredients. The standard bar target is 18–25%.'},
-      {q:'Which currencies are supported?',a:'DrinkCost supports 10 currencies: CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY and AUD. Currency is auto-detected based on your timezone.'},
+      {q:'Which currencies are supported?',a:'DrinkCost supports 11 currencies: CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY, AUD and CNY (Chinese Yuan). Currency is auto-detected based on your timezone.'},
       {q:'How does the break-even calculation work?',a:'The Profitability tab calculates the minimum number of cocktails you need to sell per service to cover your fixed costs (bartender cost + fixed overheads). Below this threshold, the service runs at a loss.'},
       {q:'Can I use DrinkCost on mobile?',a:'Yes. The tool is fully responsive and optimised for all screen sizes. It works on iOS and Android with no app to install.'},
       {q:'How do I export my cost sheet?',a:'Click "Print" to generate a PDF via your browser, or "Copy summary" to copy key data to your clipboard.'},
@@ -1443,14 +1446,14 @@ const T = {
     seo_h3a:'Una ficha técnica profesional en segundos',
     seo_p2:'Introduce tus ingredientes líquidos (licores, siropes, zumos) y productos frescos (menta, limones, especias), sus formatos y costes de compra. DrinkCost calcula automáticamente el coste por dosis, el coste de materia prima total, el margen bruto y el margen neto tras el IVA. Si el food cost es demasiado alto, el precio de venta sugerido te indica exactamente a qué precio vender tu cóctel para alcanzar tu objetivo. Cada ficha técnica de cóctel puede imprimirse o copiarse en un clic — el costo de receta se muestra con precisión al céntimo.',
     seo_h3b:'Para jefes de bar y mixólogos de todo el mundo',
-    seo_p3:'Tanto si gestionas un bar independiente, un restaurante gastronómico, un hotel de 5 estrellas o un evento privado, DrinkCost está diseñado para profesionales del bar. La herramienta es compatible con 10 monedas (CHF, EUR, USD, GBP y más) y 3 idiomas — francés, inglés, español — para adaptarse a cualquier contexto de trabajo, en cualquier parte del mundo.',
+    seo_p3:'Tanto si gestionas un bar independiente, un restaurante gastronómico, un hotel de 5 estrellas o un evento privado, DrinkCost está diseñado para profesionales del bar. La herramienta es compatible con 11 monedas (CHF, EUR, USD, GBP, CNY y más) y 3 idiomas — francés, inglés, español — para adaptarse a cualquier contexto de trabajo, en cualquier parte del mundo.',
     faq_title:'Preguntas <em>frecuentes</em>',
     faq_tagline:'Todo lo que necesitas saber sobre DrinkCost',
     faq:[
       {q:'¿DrinkCost es gratuito?',a:'Sí, la herramienta es completamente gratuita. Todas las funciones de cálculo son accesibles sin registro ni tarjeta bancaria.'},
       {q:'¿Cómo calculo el food cost de un cóctel?',a:'Introduce el nombre del cóctel y el precio de venta, luego añade tus ingredientes con sus dosis y costes. Haz clic en «Calcular ficha técnica» — el food cost, el margen bruto y el precio sugerido se muestran automáticamente.'},
       {q:'¿Qué es el food cost?',a:'El food cost es la relación entre el coste de materia prima de un cóctel y su precio de venta, en porcentaje. Un food cost del 20 % significa que el 20 % del precio de venta lo consumen los ingredientes. El objetivo estándar en un bar es 18–25 %.'},
-      {q:'¿Qué monedas están disponibles?',a:'DrinkCost admite 10 monedas: CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY y AUD. La moneda se detecta automáticamente según tu zona horaria.'},
+      {q:'¿Qué monedas están disponibles?',a:'DrinkCost admite 11 monedas: CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY, AUD y CNY (Yuan chino). La moneda se detecta automáticamente según tu zona horaria.'},
       {q:'¿Cómo funciona el umbral de rentabilidad?',a:'La pestaña Rentabilidad calcula el número mínimo de cócteles que debes vender por servicio para cubrir tus costes fijos (coste barman + gastos fijos). Por debajo de ese umbral, el servicio es deficitario.'},
       {q:'¿Puedo usar DrinkCost en el móvil?',a:'Sí. La herramienta es totalmente responsive y está optimizada para todos los tamaños de pantalla. Funciona en iOS y Android sin necesidad de instalar ninguna aplicación.'},
       {q:'¿Cómo exporto mi ficha técnica?',a:'Haz clic en «Imprimir» para generar un PDF desde tu navegador, o en «Copiar resumen» para copiar los datos clave al portapapeles.'},
