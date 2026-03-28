@@ -1261,8 +1261,8 @@ function applyUnitSystem() {
     const sel = row.querySelector('.ing-unit-select');
     if (!sel) return;
     const cur = sel.value;
-    sel.innerHTML = `<option value="${firstOpt}">${firstOpt}</option><option value="cl">cl</option><option value="g">g</option>`;
-    if (cur === 'cl' || cur === 'g') sel.value = cur;
+    sel.innerHTML = `<option value="${firstOpt}">${firstOpt}</option><option value="cl">cl</option>`;
+    if (cur === 'cl') sel.value = cur;
   });
   const ph = isImp ? t('ph_dose_imperial') : t('ph_dose');
   document.querySelectorAll('.ing-dose-input').forEach(inp => { inp.placeholder = ph; });
@@ -1569,7 +1569,7 @@ function applyTranslations(){
     const bvs=row.querySelector('.bvs');
     if(bvs){Array.from(bvs.options).forEach(o=>{o.text=volLabel(parseFloat(o.value));});}
     const ius=row.querySelector('.ing-unit-select');
-    if(ius){Array.from(ius.options).forEach(o=>{const km={ml:'ml',cl:'cl',g:'g'};if(km[o.value])o.text=o.value;});}
+    if(ius){Array.from(ius.options).forEach(o=>{o.text=o.value;});}
   });
   // Refresh complexity text with current lang
   ['complexity-text','r2-cplx-text','r-cplx-text'].forEach(id=>{
@@ -1722,7 +1722,6 @@ function addIng(name='',dose='',vol=700,cost='',unit=null){
       <select class="ing-unit-select" onchange="updateIngUnit(${id})">
         <option value="${firstOpt}"${u===firstOpt?' selected':''}>${firstOpt}</option>
         <option value="cl"${u==='cl'?' selected':''}>cl</option>
-        <option value="g"${u==='g'?' selected':''}>g</option>
       </select>
     </div>
     <div><label>${t('i_format')}</label><select class="bvs" onchange="toggleCustomVol(${id},this.value)">${opts}</select></div>
