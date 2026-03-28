@@ -23,8 +23,8 @@ Last updated: 2026-03-28
 |---|---|
 | Ingredient name | Free text |
 | Quantity | Numeric (dose used) |
-| Unit | Select: ml / cl / g |
-| Bottle format | Select: 8 presets (20cl to 150cl) + custom volume |
+| Unit | Select: oz / cl / g (imperial) or ml / cl / g (metric) — follows active unit system |
+| Bottle format | Select: 8 presets (200 ml to 1500 ml) + custom volume |
 | Bottle cost | Numeric — dose cost computed automatically |
 
 ### Fresh & Solid Ingredients (repeatable rows)
@@ -98,10 +98,19 @@ Last updated: 2026-03-28
 ## Global Features
 
 ### Currency
-- 10 currencies: CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY, AUD
+- 11 currencies: CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY, AUD, CNY
 - Auto-detected on init via timezone + navigator.language
 - All monetary labels update dynamically via `.cur-label` spans and `curSym()`
 - Selector in header
+
+### Unit System
+- 2 modes: metric (ml) / imperial (oz)
+- Auto-detected on init: imperial for US timezones (excl. Canada, French Caribbean)
+- Manual override via pill buttons ml / oz in header
+- `toMl()` converts oz/cl to ml at calculation time — internal values always in ml
+- Dose column in results shows the user's entered unit (oz or ml)
+- Bottle reference column always shows ml (universal manufacturer data)
+- GA4 event fired on manual unit system change
 
 ### Language (i18n)
 - 3 languages: FR / EN / ES
@@ -151,3 +160,5 @@ Last updated: 2026-03-28
   ficha-tecnica-coctel.html — ES, cible "ficha técnica cóctel", "calculadora food cost bar" — 500+ mots, liste numérotée pas à pas, og:locale:alternate es_MX + es_AR, Schema complet, hreflang croisé
 2026-03-28 — sitemap.xml mis à jour: 3 nouvelles URLs (priority 0.8) avec xhtml:link hreflang pour chaque page dédiée
 2026-03-28 — index.html footer: liens internes discrets vers les 3 pages dédiées (Calculateur Food Cost · Cocktail Cost Sheet · Ficha Técnica Cóctel)
+2026-03-28 — Simplification labels format bouteille: suppression des descriptifs (Canette, Standard, Vin/Champagne…) — labels unifiés "200 ml", "250 ml"… + clé vol_other FR/EN/ES pour "Autre"
+2026-03-28 — Système de mesure oz/ml: sélecteur pill header ml/oz, auto-détection US, toMl() pour conversion interne, getIngs() mis à jour, addIng() dynamique, applyUnitSystem() sync placeholders, clé ph_dose_imperial × 3 langues

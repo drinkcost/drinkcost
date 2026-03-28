@@ -1,5 +1,5 @@
 # DrinkCost — FAQ
-Last updated: 2026-03-28
+Last updated: 2026-03-28 (session 2)
 Languages: FR / EN / ES
 
 ---
@@ -16,7 +16,7 @@ R : Entrez le nom du cocktail et son prix de vente, puis ajoutez vos ingrédient
 R : Le food cost est le ratio entre le coût matière d'un cocktail et son prix de vente, exprimé en pourcentage. Un food cost de 20 % signifie que 20 % du prix de vente est consommé par les ingrédients. L'objectif standard en bar est de 18–25 %.
 
 **Q : Quelles devises sont supportées ?**
-R : DrinkCost supporte 10 devises : CHF, EUR, USD, GBP, CAD, XCD (dollar des Caraïbes), MAD, AED, JPY et AUD. La devise est détectée automatiquement selon votre fuseau horaire et peut être changée manuellement.
+R : DrinkCost supporte 11 devises : CHF, EUR, USD, GBP, CAD, XCD (dollar des Caraïbes), MAD, AED, JPY, AUD et CNY (Yuan chinois). La devise est détectée automatiquement selon votre fuseau horaire et peut être changée manuellement.
 
 **Q : Comment fonctionne le seuil de rentabilité ?**
 R : L'onglet Rentabilité calcule le nombre minimum de cocktails à vendre par service pour couvrir vos charges fixes (coût barman + frais fixes). En dessous de ce seuil, le service est déficitaire.
@@ -42,6 +42,9 @@ R : DrinkCost est conçu pour les bar managers, chefs barmen, directeurs F&B et 
 **Q : Quelle est la différence entre marge brute et marge nette ?**
 R : La marge brute est la différence entre le prix de vente et le coût matière. La marge nette déduit en plus la TVA. Activez « Afficher la marge nette » dans les résultats pour la visualiser.
 
+**Q : L'outil supporte-t-il les mesures en oz ?**
+R : Oui. Cliquez sur « oz » dans le sélecteur en haut de l'outil pour passer en mode impérial. Les dosages se saisissent alors en oz — la conversion en ml est faite automatiquement en interne pour garantir la précision des calculs. Les utilisateurs américains passent en oz automatiquement à l'ouverture. Vous pouvez repasser en ml à tout moment.
+
 ---
 
 ## EN
@@ -56,7 +59,7 @@ A: Enter the cocktail name and selling price, then add your ingredients (liquid 
 A: Food cost is the ratio between a cocktail's material cost and its selling price, expressed as a percentage. A 20% food cost means 20% of the selling price is consumed by ingredients. The standard bar target is 18–25%.
 
 **Q: Which currencies are supported?**
-A: DrinkCost supports 10 currencies: CHF, EUR, USD, GBP, CAD, XCD (East Caribbean dollar), MAD, AED, JPY and AUD. Currency is auto-detected based on your timezone and can be changed manually.
+A: DrinkCost supports 11 currencies: CHF, EUR, USD, GBP, CAD, XCD (East Caribbean dollar), MAD, AED, JPY, AUD and CNY (Chinese Yuan). Currency is auto-detected based on your timezone and can be changed manually.
 
 **Q: How does the break-even calculation work?**
 A: The Profitability tab calculates the minimum number of cocktails you need to sell per service to cover your fixed costs (bartender cost + fixed overheads). Below this threshold, the service runs at a loss.
@@ -82,6 +85,9 @@ A: DrinkCost is built for bar managers, head bartenders, F&B directors and mixol
 **Q: What is the difference between gross margin and net margin?**
 A: Gross margin is the difference between selling price and material cost. Net margin further deducts VAT. Enable "Show net margin" in the results to see it.
 
+**Q: Does DrinkCost support oz measurements?**
+A: Yes. Click "oz" in the selector at the top of the tool to switch to imperial mode. You then enter doses in oz — the conversion to ml is handled automatically internally to ensure calculation accuracy. US users are switched to oz automatically on load. You can switch back to ml at any time.
+
 ---
 
 ## ES
@@ -96,7 +102,7 @@ R: Introduce el nombre del cóctel y el precio de venta, luego añade tus ingred
 R: El food cost es la relación entre el coste de materia prima de un cóctel y su precio de venta, expresado en porcentaje. Un food cost del 20 % significa que el 20 % del precio de venta lo consumen los ingredientes. El objetivo estándar en un bar es 18–25 %.
 
 **P: ¿Qué monedas están disponibles?**
-R: DrinkCost admite 10 monedas: CHF, EUR, USD, GBP, CAD, XCD (dólar del Caribe Oriental), MAD, AED, JPY y AUD. La moneda se detecta automáticamente según tu zona horaria y puede cambiarse manualmente.
+R: DrinkCost admite 11 monedas: CHF, EUR, USD, GBP, CAD, XCD (dólar del Caribe Oriental), MAD, AED, JPY, AUD y CNY (Yuan chino). La moneda se detecta automáticamente según tu zona horaria y puede cambiarse manualmente.
 
 **P: ¿Cómo funciona el umbral de rentabilidad?**
 R: La pestaña Rentabilidad calcula el número mínimo de cócteles que debes vender por servicio para cubrir tus costes fijos (coste barman + gastos fijos). Por debajo de ese umbral, el servicio es deficitario.
@@ -121,3 +127,6 @@ R: DrinkCost está diseñado para jefes de bar, bartenders, directores de F&B y 
 
 **P: ¿Cuál es la diferencia entre margen bruto y margen neto?**
 R: El margen bruto es la diferencia entre el precio de venta y el coste de materia prima. El margen neto deduce además el IVA. Activa «Mostrar margen neto» en los resultados para visualizarlo.
+
+**P: ¿DrinkCost admite medidas en oz?**
+R: Sí. Haz clic en «oz» en el selector de la parte superior de la herramienta para cambiar al modo imperial. Las dosis se introducen en oz — la conversión a ml se realiza automáticamente de forma interna para garantizar la precisión de los cálculos. Los usuarios de EE. UU. cambian a oz automáticamente al abrir la herramienta. Puedes volver a ml en cualquier momento.
