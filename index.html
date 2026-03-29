@@ -1219,6 +1219,14 @@ function curSym() {
   return (CURRENCIES[currentCurrency] || CURRENCIES['CHF']).symbol;
 }
 
+function formatVolume(ml) {
+  if (!ml || ml <= 0) return '?';
+  if (ml < 100) return ml + 'ml';
+  if (ml < 1000) return (ml / 10) + 'cl';
+  const l = ml / 1000;
+  return (l % 1 === 0 ? l : l.toFixed(1)) + 'L';
+}
+
 function detectCurrency() {
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
@@ -1881,7 +1889,7 @@ function calculate(){
   const tbody=document.getElementById('r-ing-body'); tbody.innerHTML='';
   ings.forEach(i=>{
     const pct=sp>0?((i.doseCost/sp)*100).toFixed(1)+'%':'';
-    tbody.innerHTML+=`<tr><td class="in">${i.name}</td><td class="id">${i.dose}${i.unit}</td><td class="id">${i.bCost.toFixed(2)} ${curSym()}/${i.bVol}ml</td><td>${i.doseCost.toFixed(3)} ${curSym()}${pct?` <span class="ipct">${pct}</span>`:''}</td></tr>`;
+    tbody.innerHTML+=`<tr><td class="in">${i.name}</td><td class="id">${i.dose}${i.unit}</td><td class="id">${i.bCost.toFixed(2)} ${curSym()}/${formatVolume(i.bVol)}</td><td>${i.doseCost.toFixed(3)} ${curSym()}${pct?` <span class="ipct">${pct}</span>`:''}</td></tr>`;
   });
   if(prodCost>0) tbody.innerHTML+=`<tr><td class="id">${t('tbl_fresh')}</td><td class="id">—</td><td class="id">—</td><td>${prodCost.toFixed(3)} ${curSym()}</td></tr>`;
 
