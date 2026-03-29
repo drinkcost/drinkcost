@@ -1312,7 +1312,7 @@ const T = {
     kpi_cost:'Coût matière',kpi_price:'Prix de vente',kpi_fc:'Food cost',kpi_margin:'Marge brute',kpi_net:'Marge nette',
     cost_mat:'Coût matière',
     tbl_ing:'Ingrédient',tbl_dose:'Dosage',tbl_ref:'Réf.',tbl_cost:'Coût dose',
-    tbl_total_ing:'Total ingrédients',tbl_overhead:"Garnish + glace + main d'œuvre",tbl_waste:'Taux de perte',tbl_total:'Coût total',tbl_fresh:'Produits frais',
+    tbl_total_ing:'Total ingrédients',tbl_overhead:"Garnish + glace + main d'œuvre",tbl_overhead_no_labor:'Garnish + glace',tbl_waste:'Taux de perte',tbl_total:'Coût total',tbl_fresh:'Produits frais',
     suggest_label:"Prix suggéré pour atteindre l'objectif food cost",r_sheet:'Fiche technique',
     h_liquids:'Spiritueux, sirops, jus en bouteille, sodas — tout ce qui se mesure en ml ou cl.',
     h_fresh:"Menthe, citrons, fruits, sucre en morceaux, épices — tout ce qui se vend au g ou au kg. Le coût à la dose est calculé automatiquement selon le rendement du paquet.",
@@ -1388,7 +1388,7 @@ const T = {
     kpi_cost:'Material cost',kpi_price:'Selling price',kpi_fc:'Food cost',kpi_margin:'Gross margin',kpi_net:'Net margin',
     cost_mat:'Material cost',
     tbl_ing:'Ingredient',tbl_dose:'Dose',tbl_ref:'Ref.',tbl_cost:'Dose cost',
-    tbl_total_ing:'Total ingredients',tbl_overhead:'Garnish + ice + labor',tbl_waste:'Waste rate',tbl_total:'Total cost',tbl_fresh:'Fresh produce',
+    tbl_total_ing:'Total ingredients',tbl_overhead:'Garnish + ice + labor',tbl_overhead_no_labor:'Garnish + ice',tbl_waste:'Waste rate',tbl_total:'Total cost',tbl_fresh:'Fresh produce',
     suggest_label:'Suggested price to hit food cost target',r_sheet:'Cost Sheet',
     h_liquids:'Spirits, syrups, bottled juices, sodas — measured in oz or cl.',
     h_fresh:'Mint, lemons, fruits, sugar, spices — anything sold by g or kg. Dose cost is calculated automatically from the pack yield.',
@@ -1464,7 +1464,7 @@ const T = {
     kpi_cost:'Coste materia',kpi_price:'Precio de venta',kpi_fc:'Food cost',kpi_margin:'Margen bruto',kpi_net:'Margen neto',
     cost_mat:'Coste materia',
     tbl_ing:'Ingrediente',tbl_dose:'Dosis',tbl_ref:'Ref.',tbl_cost:'Coste dosis',
-    tbl_total_ing:'Total ingredientes',tbl_overhead:'Guarnición + hielo + MO',tbl_waste:'Merma',tbl_total:'Coste total',tbl_fresh:'Productos frescos',
+    tbl_total_ing:'Total ingredientes',tbl_overhead:'Guarnición + hielo + MO',tbl_overhead_no_labor:'Guarnición + hielo',tbl_waste:'Merma',tbl_total:'Coste total',tbl_fresh:'Productos frescos',
     suggest_label:'Precio sugerido para alcanzar el food cost objetivo',r_sheet:'Ficha técnica',
     h_liquids:'Licores, siropes, zumos embotellados, refrescos — todo lo que se mide en ml o cl.',
     h_fresh:'Menta, limones, frutas, azúcar, especias — todo lo que se vende por g o kg. El coste por dosis se calcula automáticamente.',
@@ -1602,11 +1602,14 @@ function applyTranslations(){
   if(cguEl){const labels={fr:"Conditions d'utilisation",en:'Terms of use',es:'Condiciones de uso'};cguEl.textContent=labels[currentLang]||labels.fr;}
   // Tfoot labels
   const lbls={
-    'lbl-total-ing':'tbl_total_ing','lbl-overhead':'tbl_overhead',
+    'lbl-total-ing':'tbl_total_ing',
     'lbl-waste':'tbl_waste','lbl-total':'tbl_total',
     'lbl-cocktails-unit':'rr_unit_cocktails','lbl-min-unit':'rr_unit_min',
   };
   Object.entries(lbls).forEach(([id,key])=>{const el=document.getElementById(id);if(el)el.textContent=t(key);});
+  // lbl-overhead — respects labor toggle state
+  const overheadEl=document.getElementById('lbl-overhead');
+  if(overheadEl){const laborOn=document.getElementById('labor-toggle')?.checked;overheadEl.textContent=laborOn?t('tbl_overhead'):t('tbl_overhead_no_labor');}
   // rr_unit_net
   const netLbl2=document.getElementById('rr-unit-net-label');
   if(netLbl2)netLbl2.textContent=t('rr_unit_net');
@@ -1895,6 +1898,8 @@ function calculate(){
 
   document.getElementById('r-ing-total').textContent=ingTotal.toFixed(3)+' '+curSym();
   document.getElementById('r-overhead').textContent=(gar+ice+lab).toFixed(2)+' '+curSym();
+  const overheadLbl=document.getElementById('lbl-overhead');
+  if(overheadLbl)overheadLbl.textContent=laborOn?t('tbl_overhead'):t('tbl_overhead_no_labor');
   if(wasteOn&&wastePct>0){document.getElementById('r-waste-tr').style.display='';document.getElementById('r-waste-val').textContent='+'+wasteAmt.toFixed(3)+' '+curSym()+' ('+wastePct+'%)';}
   else document.getElementById('r-waste-tr').style.display='none';
   document.getElementById('r-total').textContent=totalC.toFixed(2)+' '+curSym();
