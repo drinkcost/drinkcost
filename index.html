@@ -2043,35 +2043,35 @@ function toggleLabor(cb){
 // ===== EXAMPLES =====
 const EXAMPLES = {
   negroni: {
-    name:'Negroni', category:0, glass:{fr:'Rocks',en:'Rocks',es:'Rocks'}, method:'verre-melange',
+    name:'Negroni', glass:'Rocks', method:'verre-melange',
     sell:18, fc:20, garnish:0.20, ice:0.15,
     ings:[
-      {name:{fr:'Gin London Dry',en:'Gin London Dry',es:'Gin London Dry'}, ml:30, vol:700, cost:18},
-      {name:{fr:'Campari',en:'Campari',es:'Campari'}, ml:30, vol:1000, cost:17},
-      {name:{fr:'Vermouth rouge',en:'Red vermouth',es:'Vermut rojo'}, ml:30, vol:1000, cost:12}
+      {name:{fr:'Gin London Dry',  en:'Gin London Dry',  es:'Gin London Dry'},  dose:3, vol:700,  cost:18},
+      {name:{fr:'Campari',         en:'Campari',         es:'Campari'},          dose:3, vol:1000, cost:17},
+      {name:{fr:'Vermouth rouge',  en:'Red vermouth',    es:'Vermut rojo'},      dose:3, vol:1000, cost:12}
     ],
     produce:[]
   },
   mojito: {
-    name:'Mojito', category:0, glass:{fr:'Highball',en:'Highball',es:'Highball'}, method:'shaker',
+    name:'Mojito', glass:'Highball', method:'shaker',
     sell:16, fc:22, garnish:0.20, ice:0.20,
     ings:[
-      {name:{fr:'Rhum blanc',en:'White rum',es:'Ron blanco'}, ml:50, vol:700, cost:16},
-      {name:{fr:'Sirop de canne',en:'Cane syrup',es:'Sirope de caña'}, ml:20, vol:700, cost:8},
-      {name:{fr:'Jus citron vert',en:'Lime juice',es:'Zumo de lima'}, ml:30, vol:700, cost:6}
+      {name:{fr:'Rhum blanc',       en:'White rum',   es:'Ron blanco'},       dose:5, vol:700, cost:16},
+      {name:{fr:'Sirop de canne',   en:'Cane syrup',  es:'Sirope de caña'},   dose:2, vol:700, cost:8},
+      {name:{fr:'Jus de citron vert',en:'Lime juice', es:'Zumo de lima'},     dose:3, vol:700, cost:6}
     ],
     produce:[
-      {name:{fr:'Menthe',en:'Mint',es:'Menta'}, unit:'g', pkg:50, price:2.50, qty:8},
-      {name:{fr:'Citron vert',en:'Lime',es:'Lima'}, unit:'g', pkg:500, price:3.00, qty:30}
+      {name:{fr:'Menthe fraîche', en:'Fresh mint', es:'Menta fresca'}, unit:'g', pkg:50,  price:2.50, qty:8},
+      {name:{fr:'Citron vert',    en:'Lime',       es:'Lima'},          unit:'g', pkg:500, price:3.00, qty:30}
     ]
   },
   spritz: {
-    name:'Spritz', category:0, glass:{fr:'Balloon',en:'Balloon',es:'Balloon'}, method:'direct',
+    name:'Spritz', glass:'Balloon', method:'direct',
     sell:14, fc:20, garnish:0.15, ice:0.15,
     ings:[
-      {name:{fr:'Aperol',en:'Aperol',es:'Aperol'}, ml:60, vol:1000, cost:14},
-      {name:{fr:'Prosecco',en:'Prosecco',es:'Prosecco'}, ml:90, vol:750, cost:12},
-      {name:{fr:'Eau gazeuse',en:'Sparkling water',es:'Agua con gas'}, ml:30, vol:1000, cost:2.50}
+      {name:{fr:'Aperol',      en:'Aperol',          es:'Aperol'},         dose:6, vol:1000, cost:14},
+      {name:{fr:'Prosecco',    en:'Prosecco',         es:'Prosecco'},       dose:9, vol:750,  cost:12},
+      {name:{fr:'Eau gazeuse', en:'Sparkling water',  es:'Agua con gas'},   dose:3, vol:1000, cost:2.50}
     ],
     produce:[]
   }
@@ -2080,40 +2080,48 @@ const EXAMPLES = {
 function loadExample(id) {
   const ex = EXAMPLES[id];
   if (!ex) return;
-  // Clear existing rows
+
+  // 1. Clear existing ingredient and produce rows
   document.getElementById('ingredients-list').innerHTML = '';
   document.getElementById('produce-list').innerHTML = '';
-  // Fill cocktail info
+
+  // 2. Fill cocktail info fields
   document.getElementById('cocktail-name').value = ex.name;
   document.getElementById('sell-price').value = ex.sell;
-  document.getElementById('category').selectedIndex = ex.category;
-  document.getElementById('glass').value = ex.glass[currentLang] || ex.glass.en;
+  document.getElementById('category').selectedIndex = 0; // all examples are Classique
+  document.getElementById('glass').value = ex.glass;
   document.getElementById('method').value = ex.method;
   setCplx('complexity-bar', 'complexity-text', ex.method);
   document.getElementById('target-fc').value = ex.fc;
   document.getElementById('garnish-cost').value = ex.garnish;
   document.getElementById('ice-cost').value = ex.ice;
-  // Add liquid ingredients (convert ml→oz if imperial)
-  const isImp = currentUnitSystem === 'imperial';
+
+  // 3. Create each liquid ingredient row (empty), then fill with .value=
   ex.ings.forEach(ing => {
-    const dose = isImp ? parseFloat((ing.ml / 29.5735).toFixed(2)) : ing.ml;
-    const unit = isImp ? 'oz' : 'ml';
-    addIng(ing.name[currentLang] || ing.name.en, dose, ing.vol, ing.cost, unit);
+    addIng();
+    const rows = document.querySelectorAll('.ingredient-row');
+    const row = rows[rows.length - 1];
+    row.querySelector('input[type="text"]').value = ing.name[currentLang] || ing.name.fr;
+    row.querySelector('.ing-dose-input').value = ing.dose;
+    row.querySelector('.ing-unit-select').value = 'cl';
+    row.querySelector('.bvs').value = String(ing.vol);
+    row.querySelector('input[type="number"]:not(.ing-dose-input):not(.custom-vol-input)').value = ing.cost;
   });
-  // Add fresh ingredients
+
+  // 4. Create each fresh ingredient row (empty), then fill with .value=
   ex.produce.forEach(prod => {
     addProduce();
     const rows = document.querySelectorAll('.produce-row');
     const row = rows[rows.length - 1];
     const rowId = parseInt(row.id.replace('prod-', ''));
-    row.querySelector('input[type="text"]').value = prod.name[currentLang] || prod.name.en;
+    row.querySelector('input[type="text"]').value = prod.name[currentLang] || prod.name.fr;
     row.querySelector('.prod-unit').value = prod.unit;
     row.querySelector('.prod-pkg').value = prod.pkg;
     row.querySelector('.prod-price').value = prod.price;
     row.querySelector('.prod-qty').value = prod.qty;
     calcProd(rowId);
   });
-  // Scroll form into view
+
   document.getElementById('form-section').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
