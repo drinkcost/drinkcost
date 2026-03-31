@@ -513,6 +513,9 @@ select option { background: var(--bg3); }
   color: var(--text2);
 }
 .btn-ghost:hover { border-color: var(--border2); color: var(--accent); background: var(--bg4); }
+.btn-xs { font-size: 11px; padding: 5px 10px; border-radius: var(--radius-sm); font-weight: 500; letter-spacing: .02em; }
+.example-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); align-items: center; }
+.example-bar-label { font-size: 11px; color: var(--text-faint); font-family: 'Plus Jakarta Sans', sans-serif; white-space: nowrap; }
 .btn-remove {
   background: var(--bg3);
   border: 1px solid var(--border);
@@ -944,6 +947,13 @@ select option { background: var(--bg3); }
       <div class="cplx-bar" id="complexity-bar"><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div><div class="cplx-dot"></div></div>
       <div style="font-size:10px;color:var(--text-faint);margin-top:4px" id="complexity-text" data-cplx-key="direct">Direct (build) — faible complexité</div>
     </div>
+    <div class="example-bar">
+      <span class="example-bar-label" data-i18n="ex_label">Charger un exemple :</span>
+      <button class="btn btn-ghost btn-xs" onclick="loadExample('negroni')">Negroni</button>
+      <button class="btn btn-ghost btn-xs" onclick="loadExample('mojito')">Mojito</button>
+      <button class="btn btn-ghost btn-xs" onclick="loadExample('spritz')">Spritz</button>
+    </div>
+    <p style="font-size:10px;color:var(--text-faint);margin-top:6px;margin-bottom:0" data-i18n="example_disclaimer">Prix indicatifs — ajustez selon vos tarifs fournisseurs.</p>
   </div>
 
   <div class="panel">
@@ -1347,6 +1357,8 @@ const T = {
     ph_cocktail:'ex. Negroni…',ph_glass:'Coupe, Highball…',ph_dose:'45',ph_dose_imperial:'ex. 1.5',ph_bottle:'38.00',ph_custom_vol:'ex. 375',
     pu_g:'grammes (g)',pu_kg:'kilogrammes (kg)',pu_piece:'pièces',
     vol_other:'Autre — volume personnalisé',
+    ex_label:'Charger un exemple :',
+    example_disclaimer:'Prix indicatifs — ajustez selon vos tarifs fournisseurs.',
     m_direct:'Direct (build)',m_shaker:'Shaker',m_mixing:'Verre à mélange',m_blender:'Blender',
     m_infusion:'Infusion / Macération',m_carb:'Carbonation',m_multi:'Multi-techniques',
     cat_classic:'Classique',cat_sig:'Signature',cat_mock:'Mocktail',cat_champ:'Champagne / Bulles',cat_shot:'Shot',
@@ -1423,6 +1435,8 @@ const T = {
     ph_cocktail:'e.g. Negroni…',ph_glass:'Coupe, Highball…',ph_dose:'45',ph_dose_imperial:'e.g. 1.5',ph_bottle:'38.00',ph_custom_vol:'e.g. 375',
     pu_g:'grams (g)',pu_kg:'kilograms (kg)',pu_piece:'pieces',
     vol_other:'Other — custom volume',
+    ex_label:'Load an example:',
+    example_disclaimer:'Indicative prices — adjust to your local supplier costs.',
     m_direct:'Direct (build)',m_shaker:'Shaker',m_mixing:'Mixing glass',m_blender:'Blender',
     m_infusion:'Infusion / Maceration',m_carb:'Carbonation',m_multi:'Multi-technique',
     cat_classic:'Classic',cat_sig:'Signature',cat_mock:'Mocktail',cat_champ:'Champagne / Sparkling',cat_shot:'Shot',
@@ -1499,6 +1513,8 @@ const T = {
     ph_cocktail:'ej. Negroni…',ph_glass:'Copa, Highball…',ph_dose:'45',ph_dose_imperial:'ej. 1.5',ph_bottle:'38.00',ph_custom_vol:'ej. 375',
     pu_g:'gramos (g)',pu_kg:'kilogramos (kg)',pu_piece:'unidades',
     vol_other:'Otro — volumen personalizado',
+    ex_label:'Cargar un ejemplo:',
+    example_disclaimer:'Precios orientativos — ajusta según tus proveedores.',
     m_direct:'Directo (build)',m_shaker:'Coctelera',m_mixing:'Vaso mezclador',m_blender:'Batidora',
     m_infusion:'Infusión / Maceración',m_carb:'Carbonatación',m_multi:'Multi-técnica',
     cat_classic:'Clásico',cat_sig:'Signature',cat_mock:'Mocktail',cat_champ:'Champagne / Espumoso',cat_shot:'Chupito',
@@ -2022,6 +2038,83 @@ function toggleLabor(cb){
   inp.disabled=!cb.checked;
   inp.style.opacity=cb.checked?'1':'.3';
   inp.style.cursor=cb.checked?'auto':'not-allowed';
+}
+
+// ===== EXAMPLES =====
+const EXAMPLES = {
+  negroni: {
+    name:'Negroni', category:0, glass:{fr:'Rocks',en:'Rocks',es:'Rocks'}, method:'verre-melange',
+    sell:18, fc:20, garnish:0.20, ice:0.15,
+    ings:[
+      {name:{fr:'Gin London Dry',en:'Gin London Dry',es:'Gin London Dry'}, ml:30, vol:700, cost:18},
+      {name:{fr:'Campari',en:'Campari',es:'Campari'}, ml:30, vol:1000, cost:17},
+      {name:{fr:'Vermouth rouge',en:'Red vermouth',es:'Vermut rojo'}, ml:30, vol:1000, cost:12}
+    ],
+    produce:[]
+  },
+  mojito: {
+    name:'Mojito', category:0, glass:{fr:'Highball',en:'Highball',es:'Highball'}, method:'shaker',
+    sell:16, fc:22, garnish:0.20, ice:0.20,
+    ings:[
+      {name:{fr:'Rhum blanc',en:'White rum',es:'Ron blanco'}, ml:50, vol:700, cost:16},
+      {name:{fr:'Sirop de canne',en:'Cane syrup',es:'Sirope de caña'}, ml:20, vol:700, cost:8},
+      {name:{fr:'Jus citron vert',en:'Lime juice',es:'Zumo de lima'}, ml:30, vol:700, cost:6}
+    ],
+    produce:[
+      {name:{fr:'Menthe',en:'Mint',es:'Menta'}, unit:'g', pkg:50, price:2.50, qty:8},
+      {name:{fr:'Citron vert',en:'Lime',es:'Lima'}, unit:'g', pkg:500, price:3.00, qty:30}
+    ]
+  },
+  spritz: {
+    name:'Spritz', category:0, glass:{fr:'Balloon',en:'Balloon',es:'Balloon'}, method:'direct',
+    sell:14, fc:20, garnish:0.15, ice:0.15,
+    ings:[
+      {name:{fr:'Aperol',en:'Aperol',es:'Aperol'}, ml:60, vol:1000, cost:14},
+      {name:{fr:'Prosecco',en:'Prosecco',es:'Prosecco'}, ml:90, vol:750, cost:12},
+      {name:{fr:'Eau gazeuse',en:'Sparkling water',es:'Agua con gas'}, ml:30, vol:1000, cost:2.50}
+    ],
+    produce:[]
+  }
+};
+
+function loadExample(id) {
+  const ex = EXAMPLES[id];
+  if (!ex) return;
+  // Clear existing rows
+  document.getElementById('ingredients-list').innerHTML = '';
+  document.getElementById('produce-list').innerHTML = '';
+  // Fill cocktail info
+  document.getElementById('cocktail-name').value = ex.name;
+  document.getElementById('sell-price').value = ex.sell;
+  document.getElementById('category').selectedIndex = ex.category;
+  document.getElementById('glass').value = ex.glass[currentLang] || ex.glass.en;
+  document.getElementById('method').value = ex.method;
+  setCplx('complexity-bar', 'complexity-text', ex.method);
+  document.getElementById('target-fc').value = ex.fc;
+  document.getElementById('garnish-cost').value = ex.garnish;
+  document.getElementById('ice-cost').value = ex.ice;
+  // Add liquid ingredients (convert ml→oz if imperial)
+  const isImp = currentUnitSystem === 'imperial';
+  ex.ings.forEach(ing => {
+    const dose = isImp ? parseFloat((ing.ml / 29.5735).toFixed(2)) : ing.ml;
+    const unit = isImp ? 'oz' : 'ml';
+    addIng(ing.name[currentLang] || ing.name.en, dose, ing.vol, ing.cost, unit);
+  });
+  // Add fresh ingredients
+  ex.produce.forEach(prod => {
+    addProduce();
+    const rows = document.querySelectorAll('.produce-row');
+    const row = rows[rows.length - 1];
+    const rowId = parseInt(row.id.replace('prod-', ''));
+    row.querySelector('input[type="text"]').value = prod.name[currentLang] || prod.name.en;
+    row.querySelector('.prod-unit').value = prod.unit;
+    row.querySelector('.prod-pkg').value = prod.pkg;
+    row.querySelector('.prod-price').value = prod.price;
+    row.querySelector('.prod-qty').value = prod.qty;
+    calcProd(rowId);
+  });
+  // Scroll form into view
+  document.getElementById('form-section').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 // ===== INIT =====
