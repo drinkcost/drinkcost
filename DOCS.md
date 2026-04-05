@@ -1,5 +1,5 @@
 # DrinkCost — Feature Documentation
-Last updated: 2026-03-28
+Last updated: 2026-04-05
 
 ## Tab 1 — Cost Sheet (Fiche Technique / Ficha Técnica)
 
@@ -57,6 +57,7 @@ Last updated: 2026-03-28
 - **New sheet** — resets the form
 - **Copy summary** — copies cost/price/FC/margin text to clipboard
 - **Analyze profitability** — pre-fills Tab 2 and switches to it
+- **Load example (Negroni / Mojito / Spritz Aperol)** — pre-fills the entire form with a realistic recipe (name, category, glass, method, ingredients with doses and costs, parameters); respects active unit system (oz/ml)
 
 ---
 
@@ -160,5 +161,12 @@ Last updated: 2026-03-28
   ficha-tecnica-coctel.html — ES, cible "ficha técnica cóctel", "calculadora food cost bar" — 500+ mots, liste numérotée pas à pas, og:locale:alternate es_MX + es_AR, Schema complet, hreflang croisé
 2026-03-28 — sitemap.xml mis à jour: 3 nouvelles URLs (priority 0.8) avec xhtml:link hreflang pour chaque page dédiée
 2026-03-28 — index.html footer: liens internes discrets vers les 3 pages dédiées (Calculateur Food Cost · Cocktail Cost Sheet · Ficha Técnica Cóctel)
+2026-04-05 — SEO headlines & meta: H1/tagline/seo_title/seo_desc/intro_desc × FR/EN/ES — pivot terminologie "food cost" → "drink cost / pour cost / bar cost" dans les zones visibles
+2026-03-31 — Boutons "Charger un exemple": 3 recettes pré-remplies (Negroni / Mojito / Spritz Aperol) — name, category, glass, method, liquid ings, fresh ings (Mojito: menthe), params FC/garnish/glace; oz auto-converti si mode impérial; clé ex_label × FR/EN/ES
+2026-03-31 — formatVolume(): colonne Réf. affiche ml/cl/L selon magnitude (ex. 70cl, 1L, 1.5L)
+2026-03-31 — reco_good: "par service" → "par cocktail" × FR/EN/ES
+2026-03-31 — Overhead label: masque "main d'œuvre" si toggle labor OFF (tbl_overhead_no_labor × 3 langs)
+2026-03-31 — Favicon SVG: favicon.svg martini glass amber sur fond navy; head index.html + terms.html mis à jour
+2026-03-31 — SVG logo header: emoji 🍸 remplacé par logo SVG inline dans index.html et terms.html
 2026-03-28 — Simplification labels format bouteille: suppression des descriptifs (Canette, Standard, Vin/Champagne…) — labels unifiés "200 ml", "250 ml"… + clé vol_other FR/EN/ES pour "Autre"
 2026-03-28 — Système de mesure oz/ml: sélecteur pill header ml/oz, auto-détection US, toMl() pour conversion interne, getIngs() mis à jour, addIng() dynamique, applyUnitSystem() sync placeholders, clé ph_dose_imperial × 3 langues

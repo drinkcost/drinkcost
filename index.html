@@ -851,7 +851,7 @@ select option { background: var(--bg3); }
 </head>
 <body>
 <div class="app">
-<p class="intro-desc" id="intro-desc">DrinkCost — L'outil gratuit pour calculer le food cost, le coût de revient et la marge de vos cocktails. Conçu par et pour les professionnels du bar.</p>
+<p class="intro-desc" id="intro-desc">DrinkCost — Calculez le coût de vos boissons, le pour cost et le prix de vos cocktails en temps réel. Outil gratuit pour bar managers et barmans.</p>
 <header>
   <div class="logo-wrap">
     <div class="logo-icon">
@@ -875,8 +875,8 @@ select option { background: var(--bg3); }
     </div>
     <div class="logo-text">Drink<span>Cost</span></div>
   </div>
-  <h1 class="header-sub">Fiche <em>Technique</em> Cocktail</h1>
-  <div class="tagline">Calcul coût · marge · rentabilité</div>
+  <h1 class="header-sub">Le Calculateur de <em>Coût Bar</em> Fait pour les Pros</h1>
+  <div class="tagline">Coût boisson, pour cost, prix cocktail — vos chiffres en temps réel.</div>
   <div class="header-divider"><div class="header-divider-dot"></div></div>
   <div class="currency-pill">
     <span class="cur-icon">💱</span>
@@ -1383,9 +1383,9 @@ const T = {
     copy_text:(n,c,p,fp,m,sym)=>`FICHE TECHNIQUE — ${n}\nCoût matière : ${c} ${sym}\nPrix de vente : ${p} ${sym}\nFood cost : ${fp}%\nMarge brute : ${m} ${sym}`,
     cplx:{direct:'Direct (build) — faible complexité',shaker:'Shaker — complexité modérée','verre-melange':'Verre à mélange — bonne maîtrise requise',blender:'Blender — complexité modérée',infusion:'Infusion / Macération — préparation longue',carbonation:'Carbonation — technique avancée',multi:'Multi-techniques — haute complexité'},
     cplx_levels:['','Faible','Modérée','Modérée+','Élevée','Très élevée'],
-    title:'Fiche <em>Technique</em> Cocktail',tagline:'Calcul coût · marge · rentabilité',currency_label:'Devise',intro_desc:'DrinkCost — L\'outil gratuit pour calculer le food cost, le coût de revient et la marge de vos cocktails. Conçu par et pour les professionnels du bar.',
-    seo_title:'DrinkCost — Fiche Technique Cocktail Gratuite | Calcul Food Cost Bar',
-    seo_desc:'Calculez le food cost, le coût de revient et la marge de vos cocktails en 30 secondes. Fiche technique gratuite pour bar managers et barmans. Outil professionnel FR / EN / ES.',
+    title:'Le Calculateur de <em>Coût Bar</em> Fait pour les Pros',tagline:'Coût boisson, pour cost, prix cocktail — vos chiffres en temps réel.',currency_label:'Devise',intro_desc:'DrinkCost — Calculez le coût de vos boissons, le pour cost et le prix de vos cocktails en temps réel. Outil gratuit pour bar managers et barmans.',
+    seo_title:'Calculateur de Coût Boisson — Prix de vos Cocktails',
+    seo_desc:'Calculez le coût de vos boissons, votre pour cost et le prix de vos cocktails en quelques secondes. Outil gratuit pour les pros du bar.',
     seo_og_locale:'fr_FR',
     seo_keywords:'fiche technique cocktail, fiche recette cocktail, fiche technique bar, calcul food cost, food cost cocktail, coût de revient cocktail, calculer coût de revient recette, calcul marge cocktail, calcul marge bar, drink cost, rentabilité bar, outil bar manager gratuit, contrôle coût boissons, seuil rentabilité bar',
     seo_h2:'Comment calculer le <em>coût de revient</em> d\'un cocktail ?',
@@ -1461,9 +1461,9 @@ const T = {
     copy_text:(n,c,p,fp,m,sym)=>`COST SHEET — ${n}\nMaterial cost: ${c} ${sym}\nSelling price: ${p} ${sym}\nFood cost: ${fp}%\nGross margin: ${m} ${sym}`,
     cplx:{direct:'Direct (build) — low complexity',shaker:'Shaker — moderate complexity','verre-melange':'Mixing glass — good technique required',blender:'Blender — moderate complexity',infusion:'Infusion / Maceration — long preparation',carbonation:'Carbonation — advanced technique',multi:'Multi-technique — high complexity'},
     cplx_levels:['','Low','Moderate','Moderate+','High','Very high'],
-    title:'Cocktail <em>Cost Sheet</em>',tagline:'Cost · margin · profitability',currency_label:'Currency',intro_desc:'DrinkCost — The free tool to calculate cocktail food cost, recipe cost and gross margin. Built by bar professionals, for bar professionals.',
-    seo_title:'DrinkCost — Free Cocktail Food Cost Calculator | Cost Sheet for Bar Managers',
-    seo_desc:'Free cocktail food cost calculator for bar managers. Calculate recipe cost, gross margin and profitability in seconds. The professional bar tool — FR / EN / ES.',
+    title:'The Bar Cost Calculator Built for <em>Professionals</em>',tagline:'From cocktail pricing to pour cost — know your numbers instantly.',currency_label:'Currency',intro_desc:'DrinkCost — Calculate your drink cost, pour cost and cocktail pricing in seconds. Free tool for bar managers, bartenders and F&B professionals.',
+    seo_title:'Drink Cost Calculator — Price Your Cocktails Instantly',
+    seo_desc:'Calculate your drink cost, pour cost and cocktail pricing in seconds. Free bar tool for bartenders, bar managers and F&B professionals.',
     seo_og_locale:'en_US',
     seo_keywords:'cocktail food cost calculator, cocktail cost sheet, drink cost calculator, pour cost calculator free, bar recipe cost calculator, cocktail recipe costing, food cost calculator, bar manager tool free, beverage cost control, bar profitability calculator, recipe cost cocktail, break-even bar, bar cost management',
     seo_h2:'How to Calculate Your <em>Cocktail Cost</em>',
@@ -1539,9 +1539,9 @@ const T = {
     copy_text:(n,c,p,fp,m,sym)=>`FICHA TÉCNICA — ${n}\nCoste materia: ${c} ${sym}\nPrecio de venta: ${p} ${sym}\nFood cost: ${fp}%\nMargen bruto: ${m} ${sym}`,
     cplx:{direct:'Directo (build) — baja complejidad',shaker:'Coctelera — complejidad moderada','verre-melange':'Vaso mezclador — buena técnica requerida',blender:'Batidora — complejidad moderada',infusion:'Infusión / Maceración — preparación larga',carbonation:'Carbonatación — técnica avanzada',multi:'Multi-técnica — alta complejidad'},
     cplx_levels:['','Baja','Moderada','Moderada+','Alta','Muy alta'],
-    title:'Ficha <em>Técnica</em> Cóctel',tagline:'Coste · margen · rentabilidad',currency_label:'Moneda',intro_desc:'DrinkCost — La herramienta gratuita para calcular el food cost, el coste de receta y el margen de tus cócteles. Creada por y para profesionales del bar.',
-    seo_title:'DrinkCost — Calculadora Food Cost Cóctel Gratis | Ficha Técnica Bar',
-    seo_desc:'Calculadora gratuita de food cost para bartenders. Calcula el coste de receta, margen bruto y rentabilidad en segundos. Herramienta profesional FR / EN / ES.',
+    title:'La Calculadora de Coste de Bar para <em>Profesionales</em>',tagline:'Coste de bebida, pour cost, precio cóctel — tus números al instante.',currency_label:'Moneda',intro_desc:'DrinkCost — Calcula el coste de tus bebidas, el pour cost y el precio de tus cócteles al instante. Herramienta gratuita para profesionales del bar.',
+    seo_title:'Calculadora de Coste de Bebidas — Precio tu Cóctel',
+    seo_desc:'Calcula el coste de tus bebidas, el pour cost y el precio de tus cócteles en segundos. Herramienta gratuita para profesionales de bar.',
     seo_og_locale:'es_ES',
     seo_keywords:'ficha técnica cóctel, calcular costo coctel, calcular coste cóctel, food cost coctelería, costo de receta coctel, calculadora food cost, ficha técnica bar, rentabilidad bar, herramienta bar manager gratis, control costes bebidas, gestión costes bar, umbral rentabilidad bar',
     seo_h2:'Cómo calcular el <em>coste de un cóctel</em>',
