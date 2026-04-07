@@ -1354,7 +1354,8 @@ const T = {
     l_net_toggle:'Afficher la marge nette (après TVA)',
     i_name:'Ingrédient',i_qty:'Quantité',i_unit:'Unité',i_format:'Format bouteille',i_cost:'Coût bouteille',i_custom_vol:'Volume personnalisé (ml)',
     pr_name:'Produit',pr_pkg:'Poids paquet (g)',pr_price:'Prix paquet',pr_qty:'Qté utilisée (g)',
-    ph_cocktail:'ex. Negroni…',ph_glass:'Coupe, Highball…',ph_dose:'45',ph_dose_imperial:'ex. 1.5',ph_bottle:'38.00',ph_custom_vol:'ex. 375',
+    ph_cocktail:'ex. Negroni…',ph_glass:'Coupe, Highball…',ph_dose:'30',ph_dose_imperial:'ex. 1.5',ph_bottle:'38.00',ph_custom_vol:'ex. 375',
+    ph_ingredient:'ex. Gin, Campari, Sirop de canne…',
     pu_g:'grammes (g)',pu_kg:'kilogrammes (kg)',pu_piece:'pièces',
     vol_other:'Autre — volume personnalisé',
     ex_label:'Charger un exemple :',
@@ -1432,7 +1433,8 @@ const T = {
     l_net_toggle:'Show net margin (after VAT)',
     i_name:'Ingredient',i_qty:'Quantity',i_unit:'Unit',i_format:'Bottle format',i_cost:'Bottle cost',i_custom_vol:'Custom volume (ml)',
     pr_name:'Product',pr_pkg:'Pack weight (g)',pr_price:'Pack price',pr_qty:'Qty used (g)',
-    ph_cocktail:'e.g. Negroni…',ph_glass:'Coupe, Highball…',ph_dose:'45',ph_dose_imperial:'e.g. 1.5',ph_bottle:'38.00',ph_custom_vol:'e.g. 375',
+    ph_cocktail:'e.g. Negroni…',ph_glass:'Coupe, Highball…',ph_dose:'30',ph_dose_imperial:'e.g. 1.5',ph_bottle:'38.00',ph_custom_vol:'e.g. 375',
+    ph_ingredient:'e.g. Gin, Syrup, Juice…',
     pu_g:'grams (g)',pu_kg:'kilograms (kg)',pu_piece:'pieces',
     vol_other:'Other — custom volume',
     ex_label:'Load an example:',
@@ -1510,7 +1512,8 @@ const T = {
     l_net_toggle:'Mostrar margen neto (después de IVA)',
     i_name:'Ingrediente',i_qty:'Cantidad',i_unit:'Unidad',i_format:'Formato botella',i_cost:'Coste botella',i_custom_vol:'Volumen personalizado (ml)',
     pr_name:'Producto',pr_pkg:'Peso paquete (g)',pr_price:'Precio paquete',pr_qty:'Cantidad usada (g)',
-    ph_cocktail:'ej. Negroni…',ph_glass:'Copa, Highball…',ph_dose:'45',ph_dose_imperial:'ej. 1.5',ph_bottle:'38.00',ph_custom_vol:'ej. 375',
+    ph_cocktail:'ej. Negroni…',ph_glass:'Copa, Highball…',ph_dose:'30',ph_dose_imperial:'ej. 1.5',ph_bottle:'38.00',ph_custom_vol:'ej. 375',
+    ph_ingredient:'ej. Ginebra, Sirope, Zumo…',
     pu_g:'gramos (g)',pu_kg:'kilogramos (kg)',pu_piece:'unidades',
     vol_other:'Otro — volumen personalizado',
     ex_label:'Cargar un ejemplo:',
@@ -1762,7 +1765,7 @@ function addIng(name='',dose='',vol=700,cost='',unit=null){
   const row=document.createElement('div');
   row.className='ingredient-row'; row.id='ing-'+id;
   row.innerHTML=`
-    <div><label>${t('i_name')}</label><input type="text" placeholder="${t('ph_cocktail')}" value="${name}"></div>
+    <div><label>${t('i_name')}</label><input type="text" placeholder="${t('ph_ingredient')}" value="${name}"></div>
     <div><label>${t('i_qty')}</label><input type="number" class="ing-dose-input" placeholder="${ph}" value="${dose}" min="0" step="0.1" oninput="updateIngUnit(${id})"></div>
     <div><label>${t('i_unit')}</label>
       <select class="ing-unit-select" onchange="updateIngUnit(${id})">
