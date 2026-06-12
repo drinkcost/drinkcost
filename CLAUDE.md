@@ -130,9 +130,10 @@ Never batch unrelated changes in one commit. Never commit broken code.
 
 ## 8. Performance discipline
 
-- `index.html` must remain a single file loadable in under 1 second on a 4G connection
+- The app must remain loadable in under 1 second on a 4G connection
+- The JS lives in three modules loaded at the end of `<body>` in this exact order: `currency.js` → `i18n.js` → `calc.js` (init code runs at the end of calc.js). Never reinline them into index.html and never change the load order
+- New code goes in the right module: user-facing strings in `i18n.js` (object T), currency/unit logic in `currency.js`, business logic and DOM wiring in `calc.js`
 - No new external JS libraries without explicit approval
-- When `index.html` exceeds 1800 lines, propose splitting into `i18n.js`, `currency.js`, `calc.js` — but only refactor when explicitly asked
 - Google Fonts are already loaded — do not add more font imports
 - All images (if any added in future) must be optimized and served via CDN
 

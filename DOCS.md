@@ -158,7 +158,8 @@ Last updated: 2026-06-12
 ---
 
 ## Changelog
-2026-06-12 — refactor: découpage du JS inline d'index.html (2366 → 1243 lignes) en 3 modules — currency.js, i18n.js, calc.js — zéro changement de comportement; suppression du code mort (updateIngUnit no-op + double rafraîchissement de rr-unit-net-label dans applyTranslations)
+2026-06-12 — fix: badge résultat (Rentable/Limite/À revoir) — retraduit au changement de langue (dataset.badgeKey + applyTranslations, même pattern que cplxKey) et réaffiché au recalcul après un calcul sans prix (il restait masqué définitivement)
+2026-06-12 — refactor: découpage du JS inline d'index.html (2366 → 1243 lignes) en 3 modules — currency.js, i18n.js, calc.js — zéro changement de comportement; suppression du code mort (updateIngUnit no-op + double rafraîchissement de rr-unit-net-label dans applyTranslations); règle 8 de CLAUDE.md reformulée en conséquence
 2026-03-27 — Initial build: full app (Tab 1 + Tab 2), trilingual, multi-currency, GA4, terms.html
 2026-03-28 — SEO meta tags: meta description, Open Graph, Twitter Card, hreflang (fr/en/es/x-default), Schema.org WebApplication, dynamic title/meta update per language via applyTranslations()
 2026-03-28 — FAQ section: FAQ.md créé (12 Q&A × FR/EN/ES) + section accordion <details>/<summary> intégrée au site, rendue dynamiquement par applyTranslations()
