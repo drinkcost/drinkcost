@@ -75,9 +75,9 @@ function addIng(name='',dose='',vol=700,cost='',unit=null){
   row.className='ingredient-row'; row.id='ing-'+id;
   row.innerHTML=`
     <div><label>${t('i_name')}</label><input type="text" placeholder="${t('ph_ingredient')}" value="${name}"></div>
-    <div><label>${t('i_qty')}</label><input type="number" class="ing-dose-input" placeholder="${ph}" value="${dose}" min="0" step="0.1" oninput="updateIngUnit(${id})"></div>
+    <div><label>${t('i_qty')}</label><input type="number" class="ing-dose-input" placeholder="${ph}" value="${dose}" min="0" step="0.1"></div>
     <div><label>${t('i_unit')}</label>
-      <select class="ing-unit-select" onchange="updateIngUnit(${id})">
+      <select class="ing-unit-select">
         <option value="${firstOpt}"${u===firstOpt?' selected':''}>${firstOpt}</option>
         <option value="cl"${u==='cl'?' selected':''}>cl</option>
       </select>
@@ -97,9 +97,6 @@ function toggleCustomVol(id, val) {
   if (customDiv) customDiv.style.display = val === '0' ? '' : 'none';
 }
 
-function updateIngUnit(id){
-  // live feedback only — conversion happens in getIngs()
-}
 function getIngs(){
   return Array.from(document.querySelectorAll('.ingredient-row')).map(row=>{
     const inp=row.querySelectorAll('input');

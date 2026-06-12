@@ -322,9 +322,6 @@ function applyTranslations(){
   // lbl-overhead — respects labor toggle state
   const overheadEl=document.getElementById('lbl-overhead');
   if(overheadEl){const laborOn=document.getElementById('labor-toggle')?.checked;overheadEl.textContent=laborOn?t('tbl_overhead'):t('tbl_overhead_no_labor');}
-  // rr_unit_net
-  const netLbl2=document.getElementById('rr-unit-net-label');
-  if(netLbl2)netLbl2.textContent=t('rr_unit_net');
   // Service type options
   document.querySelectorAll('[data-i18n-opt]').forEach(el=>el.textContent=t(el.getAttribute('data-i18n-opt')));
   document.querySelectorAll('.produce-row').forEach(row=>{
