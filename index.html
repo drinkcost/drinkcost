@@ -1263,7 +1263,7 @@ function detectCurrency() {
     let code = 'CHF'; // default
     if (tz.includes('Zurich') || tz.includes('Geneva') || lang.includes('ch')) code = 'CHF';
     else if (tz.includes('London') || lang.startsWith('en-gb')) code = 'GBP';
-    else if (tz.includes('America/New_York') || tz.includes('America/Los_Angeles') || lang.startsWith('en-us')) code = 'USD';
+    else if (lang.startsWith('en-us') || ['New_York','Los_Angeles','Chicago','Denver','Phoenix','Detroit','Anchorage','Boise','Indiana','Kentucky','Honolulu'].some(c => tz.includes(c))) code = 'USD';
     else if (tz.includes('Paris') || tz.includes('Berlin') || tz.includes('Rome') || tz.includes('Madrid') || lang.startsWith('fr-fr') || lang.startsWith('de') || lang.startsWith('it') || lang.startsWith('es')) code = 'EUR';
     else if (tz.includes('Toronto') || tz.includes('Montreal') || lang.startsWith('fr-ca') || lang.startsWith('en-ca')) code = 'CAD';
     else if (tz.includes('Antigua') || tz.includes('Barbados')) code = 'XCD';
