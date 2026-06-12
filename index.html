@@ -1254,6 +1254,7 @@ let currentCurrency = 'CHF';
 
 function setCurrency(code) {
   currentCurrency = code;
+  try { localStorage.setItem('dc_cur', code); } catch(e) {}
   const cur = CURRENCIES[code] || CURRENCIES['CHF'];
   document.getElementById('currency-symbol').textContent = cur.symbol;
   document.querySelectorAll('.cur-label').forEach(el => el.textContent = cur.symbol);
@@ -1274,6 +1275,14 @@ function formatVolume(ml) {
 }
 
 function detectCurrency() {
+  try {
+    const stored = localStorage.getItem('dc_cur');
+    if (stored && CURRENCIES[stored]) {
+      document.getElementById('currency-select').value = stored;
+      setCurrency(stored);
+      return;
+    }
+  } catch(e) {}
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
     const lang = (navigator.language || 'fr-CH').toLowerCase();
@@ -1301,6 +1310,7 @@ const OZ_TO_ML = 29.5735;
 
 function setUnitSystem(system, btn) {
   currentUnitSystem = system;
+  try { localStorage.setItem('dc_unit', system); } catch(e) {}
   document.querySelectorAll('.unit-btn').forEach((b, i) => {
     b.classList.toggle('active', i === (system === 'imperial' ? 1 : 0));
   });
@@ -1333,6 +1343,14 @@ function unitLabel() {
 }
 
 function detectUnitSystem() {
+  try {
+    const stored = localStorage.getItem('dc_unit');
+    if (stored === 'imperial' || stored === 'metric') {
+      currentUnitSystem = stored;
+      document.querySelectorAll('.unit-btn').forEach((b,i) => b.classList.toggle('active', i === (stored === 'imperial' ? 1 : 0)));
+      return;
+    }
+  } catch(e) {}
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
     const lang = (navigator.language || '').toLowerCase();
@@ -1594,6 +1612,7 @@ function t(key,...args){const v=T[currentLang][key];return typeof v==='function'
 
 function setLang(lang,btn){
   currentLang=lang;
+  try{localStorage.setItem('dc_lang',lang);}catch(e){}
   document.documentElement.lang=lang;
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
   if(btn)btn.classList.add('active');
@@ -1723,10 +1742,14 @@ function applyTranslations(){
 }
 
 function detectLang(){
-  const lang=(navigator.language||'fr').toLowerCase();
-  let detected='fr';
-  if(lang.startsWith('en'))detected='en';
-  else if(lang.startsWith('es'))detected='es';
+  let detected=null;
+  try{const s=localStorage.getItem('dc_lang');if(s&&T[s])detected=s;}catch(e){}
+  if(!detected){
+    const lang=(navigator.language||'fr').toLowerCase();
+    detected='fr';
+    if(lang.startsWith('en'))detected='en';
+    else if(lang.startsWith('es'))detected='es';
+  }
   currentLang=detected;
   document.documentElement.lang=detected;
   document.querySelectorAll('.lang-btn').forEach(btn=>{
