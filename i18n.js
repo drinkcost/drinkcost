@@ -297,6 +297,9 @@ function applyTranslations(){
     if(!el||!el.dataset.cplxKey) return;
     el.textContent=(T[currentLang].cplx&&T[currentLang].cplx[el.dataset.cplxKey])||el.textContent;
   });
+  // Refresh result badge with current lang (key set by calculate())
+  const badgeEl=document.getElementById('r-badge');
+  if(badgeEl&&badgeEl.dataset.badgeKey)badgeEl.textContent=t(badgeEl.dataset.badgeKey);
   // Labels with currency + /h suffix
   document.querySelectorAll('[data-i18n-cur-h]').forEach(el=>{
     const k=el.getAttribute('data-i18n-cur-h');

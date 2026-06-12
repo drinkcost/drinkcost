@@ -226,12 +226,17 @@ function calculate(){
     document.getElementById('r-bar').style.background=fcPct<=fc?'var(--teal)':fcPct<=fc*1.3?'var(--accent)':'var(--red)';
     document.getElementById('r-fc-lbl').textContent=fcPct.toFixed(1)+'%';
     const b=document.getElementById('r-badge');
-    b.textContent=fcPct<=fc?t('badge_good'):fcPct<=fc*1.3?t('badge_ok'):t('badge_bad');
+    const bKey=fcPct<=fc?'badge_good':fcPct<=fc*1.3?'badge_ok':'badge_bad';
+    b.textContent=t(bKey);
+    b.dataset.badgeKey=bKey;
     b.className='rbadge '+(fcPct<=fc?'bg':fcPct<=fc*1.3?'bo':'bb');
+    b.style.display='';
   } else {
     document.getElementById('r-fc').textContent='—';
     document.getElementById('r-margin').textContent='—';
-    document.getElementById('r-badge').style.display='none';
+    const b=document.getElementById('r-badge');
+    b.style.display='none';
+    delete b.dataset.badgeKey;
   }
 
   const tbody=document.getElementById('r-ing-body'); tbody.innerHTML='';
