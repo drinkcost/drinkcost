@@ -847,6 +847,23 @@ select option { background: var(--bg3); }
   .faq-item summary{padding:14px 16px;font-size:13px;}
   .faq-a{padding:0 16px 14px;}
 }
+/* ===== PRINT — clean cost sheet on white paper ===== */
+@media print{
+  body{background:#fff !important;}
+  body::before{display:none !important;}
+  header,.nav-tabs,#form-section,.actions-row,.seo-section,.faq-section,footer,.intro-desc,.toggle-row{display:none !important;}
+  .app{max-width:100%;padding:0;}
+  .panel,#result{background:#fff !important;border:1px solid #ddd !important;box-shadow:none !important;}
+  #result *{color:#000 !important;}
+  #result .cur-label,#result .kpi-unit{color:#444 !important;}
+  .kpi{background:#fff !important;border:1px solid #ddd !important;}
+  .rbadge{background:#fff !important;border:1px solid #000 !important;}
+  .mbar-track{background:#eee !important;}
+  .mbar-fill{background:#999 !important;}
+  .itbl th,.itbl td{border-color:#ddd !important;}
+  .cplx-dot{border:1px solid #999;}
+  .reco{background:#f7f7f7 !important;border:1px solid #ddd !important;}
+}
 </style>
 </head>
 <body>
