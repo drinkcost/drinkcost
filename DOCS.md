@@ -1,5 +1,5 @@
 # DrinkCost — Feature Documentation
-Last updated: 2026-04-05
+Last updated: 2026-06-12
 
 ## Tab 1 — Cost Sheet (Fiche Technique / Ficha Técnica)
 
@@ -161,6 +161,14 @@ Last updated: 2026-04-05
   ficha-tecnica-coctel.html — ES, cible "ficha técnica cóctel", "calculadora food cost bar" — 500+ mots, liste numérotée pas à pas, og:locale:alternate es_MX + es_AR, Schema complet, hreflang croisé
 2026-03-28 — sitemap.xml mis à jour: 3 nouvelles URLs (priority 0.8) avec xhtml:link hreflang pour chaque page dédiée
 2026-03-28 — index.html footer: liens internes discrets vers les 3 pages dédiées (Calculateur Food Cost · Cocktail Cost Sheet · Ficha Técnica Cóctel)
+2026-06-12 — Audit structurel — corrections majeures:
+  fix: landing EN affirmait "metric only" (FAQ + JSON-LD) alors que le switch ml/oz existe — corrigé
+  fix: "10 devises" → 11 sur les 3 landing pages (texte + schemas)
+  fix: detectCurrency couvre désormais toutes les timezones US (Chicago, Denver, Phoenix, Detroit, Anchorage, Honolulu…) — avant, seuls NY/LA donnaient USD, le reste tombait sur CHF
+  feat: @media print — la fiche s'imprime en noir sur blanc (panel résultat uniquement), plus de thème dark intégral
+  feat: persistance localStorage (dc_lang, dc_cur, dc_unit) — les choix langue/devise/unités survivent au rechargement
+  style: landing pages alignées sur le logo SVG + favicon.svg (fin de l'emoji 🍸 et des PNG/ICO legacy)
+  seo: sitemap lastmod 2026-06-12 ; hreflang reciprocal corrigé sur index.html (fr/en/es → landing pages dédiées)
 2026-04-05 — SEO headlines & meta: H1/tagline/seo_title/seo_desc/intro_desc × FR/EN/ES — pivot terminologie "food cost" → "drink cost / pour cost / bar cost" dans les zones visibles
 2026-03-31 — Boutons "Charger un exemple": 3 recettes pré-remplies (Negroni / Mojito / Spritz Aperol) — name, category, glass, method, liquid ings, fresh ings (Mojito: menthe), params FC/garnish/glace; oz auto-converti si mode impérial; clé ex_label × FR/EN/ES
 2026-03-31 — formatVolume(): colonne Réf. affiche ml/cl/L selon magnitude (ex. 70cl, 1L, 1.5L)

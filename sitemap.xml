@@ -5,7 +5,7 @@
   <!-- Main app — trilingual single-page -->
   <url>
     <loc>https://drinkcost.bar/</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drinkcost.bar/"/>
@@ -17,7 +17,7 @@
   <!-- FR landing — food cost cocktail -->
   <url>
     <loc>https://drinkcost.bar/food-cost-calculator.html</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drinkcost.bar/food-cost-calculator.html"/>
@@ -29,7 +29,7 @@
   <!-- EN landing — cocktail cost sheet / pour cost calculator -->
   <url>
     <loc>https://drinkcost.bar/cocktail-cost-sheet.html</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://drinkcost.bar/cocktail-cost-sheet.html"/>
@@ -41,7 +41,7 @@
   <!-- ES landing — ficha técnica cóctel / food cost coctelería -->
   <url>
     <loc>https://drinkcost.bar/ficha-tecnica-coctel.html</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://drinkcost.bar/ficha-tecnica-coctel.html"/>
@@ -53,7 +53,7 @@
   <!-- Terms of use -->
   <url>
     <loc>https://drinkcost.bar/terms.html</loc>
-    <lastmod>2026-03-27</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drinkcost.bar/terms.html"/>

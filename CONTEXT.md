@@ -54,7 +54,8 @@ Built in a single day (March 27, 2026) — prototype to live product.
 - Smart recommendation based on qty vs break-even
 
 ### Global Features
-- **Currency selector**: 10 currencies (CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY, AUD) — auto-detected by timezone/locale — all labels update dynamically including embedded currency in field labels
+- **Currency selector**: 11 currencies (CHF, EUR, USD, GBP, CAD, XCD, MAD, AED, JPY, AUD, CNY) — auto-detected by timezone/locale, persisted in localStorage — all labels update dynamically including embedded currency in field labels
+- **Unit system**: metric (ml) / imperial (oz) pill toggle — auto-detected for US users, persisted in localStorage
 - **Trilingue FR/EN/ES**: full translation including labels, placeholders, helpers, error messages, dynamic recommendation texts, dropdown options, tfoot labels, complexity text — auto-detected by browser language — lang pill buttons FR/EN/ES
 - **Responsive**: mobile (<640px) stacked layout, tablet (<900px) adapted grid, 44px touch targets, iOS zoom prevention (font-size: 16px on inputs)
 - **Design**: dark navy theme (#0d1117), amber accent (#e8a020), Plus Jakarta Sans + Playfair Display + JetBrains Mono, CSS variables throughout
