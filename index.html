@@ -124,7 +124,7 @@
     {"@type":"Question","name":"Comment exporter ma fiche technique ?","acceptedAnswer":{"@type":"Answer","text":"Cliquez sur « Imprimer » pour générer un PDF via votre navigateur, ou « Copier résumé » pour copier les données clés dans le presse-papier."}},
     {"@type":"Question","name":"Qu'est-ce que le taux de perte / gaspillage ?","acceptedAnswer":{"@type":"Answer","text":"Le taux de perte majore votre coût matière pour refléter les pertes réelles au service : renversements, mesures approximatives, ingrédients gaspillés. Il est activable dans les paramètres avancés."}},
     {"@type":"Question","name":"Comment est calculé le prix suggéré ?","acceptedAnswer":{"@type":"Answer","text":"Coût matière total ÷ (objectif food cost / 100). Exemple : coût 3,50 CHF, objectif 20 % → prix suggéré 17,50 CHF."}},
-    {"@type":"Question","name":"Puis-je sauvegarder mes fiches techniques ?","acceptedAnswer":{"@type":"Answer","text":"La sauvegarde est prévue en V2 (comptes utilisateurs). Pour l'instant, utilisez « Copier résumé » ou « Imprimer »."}},
+    {"@type":"Question","name":"Puis-je sauvegarder mes fiches techniques ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Cliquez sur « Sauvegarder » après le calcul — la fiche est conservée localement dans votre navigateur (jusqu'à 15 fiches) et rechargeable depuis le panneau « Mes fiches »."}},
     {"@type":"Question","name":"Pour qui est fait DrinkCost ?","acceptedAnswer":{"@type":"Answer","text":"Pour les bar managers, chefs barmen, directeurs F&B et mixologues — dans les bars, hôtels, restaurants et entreprises événementielles, partout dans le monde."}},
     {"@type":"Question","name":"Quelle est la différence entre marge brute et marge nette ?","acceptedAnswer":{"@type":"Answer","text":"La marge brute = prix de vente − coût matière. La marge nette déduit en plus la TVA. Activez « Afficher la marge nette » dans les résultats pour la voir."}}
   ]
@@ -942,6 +942,11 @@ select option { background: var(--bg3); }
 <div class="tab-content active" id="tab-fiche">
 <div id="form-section">
 
+  <div class="panel" id="saved-panel" style="display:none">
+    <div class="panel-title" data-i18n-panel="p_saved"><span class="panel-title-icon">💾</span> Mes fiches</div>
+    <div id="saved-list"></div>
+  </div>
+
   <div class="panel">
     <div class="panel-title" data-i18n-panel="p_cocktail"><span class="panel-title-icon">🍹</span> Informations cocktail</div>
     <div class="form-row cols-2">
@@ -1089,6 +1094,7 @@ select option { background: var(--bg3); }
   </div>
 
   <div class="actions-row">
+    <button class="btn btn-ghost" onclick="saveRecipe()" data-i18n="btn_save">Sauvegarder</button>
     <button class="btn btn-ghost" onclick="window.print()" data-i18n="btn_print">Imprimer</button>
     <button class="btn btn-ghost" onclick="newRecipe()" data-i18n="btn_new">Nouvelle fiche</button>
     <button class="btn btn-ghost" onclick="copyRes()" data-i18n="btn_copy">Copier résumé</button>
@@ -1210,7 +1216,7 @@ select option { background: var(--bg3); }
     <details class="faq-item"><summary>Comment exporter ma fiche technique ?</summary><p class="faq-a">Cliquez sur « Imprimer » pour générer un PDF via votre navigateur, ou « Copier résumé » pour copier les données clés dans le presse-papier.</p></details>
     <details class="faq-item"><summary>Qu'est-ce que le taux de perte / gaspillage ?</summary><p class="faq-a">Le taux de perte majore votre coût matière pour refléter les pertes réelles au service : renversements, mesures approximatives, ingrédients gaspillés. Il est activable dans les paramètres avancés.</p></details>
     <details class="faq-item"><summary>Comment est calculé le prix suggéré ?</summary><p class="faq-a">Coût matière total ÷ (objectif food cost / 100). Exemple : coût 3,50 CHF, objectif 20 % → prix suggéré 17,50 CHF.</p></details>
-    <details class="faq-item"><summary>Puis-je sauvegarder mes fiches techniques ?</summary><p class="faq-a">La sauvegarde est prévue en V2 (comptes utilisateurs). Pour l'instant, utilisez « Copier résumé » ou « Imprimer ».</p></details>
+    <details class="faq-item"><summary>Puis-je sauvegarder mes fiches techniques ?</summary><p class="faq-a">Oui. Cliquez sur « Sauvegarder » après le calcul — la fiche est conservée localement dans votre navigateur (jusqu'à 15 fiches) et rechargeable depuis le panneau « Mes fiches ».</p></details>
     <details class="faq-item"><summary>Pour qui est fait DrinkCost ?</summary><p class="faq-a">Pour les bar managers, chefs barmen, directeurs F&amp;B et mixologues — dans les bars, hôtels, restaurants et entreprises événementielles, partout dans le monde.</p></details>
     <details class="faq-item"><summary>Quelle est la différence entre marge brute et marge nette ?</summary><p class="faq-a">La marge brute = prix de vente − coût matière. La marge nette déduit en plus la TVA. Activez « Afficher la marge nette » dans les résultats pour la voir.</p></details>
   </div>
@@ -1419,6 +1425,8 @@ const T = {
     vol_other:'Autre — volume personnalisé',
     ex_label:'Charger un exemple :',
     example_disclaimer:'Prix indicatifs — ajustez selon vos tarifs fournisseurs.',
+    p_saved:'Mes fiches',btn_save:'Sauvegarder',saved_load:'Charger',saved_delete:'Supprimer',
+    saved_ok:'Fiche sauvegardée.',saved_deleted:'Fiche supprimée.',saved_limit:'Limite de 15 fiches atteinte — supprimez-en une d\'abord.',saved_error:'Sauvegarde impossible (stockage indisponible).',
     m_direct:'Direct (build)',m_shaker:'Shaker',m_mixing:'Verre à mélange',m_blender:'Blender',
     m_infusion:'Infusion / Macération',m_carb:'Carbonation',m_multi:'Multi-techniques',
     cat_classic:'Classique',cat_sig:'Signature',cat_mock:'Mocktail',cat_champ:'Champagne / Bulles',cat_shot:'Shot',
@@ -1466,7 +1474,7 @@ const T = {
       {q:'Comment exporter ma fiche technique ?',a:'Cliquez sur « Imprimer » pour générer un PDF via votre navigateur, ou « Copier résumé » pour copier les données clés dans le presse-papier.'},
       {q:'Qu\'est-ce que le taux de perte / gaspillage ?',a:'Le taux de perte majore votre coût matière pour refléter les pertes réelles au service : renversements, mesures approximatives, ingrédients gaspillés. Il est activable dans les paramètres avancés.'},
       {q:'Comment est calculé le prix suggéré ?',a:'Coût matière total ÷ (objectif food cost / 100). Exemple : coût 3,50 CHF, objectif 20 % → prix suggéré 17,50 CHF.'},
-      {q:'Puis-je sauvegarder mes fiches techniques ?',a:'La sauvegarde est prévue en V2 (comptes utilisateurs). Pour l\'instant, utilisez « Copier résumé » ou « Imprimer ».'},
+      {q:'Puis-je sauvegarder mes fiches techniques ?',a:'Oui. Cliquez sur « Sauvegarder » après le calcul — la fiche est conservée localement dans votre navigateur (jusqu\'à 15 fiches) et rechargeable depuis le panneau « Mes fiches ». La synchronisation multi-appareils arrivera avec les comptes utilisateurs (V2).'},
       {q:'Pour qui est fait DrinkCost ?',a:'Pour les bar managers, chefs barmen, directeurs F&B et mixologues — dans les bars, hôtels, restaurants et entreprises événementielles, partout dans le monde.'},
       {q:'Quelle est la différence entre marge brute et marge nette ?',a:'La marge brute = prix de vente − coût matière. La marge nette déduit en plus la TVA. Activez « Afficher la marge nette » dans les résultats pour la voir.'},
     ],
@@ -1498,6 +1506,8 @@ const T = {
     vol_other:'Other — custom volume',
     ex_label:'Load an example:',
     example_disclaimer:'Indicative prices — adjust to your local supplier costs.',
+    p_saved:'My sheets',btn_save:'Save',saved_load:'Load',saved_delete:'Delete',
+    saved_ok:'Sheet saved.',saved_deleted:'Sheet deleted.',saved_limit:'Limit of 15 sheets reached — delete one first.',saved_error:'Could not save (storage unavailable).',
     m_direct:'Direct (build)',m_shaker:'Shaker',m_mixing:'Mixing glass',m_blender:'Blender',
     m_infusion:'Infusion / Maceration',m_carb:'Carbonation',m_multi:'Multi-technique',
     cat_classic:'Classic',cat_sig:'Signature',cat_mock:'Mocktail',cat_champ:'Champagne / Sparkling',cat_shot:'Shot',
@@ -1545,7 +1555,7 @@ const T = {
       {q:'How do I export my cost sheet?',a:'Click "Print" to generate a PDF via your browser, or "Copy summary" to copy key data to your clipboard.'},
       {q:'What is the waste / spillage rate?',a:'The waste rate increases your material cost to reflect real service losses: spills, approximate measures, wasted ingredients. Enable it in the advanced parameters.'},
       {q:'How is the suggested price calculated?',a:'Total material cost ÷ (target food cost / 100). Example: cost 3.50 CHF, target 20% → suggested price 17.50 CHF.'},
-      {q:'Can I save my cost sheets?',a:'Saving recipes is planned for V2 (user accounts). For now, use "Copy summary" or "Print" to keep your data.'},
+      {q:'Can I save my cost sheets?',a:'Yes. Click "Save" after calculating — the sheet is stored locally in your browser (up to 15 sheets) and can be reloaded from the "My sheets" panel. Cross-device sync will come with user accounts (V2).'},
       {q:'Who is DrinkCost for?',a:'DrinkCost is built for bar managers, head bartenders, F&B directors and mixologists — in independent bars, hotels, restaurants and event companies, worldwide.'},
       {q:'What is the difference between gross margin and net margin?',a:'Gross margin = selling price − material cost. Net margin further deducts VAT. Enable "Show net margin" in the results to see it.'},
     ],
@@ -1577,6 +1587,8 @@ const T = {
     vol_other:'Otro — volumen personalizado',
     ex_label:'Cargar un ejemplo:',
     example_disclaimer:'Precios orientativos — ajusta según tus proveedores.',
+    p_saved:'Mis fichas',btn_save:'Guardar',saved_load:'Cargar',saved_delete:'Eliminar',
+    saved_ok:'Ficha guardada.',saved_deleted:'Ficha eliminada.',saved_limit:'Límite de 15 fichas alcanzado — elimina una primero.',saved_error:'No se pudo guardar (almacenamiento no disponible).',
     m_direct:'Directo (build)',m_shaker:'Coctelera',m_mixing:'Vaso mezclador',m_blender:'Batidora',
     m_infusion:'Infusión / Maceración',m_carb:'Carbonatación',m_multi:'Multi-técnica',
     cat_classic:'Clásico',cat_sig:'Signature',cat_mock:'Mocktail',cat_champ:'Champagne / Espumoso',cat_shot:'Chupito',
@@ -1624,7 +1636,7 @@ const T = {
       {q:'¿Cómo exporto mi ficha técnica?',a:'Haz clic en «Imprimir» para generar un PDF desde tu navegador, o en «Copiar resumen» para copiar los datos clave al portapapeles.'},
       {q:'¿Qué es la tasa de merma / desperdicio?',a:'La tasa de merma aumenta el coste de materia prima para reflejar las pérdidas reales en el servicio: derrames, medidas aproximadas, ingredientes desperdiciados. Se activa en los parámetros avanzados.'},
       {q:'¿Cómo se calcula el precio sugerido?',a:'Coste total de materia prima ÷ (food cost objetivo / 100). Ejemplo: coste 3,50 CHF, objetivo 20 % → precio sugerido 17,50 CHF.'},
-      {q:'¿Puedo guardar mis fichas técnicas?',a:'El guardado está previsto para la V2 (cuentas de usuario). Por ahora, usa «Copiar resumen» o «Imprimir» para conservar tus datos.'},
+      {q:'¿Puedo guardar mis fichas técnicas?',a:'Sí. Haz clic en «Guardar» tras el cálculo — la ficha se conserva localmente en tu navegador (hasta 15 fichas) y puede recargarse desde el panel «Mis fichas». La sincronización multi-dispositivo llegará con las cuentas de usuario (V2).'},
       {q:'¿Para quién es DrinkCost?',a:'DrinkCost está diseñado para jefes de bar, bartenders, directores de F&B y mixólogos — en bares, hoteles, restaurantes y empresas de eventos, en todo el mundo.'},
       {q:'¿Cuál es la diferencia entre margen bruto y margen neto?',a:'Margen bruto = precio de venta − coste de materia prima. El margen neto deduce además el IVA. Activa «Mostrar margen neto» en los resultados para visualizarlo.'},
     ],
@@ -1750,6 +1762,8 @@ function applyTranslations(){
   if(_m('tw-desc'))_m('tw-desc').setAttribute('content',t('seo_desc'));
   // Sync unit system placeholders after lang change
   applyUnitSystem();
+  // Re-render saved recipes list (translated labels + locale dates)
+  renderSavedRecipes();
   // FAQPage schema — inject current language Q&A for Google rich snippets
   const faqSchema=_m('faq-schema');
   if(faqSchema&&T[currentLang].faq){
@@ -1962,6 +1976,7 @@ function calculate(){
   const netM=margin!==null?margin-(sp*tva/100):null;
 
   lastRes={name,totalC,sp,margin,fcPct,suggested,fc,netM,tva};
+  if(typeof gtag!=='undefined')gtag('event','calculate',{food_cost_pct:Math.round(fcPct||0)});
 
   document.getElementById('form-section').style.display='none';
   document.getElementById('result').style.display='block';
@@ -2190,12 +2205,157 @@ function loadExample(id) {
   });
 
   document.getElementById('form-section').scrollIntoView({behavior:'smooth', block:'start'});
+  if (typeof gtag !== 'undefined') gtag('event', 'example_loaded', {example: id});
+}
+
+// ===== SAVED RECIPES (localStorage, max 15) =====
+const MAX_RECIPES = 15;
+
+function escHtml(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function getSavedRecipes(){
+  try{const r=JSON.parse(localStorage.getItem('dc_recipes'));return Array.isArray(r)?r:[];}catch(e){return [];}
+}
+function persistRecipes(list){
+  try{localStorage.setItem('dc_recipes',JSON.stringify(list));return true;}catch(e){return false;}
+}
+
+function saveRecipe(){
+  const name=document.getElementById('cocktail-name').value.trim();
+  if(!name){showToast(t('err_name'),true);document.getElementById('cocktail-name').focus();return;}
+  const recipes=getSavedRecipes();
+  if(recipes.length>=MAX_RECIPES){showToast(t('saved_limit'),true);return;}
+  const ings=Array.from(document.querySelectorAll('.ingredient-row')).map(row=>{
+    const inp=row.querySelectorAll('input');
+    return {
+      name:inp[0].value, dose:inp[1].value,
+      unit:row.querySelector('.ing-unit-select')?.value||'ml',
+      vol:row.querySelector('.bvs')?.value||'700',
+      customVol:row.querySelector('.custom-vol-input')?.value||'',
+      cost:inp[2].value
+    };
+  });
+  const produce=Array.from(document.querySelectorAll('.produce-row')).map(row=>({
+    name:row.querySelector('input[type="text"]')?.value||'',
+    unit:row.querySelector('.prod-unit')?.value||'g',
+    pkg:row.querySelector('.prod-pkg')?.value||'',
+    price:row.querySelector('.prod-price')?.value||'',
+    qty:row.querySelector('.prod-qty')?.value||''
+  }));
+  recipes.unshift({
+    id:Date.now(), savedAt:new Date().toISOString(), name,
+    sell:document.getElementById('sell-price').value,
+    cat:document.getElementById('category').selectedIndex,
+    glass:document.getElementById('glass').value,
+    method:document.getElementById('method').value,
+    fc:document.getElementById('target-fc').value,
+    garnish:document.getElementById('garnish-cost').value,
+    ice:document.getElementById('ice-cost').value,
+    laborOn:document.getElementById('labor-toggle').checked,
+    labor:document.getElementById('labor-cost').value,
+    tva:document.getElementById('tva-rate').value,
+    wasteOn:document.getElementById('waste-toggle').checked,
+    wastePct:document.getElementById('waste-pct').value,
+    fcPct:lastRes&&lastRes.fcPct?lastRes.fcPct.toFixed(1):null,
+    ings, produce
+  });
+  if(!persistRecipes(recipes)){showToast(t('saved_error'),true);return;}
+  renderSavedRecipes();
+  showToast(t('saved_ok'));
+  if(typeof gtag!=='undefined')gtag('event','recipe_saved');
+}
+
+function loadRecipe(id){
+  const rec=getSavedRecipes().find(r=>r.id===id);
+  if(!rec)return;
+  document.getElementById('ingredients-list').innerHTML='';
+  document.getElementById('produce-list').innerHTML='';
+  document.getElementById('cocktail-name').value=rec.name;
+  document.getElementById('sell-price').value=rec.sell;
+  document.getElementById('category').selectedIndex=rec.cat||0;
+  document.getElementById('glass').value=rec.glass||'';
+  document.getElementById('method').value=rec.method||'direct';
+  setCplx('complexity-bar','complexity-text',rec.method||'direct');
+  document.getElementById('target-fc').value=rec.fc;
+  document.getElementById('garnish-cost').value=rec.garnish;
+  document.getElementById('ice-cost').value=rec.ice;
+  const lt=document.getElementById('labor-toggle');
+  if(lt.checked!==!!rec.laborOn){lt.checked=!!rec.laborOn;toggleLabor(lt);}
+  if(rec.labor!==undefined)document.getElementById('labor-cost').value=rec.labor;
+  if(rec.tva!==undefined)document.getElementById('tva-rate').value=rec.tva;
+  const wt=document.getElementById('waste-toggle');
+  if(wt.checked!==!!rec.wasteOn){wt.checked=!!rec.wasteOn;toggleWaste(wt);}
+  if(rec.wastePct!==undefined)document.getElementById('waste-pct').value=rec.wastePct;
+  (rec.ings||[]).forEach(ing=>{
+    addIng();
+    const rows=document.querySelectorAll('.ingredient-row');
+    const row=rows[rows.length-1];
+    const inp=row.querySelectorAll('input');
+    inp[0].value=ing.name;
+    inp[1].value=ing.dose;
+    const us=row.querySelector('.ing-unit-select');
+    if(us){
+      if(!Array.from(us.options).some(o=>o.value===ing.unit)){
+        const o=document.createElement('option');o.value=ing.unit;o.text=ing.unit;us.appendChild(o);
+      }
+      us.value=ing.unit;
+    }
+    const bvs=row.querySelector('.bvs');
+    if(bvs){
+      bvs.value=ing.vol;
+      toggleCustomVol(row.id.replace('ing-',''),ing.vol);
+    }
+    if(ing.vol==='0'&&ing.customVol){const cv=row.querySelector('.custom-vol-input');if(cv)cv.value=ing.customVol;}
+    inp[2].value=ing.cost;
+  });
+  (rec.produce||[]).forEach(p=>{
+    if(!p.name&&!p.pkg&&!p.price)return;
+    addProduce();
+    const rows=document.querySelectorAll('.produce-row');
+    const row=rows[rows.length-1];
+    const rowId=parseInt(row.id.replace('prod-',''));
+    row.querySelector('input[type="text"]').value=p.name;
+    row.querySelector('.prod-unit').value=p.unit;
+    row.querySelector('.prod-pkg').value=p.pkg;
+    row.querySelector('.prod-price').value=p.price;
+    row.querySelector('.prod-qty').value=p.qty;
+    calcProd(rowId);
+  });
+  calculate();
+}
+
+function deleteRecipe(id){
+  persistRecipes(getSavedRecipes().filter(r=>r.id!==id));
+  renderSavedRecipes();
+  showToast(t('saved_deleted'));
+}
+
+function renderSavedRecipes(){
+  const panel=document.getElementById('saved-panel');
+  const list=document.getElementById('saved-list');
+  if(!panel||!list)return;
+  const recipes=getSavedRecipes();
+  if(!recipes.length){panel.style.display='none';list.innerHTML='';return;}
+  panel.style.display='';
+  const locale=currentLang==='en'?'en-GB':currentLang==='es'?'es-ES':'fr-CH';
+  list.innerHTML=recipes.map(r=>{
+    const d=new Date(r.savedAt);
+    const date=isNaN(d)?'':d.toLocaleDateString(locale);
+    const fc=r.fcPct?` · FC ${r.fcPct}%`:'';
+    return `<div class="saved-item">
+      <span class="si-name">${escHtml(r.name)}</span>
+      <span class="si-meta">${date}${fc}</span>
+      <button class="btn btn-ghost btn-xs" onclick="loadRecipe(${r.id})">${t('saved_load')}</button>
+      <button class="btn btn-ghost btn-xs" onclick="deleteRecipe(${r.id})" aria-label="${t('saved_delete')}" title="${t('saved_delete')}">✕</button>
+    </div>`;
+  }).join('');
 }
 
 // ===== INIT =====
 detectCurrency();
 detectLang();
 detectUnitSystem();
+renderSavedRecipes();
 addIng(); addIng(); addIng();
 setCplx('complexity-bar','complexity-text','direct');
 setCplx('r2-cplx-bar','r2-cplx-text','direct');
