@@ -1320,8 +1320,8 @@ function detectCurrency() {
     if (tz.includes('Zurich') || tz.includes('Geneva') || lang.includes('ch')) code = 'CHF';
     else if (tz.includes('London') || lang.startsWith('en-gb')) code = 'GBP';
     else if (lang.startsWith('en-us') || ['New_York','Los_Angeles','Chicago','Denver','Phoenix','Detroit','Anchorage','Boise','Indiana','Kentucky','Honolulu'].some(c => tz.includes(c))) code = 'USD';
-    else if (tz.includes('Paris') || tz.includes('Berlin') || tz.includes('Rome') || tz.includes('Madrid') || lang.startsWith('fr-fr') || lang.startsWith('de') || lang.startsWith('it') || lang.startsWith('es')) code = 'EUR';
-    else if (tz.includes('Toronto') || tz.includes('Montreal') || lang.startsWith('fr-ca') || lang.startsWith('en-ca')) code = 'CAD';
+    else if (tz.includes('Paris') || tz.includes('Berlin') || tz.includes('Rome') || tz.includes('Madrid') || lang.startsWith('fr-fr') || lang.startsWith('de') || lang.startsWith('it') || lang.startsWith('es-es')) code = 'EUR';
+    else if (['Toronto','Montreal','Vancouver','Edmonton','Winnipeg','Regina','Halifax','St_Johns'].some(c => tz.includes(c)) || lang.startsWith('fr-ca') || lang.startsWith('en-ca')) code = 'CAD';
     else if (tz.includes('Antigua') || tz.includes('Barbados')) code = 'XCD';
     else if (tz.includes('Guadeloupe') || tz.includes('Martinique') || tz.includes('Reunion') || tz.includes('Mayotte')) code = 'EUR';
     else if (tz.includes('Casablanca')) code = 'MAD';
@@ -1329,6 +1329,7 @@ function detectCurrency() {
     else if (tz.includes('Tokyo')) code = 'JPY';
     else if (tz.includes('Sydney') || tz.includes('Melbourne')) code = 'AUD';
     else if (tz.includes('Shanghai') || tz.includes('Chongqing') || tz.includes('Harbin') || tz.includes('Urumqi') || lang.startsWith('zh')) code = 'CNY';
+    else if (tz.startsWith('America/')) code = 'USD'; // Americas fallback — less wrong than CHF
     document.getElementById('currency-select').value = code;
     setCurrency(code);
   } catch(e) { setCurrency('CHF'); }
