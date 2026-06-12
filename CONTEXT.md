@@ -11,7 +11,7 @@ Built in a single day (March 27, 2026) — prototype to live product.
 
 | Layer | Tech |
 |---|---|
-| Frontend | Vanilla HTML / CSS / JS — single file (`index.html`) |
+| Frontend | Vanilla HTML / CSS / JS — `index.html` + 3 modules JS (`currency.js`, `i18n.js`, `calc.js`) |
 | Hosting | Netlify (free tier) — auto-deploy from GitHub |
 | Repo | GitHub — repository name: `drinkcost` |
 | Domain | `drinkcost.bar` via Infomaniak (DNS Fast Anycast) |
@@ -24,11 +24,15 @@ Built in a single day (March 27, 2026) — prototype to live product.
 
 ```
 /
-├── index.html       # Main tool — 1500+ lines, full app
+├── index.html       # Main tool — markup + CSS + SEO (~1240 lines)
+├── currency.js      # Currencies + unit system (ml/oz) — loaded end of <body>
+├── i18n.js          # T object FR/EN/ES + applyTranslations
+├── calc.js          # Business logic (cost sheet, profitability, saved recipes) + init
 ├── terms.html       # CGU / Terms of Use — trilingue
 ├── CONTEXT.md       # This file
 ├── CLAUDE.md        # Claude Code rules
 ```
+Script load order matters: currency → i18n → calc (init runs at the end of calc.js).
 
 ---
 

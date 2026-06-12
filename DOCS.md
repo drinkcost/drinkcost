@@ -148,7 +148,17 @@ Last updated: 2026-06-12
 
 ---
 
+## Architecture
+- `index.html` — markup + CSS + SEO (metas, JSON-LD, contenu statique) — 1243 lignes
+- `currency.js` — devises (CURRENCIES, setCurrency, curSym, detectCurrency, formatVolume) + système d'unités ml/oz (setUnitSystem, toMl, detectUnitSystem)
+- `i18n.js` — objet T (FR/EN/ES), t(), setLang, applyTranslations, detectLang
+- `calc.js` — logique métier (ingrédients, calculs fiche + rentabilité, exemples, fiches sauvegardées, toasts) + init au chargement
+- Chargés en fin de `<body>` dans l'ordre currency → i18n → calc (scripts classiques, globales partagées, l'init s'exécute en dernier dans calc.js)
+
+---
+
 ## Changelog
+2026-06-12 — refactor: découpage du JS inline d'index.html (2366 → 1243 lignes) en 3 modules — currency.js, i18n.js, calc.js — zéro changement de comportement; suppression du code mort (updateIngUnit no-op + double rafraîchissement de rr-unit-net-label dans applyTranslations)
 2026-03-27 — Initial build: full app (Tab 1 + Tab 2), trilingual, multi-currency, GA4, terms.html
 2026-03-28 — SEO meta tags: meta description, Open Graph, Twitter Card, hreflang (fr/en/es/x-default), Schema.org WebApplication, dynamic title/meta update per language via applyTranslations()
 2026-03-28 — FAQ section: FAQ.md créé (12 Q&A × FR/EN/ES) + section accordion <details>/<summary> intégrée au site, rendue dynamiquement par applyTranslations()
