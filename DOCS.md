@@ -57,7 +57,8 @@ Last updated: 2026-06-12
 - **New sheet** — resets the form
 - **Copy summary** — copies cost/price/FC/margin text to clipboard
 - **Analyze profitability** — pre-fills Tab 2 and switches to it
-- **Load example (Negroni / Mojito / Spritz Aperol)** — pre-fills the entire form with a realistic recipe (name, category, glass, method, ingredients with doses and costs, parameters); respects active unit system (oz/ml)
+- **Load example (Negroni / Mojito / Spritz)** — pre-fills the entire form with a realistic recipe (name, category, glass, method, ingredients with doses and costs, parameters)
+- **Save (💾)** — stores a full form snapshot in localStorage (`dc_recipes`, max 15); saved sheets appear in the "Mes fiches" panel above the form with Load / Delete actions; loading refills the form and recalculates
 
 ---
 
@@ -132,7 +133,15 @@ Last updated: 2026-06-12
 
 ### Analytics
 - Google Analytics 4 — ID: G-CBMJ6CRX0N
-- Custom event: `language_change` with `{language}` parameter
+- Custom events: `language_change` {language}, `unit_system_change` {system}, `calculate` {food_cost_pct}, `example_loaded` {example}, `copy_summary`, `recipe_saved`
+
+### Notifications
+- Inline toast component (`showToast(msg, isError)`) replaces all native alert() dialogs — auto-dismiss 2.6s, error variant with red border, hidden in print
+
+### Saved recipes
+- "Mes fiches" panel (top of Tab 1, hidden when empty) — localStorage `dc_recipes`, max 15 sheets
+- Stored: complete form snapshot (info, liquid + fresh ingredients, parameters, toggles) + food cost % for display
+- Per-sheet actions: Load (refill + recalculate) and Delete; list re-rendered on language change (locale dates)
 
 ### Footer
 - CGU / Terms of use link → terms.html (label translated per active language)
@@ -161,6 +170,11 @@ Last updated: 2026-06-12
   ficha-tecnica-coctel.html — ES, cible "ficha técnica cóctel", "calculadora food cost bar" — 500+ mots, liste numérotée pas à pas, og:locale:alternate es_MX + es_AR, Schema complet, hreflang croisé
 2026-03-28 — sitemap.xml mis à jour: 3 nouvelles URLs (priority 0.8) avec xhtml:link hreflang pour chaque page dédiée
 2026-03-28 — index.html footer: liens internes discrets vers les 3 pages dédiées (Calculateur Food Cost · Cocktail Cost Sheet · Ficha Técnica Cóctel)
+2026-06-12 — Lot d'améliorations validé:
+  feat: "Mes fiches" — sauvegarde locale des fiches (localStorage dc_recipes, max 15), panel au-dessus du formulaire, Charger/Supprimer, FAQ mises à jour × 3 langues (in-app + statique + JSON-LD)
+  feat: toasts inline à la place des alert() natifs (erreurs + confirmations)
+  feat: événements GA4 — calculate {food_cost_pct}, example_loaded {example}, copy_summary, recipe_saved
+  fix: détection devise — CAD pour toutes les tz canadiennes, fallback USD pour les Amériques, es-* générique ne force plus EUR (seulement es-ES)
 2026-06-12 — Audit structurel — corrections majeures:
   fix: landing EN affirmait "metric only" (FAQ + JSON-LD) alors que le switch ml/oz existe — corrigé
   fix: "10 devises" → 11 sur les 3 landing pages (texte + schemas)

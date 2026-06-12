@@ -1,5 +1,5 @@
 # DrinkCost — FAQ
-Last updated: 2026-03-28 (session 2)
+Last updated: 2026-06-12
 Languages: FR / EN / ES
 
 ---
@@ -34,7 +34,7 @@ R : Le taux de perte majore automatiquement votre coût matière pour refléter 
 R : Le prix suggéré est calculé ainsi : coût matière total ÷ (objectif food cost / 100). Exemple : coût 3,50 CHF, objectif 20 % → prix suggéré 17,50 CHF.
 
 **Q : Puis-je sauvegarder mes fiches techniques ?**
-R : La sauvegarde des fiches est prévue dans la version V2 (comptes utilisateurs). Pour l'instant, utilisez « Copier résumé » ou « Imprimer » pour conserver vos données.
+R : Oui. Cliquez sur « Sauvegarder » après le calcul — la fiche est conservée localement dans votre navigateur (jusqu'à 15 fiches) et rechargeable depuis le panneau « Mes fiches ». Attention : les fiches sont liées à ce navigateur et cet appareil ; la synchronisation multi-appareils arrivera avec les comptes utilisateurs (V2).
 
 **Q : Pour qui est fait DrinkCost ?**
 R : DrinkCost est conçu pour les bar managers, chefs barmen, directeurs F&B et mixologues — dans les bars indépendants, hôtels, restaurants et entreprises événementielles, partout dans le monde.
@@ -77,7 +77,7 @@ A: The waste rate automatically increases your material cost to reflect real ser
 A: Suggested price = total material cost ÷ (target food cost / 100). Example: cost 3.50 CHF, target 20% → suggested price 17.50 CHF.
 
 **Q: Can I save my cost sheets?**
-A: Saving recipes is planned for V2 (user accounts). For now, use "Copy summary" or "Print" to keep your data.
+A: Yes. Click "Save" after calculating — the sheet is stored locally in your browser (up to 15 sheets) and can be reloaded from the "My sheets" panel. Note: sheets are tied to this browser and device; cross-device sync will come with user accounts (V2).
 
 **Q: Who is DrinkCost for?**
 A: DrinkCost is built for bar managers, head bartenders, F&B directors and mixologists — in independent bars, hotels, restaurants and event companies, worldwide.
@@ -120,7 +120,7 @@ R: La tasa de merma aumenta automáticamente el coste de materia prima para refl
 R: Precio sugerido = coste total de materia prima ÷ (food cost objetivo / 100). Ejemplo: coste 3,50 CHF, objetivo 20 % → precio sugerido 17,50 CHF.
 
 **P: ¿Puedo guardar mis fichas técnicas?**
-R: El guardado de fichas está previsto para la V2 (cuentas de usuario). Por ahora, usa «Copiar resumen» o «Imprimir» para conservar tus datos.
+R: Sí. Haz clic en «Guardar» tras el cálculo — la ficha se conserva localmente en tu navegador (hasta 15 fichas) y puede recargarse desde el panel «Mis fichas». Nota: las fichas están vinculadas a este navegador y dispositivo; la sincronización multi-dispositivo llegará con las cuentas de usuario (V2).
 
 **P: ¿Para quién es DrinkCost?**
 R: DrinkCost está diseñado para jefes de bar, bartenders, directores de F&B y mixólogos — en bares independientes, hoteles, restaurantes y empresas de eventos, en todo el mundo.
