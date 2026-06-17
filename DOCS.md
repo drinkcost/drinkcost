@@ -158,6 +158,12 @@ Last updated: 2026-06-12
 ---
 
 ## Changelog
+2026-06-17 — seo/perf: optimisation SEO transverse
+  perf: suppression de 2 familles Google Fonts chargées mais jamais utilisées (Cormorant Garamond, DM Mono) dans index.html — l'app n'utilise que Plus Jakarta Sans / Playfair Display / JetBrains Mono
+  seo: hreflang du sitemap (entrée `/`) aligné sur le cluster des `<head>` (fr→food-cost-calculator, en→cocktail-cost-sheet, es→ficha-tecnica-coctel, x-default→/) ; lastmod → 2026-06-17 sur toutes les URLs
+  seo: `robots` enrichi (`max-image-preview:large, max-snippet:-1, max-video-preview:-1`) sur les 4 pages
+  seo: `apple-touch-icon` → /apple-touch-icon.png (PNG, iOS ne rend pas le SVG) ; `<link icon png>` → /favicon.png (type/extension cohérents) sur les 4 pages
+  seo: Twitter Card + theme-color + og:image width/height/alt ajoutés aux 3 pages dédiées (parité avec index.html)
 2026-06-12 — fix: badge résultat (Rentable/Limite/À revoir) — retraduit au changement de langue (dataset.badgeKey + applyTranslations, même pattern que cplxKey) et réaffiché au recalcul après un calcul sans prix (il restait masqué définitivement)
 2026-06-12 — refactor: découpage du JS inline d'index.html (2366 → 1243 lignes) en 3 modules — currency.js, i18n.js, calc.js — zéro changement de comportement; suppression du code mort (updateIngUnit no-op + double rafraîchissement de rr-unit-net-label dans applyTranslations); règle 8 de CLAUDE.md reformulée en conséquence
 2026-03-27 — Initial build: full app (Tab 1 + Tab 2), trilingual, multi-currency, GA4, terms.html
