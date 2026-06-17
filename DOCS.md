@@ -158,6 +158,7 @@ Last updated: 2026-06-12
 ---
 
 ## Changelog
+2026-06-17 — fix: variable CSS --text-faint non définie (utilisée par le texte de complexité, le disclaimer d'exemples, les coûts produits) — les libellés d'aide retombaient sur le blanc vif hérité au lieu du gris discret voulu; aliasée sur --text2 (corrige le rendu et le contraste WCAG)
 2026-06-17 — seo/perf: optimisation SEO transverse
   perf: suppression de 2 familles Google Fonts chargées mais jamais utilisées (Cormorant Garamond, DM Mono) dans index.html — l'app n'utilise que Plus Jakarta Sans / Playfair Display / JetBrains Mono
   seo: hreflang du sitemap (entrée `/`) aligné sur le cluster des `<head>` (fr→food-cost-calculator, en→cocktail-cost-sheet, es→ficha-tecnica-coctel, x-default→/) ; lastmod → 2026-06-17 sur toutes les URLs
