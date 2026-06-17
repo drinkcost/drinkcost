@@ -158,6 +158,7 @@ Last updated: 2026-06-12
 ---
 
 ## Changelog
+2026-06-17 — a11y: --text3 éclairci de #484f58 à #7c8490 — contraste WCAG AA atteint sur footer (5.0:1) et en-têtes de tableau / faq-tagline / placeholders (≥4.5:1 sur bg et bg2); reste distinct de --text2 (hiérarchie visuelle préservée)
 2026-06-17 — fix: variable CSS --text-faint non définie (utilisée par le texte de complexité, le disclaimer d'exemples, les coûts produits) — les libellés d'aide retombaient sur le blanc vif hérité au lieu du gris discret voulu; aliasée sur --text2 (corrige le rendu et le contraste WCAG)
 2026-06-17 — seo/perf: optimisation SEO transverse
   perf: suppression de 2 familles Google Fonts chargées mais jamais utilisées (Cormorant Garamond, DM Mono) dans index.html — l'app n'utilise que Plus Jakarta Sans / Playfair Display / JetBrains Mono
