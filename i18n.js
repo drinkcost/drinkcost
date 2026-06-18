@@ -248,6 +248,19 @@ const T = {
 let currentLang='fr';
 function t(key,...args){const v=T[currentLang][key];return typeof v==='function'?v(...args):(v||T.fr[key]||key);}
 
+// Static form fields → i18n key for programmatic aria-label (visible <label>s aren't linked)
+const FIELD_ARIA={
+  'currency-select':'currency_label',
+  'cocktail-name':'l_name','sell-price':'l_price','category':'l_category','glass':'l_glass','method':'l_method',
+  'target-fc':'l_target_fc','garnish-cost':'l_garnish','ice-cost':'l_ice',
+  'labor-toggle':'l_labor','labor-cost':'l_labor','tva-rate':'l_tva',
+  'waste-toggle':'l_waste','waste-pct':'l_waste_pct','net-toggle':'l_net_toggle',
+  'r2-name':'r2_name','r2-price':'r2_price','r2-cost':'r2_cost','r2-type':'r2_type',
+  'r2-hours':'r2_hours','r2-pax':'r2_pax','r2-qty':'r2_qty','r2-break':'r2_break',
+  'r2-method':'r2_method','r2-preptime':'r2_prep','r2-hourly':'r2_hourly',
+  'r2-staff':'r2_staff','r2-fixed':'r2_fixed','r2-tva':'r2_tva',
+};
+
 function setLang(lang,btn){
   currentLang=lang;
   try{localStorage.setItem('dc_lang',lang);}catch(e){}
@@ -290,6 +303,15 @@ function applyTranslations(){
     if(bvs){Array.from(bvs.options).forEach(o=>{o.text=volLabel(parseFloat(o.value));});}
     const ius=row.querySelector('.ing-unit-select');
     if(ius){Array.from(ius.options).forEach(o=>{o.text=o.value;});}
+    // Keep aria-labels in sync (a11y — visible labels aren't programmatically linked)
+    const setAria=(sel,key)=>{const el=row.querySelector(sel);if(el)el.setAttribute('aria-label',t(key));};
+    setAria('input[type="text"]','i_name');
+    setAria('.ing-dose-input','i_qty');
+    setAria('.ing-unit-select','i_unit');
+    setAria('.bvs','i_format');
+    setAria('input[type="number"]:not(.ing-dose-input):not(.custom-vol-input)','i_cost');
+    setAria('.custom-vol-input','i_custom_vol');
+    const rm=row.querySelector('.btn-remove');if(rm)rm.setAttribute('aria-label',t('saved_delete'));
   });
   // Refresh complexity text with current lang
   ['complexity-text','r2-cplx-text','r-cplx-text'].forEach(id=>{
@@ -334,7 +356,17 @@ function applyTranslations(){
     });
     const us=row.querySelector('.prod-unit');
     if(us){Array.from(us.options).forEach(o=>{const km={g:'pu_g',kg:'pu_kg',piece:'pu_piece'};if(km[o.value])o.text=t(km[o.value]);});}
+    // Keep aria-labels in sync (a11y)
+    const setAria=(sel,key)=>{const el=row.querySelector(sel);if(el)el.setAttribute('aria-label',t(key));};
+    setAria('input[type="text"]','pr_name');
+    setAria('.prod-unit','i_unit');
+    setAria('.prod-pkg','pr_pkg');
+    setAria('.prod-price','pr_price');
+    setAria('.prod-qty','pr_qty');
+    const rm=row.querySelector('.btn-remove');if(rm)rm.setAttribute('aria-label',t('saved_delete'));
   });
+  // Static form fields — programmatic aria-label (visible labels aren't linked via for/id)
+  Object.entries(FIELD_ARIA).forEach(([id,key])=>{const el=document.getElementById(id);if(el)el.setAttribute('aria-label',t(key));});
   // SEO content section
   const _si=id=>document.getElementById(id);
   if(_si('seo-h2'))_si('seo-h2').innerHTML=t('seo_h2');

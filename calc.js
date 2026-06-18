@@ -74,20 +74,20 @@ function addIng(name='',dose='',vol=700,cost='',unit=null){
   const row=document.createElement('div');
   row.className='ingredient-row'; row.id='ing-'+id;
   row.innerHTML=`
-    <div><label>${t('i_name')}</label><input type="text" placeholder="${t('ph_ingredient')}" value="${name}"></div>
-    <div><label>${t('i_qty')}</label><input type="number" class="ing-dose-input" placeholder="${ph}" value="${dose}" min="0" step="0.1"></div>
+    <div><label>${t('i_name')}</label><input type="text" aria-label="${t('i_name')}" placeholder="${t('ph_ingredient')}" value="${name}"></div>
+    <div><label>${t('i_qty')}</label><input type="number" class="ing-dose-input" aria-label="${t('i_qty')}" placeholder="${ph}" value="${dose}" min="0" step="0.1"></div>
     <div><label>${t('i_unit')}</label>
-      <select class="ing-unit-select">
+      <select class="ing-unit-select" aria-label="${t('i_unit')}">
         <option value="${firstOpt}"${u===firstOpt?' selected':''}>${firstOpt}</option>
         <option value="cl"${u==='cl'?' selected':''}>cl</option>
       </select>
     </div>
-    <div><label>${t('i_format')}</label><select class="bvs" onchange="toggleCustomVol(${id},this.value)">${opts}</select></div>
-    <div id="vol-field-${id}"><label>${t('i_cost')}</label><input type="number" placeholder="${t('ph_bottle')}" value="${cost}" min="0" step="0.5"></div>
-    <div><label style="opacity:0">—</label><button class="btn-remove" onclick="document.getElementById('ing-${id}').remove()">×</button></div>
+    <div><label>${t('i_format')}</label><select class="bvs" aria-label="${t('i_format')}" onchange="toggleCustomVol(${id},this.value)">${opts}</select></div>
+    <div id="vol-field-${id}"><label>${t('i_cost')}</label><input type="number" aria-label="${t('i_cost')}" placeholder="${t('ph_bottle')}" value="${cost}" min="0" step="0.5"></div>
+    <div><label style="opacity:0">—</label><button class="btn-remove" aria-label="${t('saved_delete')}" onclick="document.getElementById('ing-${id}').remove()">×</button></div>
     <div id="custom-vol-${id}" style="display:none;grid-column:4/5;margin-top:-6px">
       <label>${t('i_custom_vol')}</label>
-      <input type="number" class="custom-vol-input" placeholder="${t('ph_custom_vol')}" min="1" step="1">
+      <input type="number" class="custom-vol-input" aria-label="${t('i_custom_vol')}" placeholder="${t('ph_custom_vol')}" min="1" step="1">
     </div>`;
   document.getElementById('ingredients-list').appendChild(row);
 }
@@ -125,19 +125,19 @@ function addProduce(){
   const row=document.createElement('div');
   row.className='produce-row'; row.id='prod-'+id;
   row.innerHTML=`
-    <div><label>${t('pr_name')}</label><input type="text" placeholder="${t('pr_name')}..." oninput="calcProd(${id})"></div>
+    <div><label>${t('pr_name')}</label><input type="text" aria-label="${t('pr_name')}" placeholder="${t('pr_name')}..." oninput="calcProd(${id})"></div>
     <div>
       <label>${t('i_unit')}</label>
-      <select class="prod-unit" onchange="calcProd(${id})">
+      <select class="prod-unit" aria-label="${t('i_unit')}" onchange="calcProd(${id})">
         <option value="g">grammes (g)</option>
         <option value="kg">kilogrammes (kg)</option>
         <option value="piece">pièces</option>
       </select>
     </div>
-    <div><label>${t('pr_pkg')}</label><input type="number" placeholder="250" min="0" step="0.1" oninput="calcProd(${id})" class="prod-pkg"></div>
-    <div><label>${t('pr_price')} (<span class="cur-label">${curSym()}</span>)</label><input type="number" placeholder="2.50" min="0" step="0.1" oninput="calcProd(${id})" class="prod-price"></div>
-    <div><label>${t('pr_qty')}</label><input type="number" placeholder="8" min="0" step="0.1" oninput="calcProd(${id})" class="prod-qty"></div>
-    <div><label style="opacity:0">—</label><button class="btn-remove" onclick="document.getElementById('prod-${id}').remove()">×</button></div>
+    <div><label>${t('pr_pkg')}</label><input type="number" aria-label="${t('pr_pkg')}" placeholder="250" min="0" step="0.1" oninput="calcProd(${id})" class="prod-pkg"></div>
+    <div><label>${t('pr_price')} (<span class="cur-label">${curSym()}</span>)</label><input type="number" aria-label="${t('pr_price')}" placeholder="2.50" min="0" step="0.1" oninput="calcProd(${id})" class="prod-price"></div>
+    <div><label>${t('pr_qty')}</label><input type="number" aria-label="${t('pr_qty')}" placeholder="8" min="0" step="0.1" oninput="calcProd(${id})" class="prod-qty"></div>
+    <div><label style="opacity:0">—</label><button class="btn-remove" aria-label="${t('saved_delete')}" onclick="document.getElementById('prod-${id}').remove()">×</button></div>
     <div style="grid-column:1/-1;margin-top:-4px;display:flex;align-items:center;gap:12px">
       <div class="produce-cost" id="pc-${id}" style="color:var(--text-faint);flex:1">—</div>
       <div style="font-size:10px;color:var(--text-faint)" id="pc-hint-${id}"></div>
