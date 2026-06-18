@@ -158,6 +158,7 @@ Last updated: 2026-06-12
 ---
 
 ## Changelog
+2026-06-18 — a11y: association statique label[for]/id sur les 25 champs statiques (audit « Accessibilité pour les agents » : l'arbre d'accessibilité doit être bien formé sans dépendre du JS). Les <label> traduits par data-i18n portent désormais l'attribut for vers l'id du champ → nom accessible présent dans le HTML, en FR/EN/ES. FIELD_ARIA réduit aux toggles + labor-cost (seuls champs sans <label> associable). Cache ?v→20260618. Vérifié : 25/25 champs statiques avec label[for], 0 champ sans nom.
 2026-06-17 — a11y: aria-label programmatique sur les 47 champs de formulaire (les <label> visuels n'étaient pas reliés via for/id → Lighthouse Accessibilité 87). Champs dynamiques étiquetés dans les templates addIng/addProduce + boutons supprimer; champs statiques via table FIELD_ARIA dans i18n.js; tout resynchronisé FR/EN/ES par applyTranslations. Vérifié : 0 champ sans nom accessible en FR/EN. Aucun changement visuel.
 2026-06-17 — perf: paramètre de version (?v=20260617) sur currency.js / i18n.js / calc.js — force le rafraîchissement du JS chez les visiteurs après déploiement (à incrémenter à chaque changement JS)
 2026-06-17 — a11y: --text3 éclairci de #484f58 à #7c8490 — contraste WCAG AA atteint sur footer (5.0:1) et en-têtes de tableau / faq-tagline / placeholders (≥4.5:1 sur bg et bg2); reste distinct de --text2 (hiérarchie visuelle préservée)

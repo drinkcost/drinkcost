@@ -248,17 +248,12 @@ const T = {
 let currentLang='fr';
 function t(key,...args){const v=T[currentLang][key];return typeof v==='function'?v(...args):(v||T.fr[key]||key);}
 
-// Static form fields → i18n key for programmatic aria-label (visible <label>s aren't linked)
+// Toggles & their inputs have no for/id-linkable <label> (the text label is a <span>
+// or carries an onclick) — give them a programmatic aria-label. All other static
+// fields are labelled in HTML via <label for> (see index.html).
 const FIELD_ARIA={
-  'currency-select':'currency_label',
-  'cocktail-name':'l_name','sell-price':'l_price','category':'l_category','glass':'l_glass','method':'l_method',
-  'target-fc':'l_target_fc','garnish-cost':'l_garnish','ice-cost':'l_ice',
-  'labor-toggle':'l_labor','labor-cost':'l_labor','tva-rate':'l_tva',
-  'waste-toggle':'l_waste','waste-pct':'l_waste_pct','net-toggle':'l_net_toggle',
-  'r2-name':'r2_name','r2-price':'r2_price','r2-cost':'r2_cost','r2-type':'r2_type',
-  'r2-hours':'r2_hours','r2-pax':'r2_pax','r2-qty':'r2_qty','r2-break':'r2_break',
-  'r2-method':'r2_method','r2-preptime':'r2_prep','r2-hourly':'r2_hourly',
-  'r2-staff':'r2_staff','r2-fixed':'r2_fixed','r2-tva':'r2_tva',
+  'labor-toggle':'l_labor','labor-cost':'l_labor',
+  'waste-toggle':'l_waste','net-toggle':'l_net_toggle',
 };
 
 function setLang(lang,btn){
