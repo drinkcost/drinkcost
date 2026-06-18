@@ -158,6 +158,8 @@ Last updated: 2026-06-12
 ---
 
 ## Changelog
+2026-06-17 — a11y: aria-label programmatique sur les 47 champs de formulaire (les <label> visuels n'étaient pas reliés via for/id → Lighthouse Accessibilité 87). Champs dynamiques étiquetés dans les templates addIng/addProduce + boutons supprimer; champs statiques via table FIELD_ARIA dans i18n.js; tout resynchronisé FR/EN/ES par applyTranslations. Vérifié : 0 champ sans nom accessible en FR/EN. Aucun changement visuel.
+2026-06-17 — perf: paramètre de version (?v=20260617) sur currency.js / i18n.js / calc.js — force le rafraîchissement du JS chez les visiteurs après déploiement (à incrémenter à chaque changement JS)
 2026-06-17 — a11y: --text3 éclairci de #484f58 à #7c8490 — contraste WCAG AA atteint sur footer (5.0:1) et en-têtes de tableau / faq-tagline / placeholders (≥4.5:1 sur bg et bg2); reste distinct de --text2 (hiérarchie visuelle préservée)
 2026-06-17 — fix: variable CSS --text-faint non définie (utilisée par le texte de complexité, le disclaimer d'exemples, les coûts produits) — les libellés d'aide retombaient sur le blanc vif hérité au lieu du gris discret voulu; aliasée sur --text2 (corrige le rendu et le contraste WCAG)
 2026-06-17 — seo/perf: optimisation SEO transverse
