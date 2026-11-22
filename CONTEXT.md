@@ -1,7 +1,7 @@
 # DrinkCost — Project Context
 
 ## Overview
-DrinkCost is a professional cocktail cost calculation SaaS tool for bar managers and mixologists.
+DrinkCost is a free, professional cocktail cost calculation tool for bar managers and mixologists.
 Live at: **https://drinkcost.bar**
 Built in a single day (March 27, 2026) — prototype to live product.
 
@@ -12,7 +12,7 @@ Built in a single day (March 27, 2026) — prototype to live product.
 | Layer | Tech |
 |---|---|
 | Frontend | Vanilla HTML / CSS / JS — `index.html` + 3 modules JS (`currency.js`, `i18n.js`, `calc.js`) |
-| Hosting | Netlify (free tier) — auto-deploy from GitHub |
+| Hosting | Netlify (free tier) — `main` = production (auto-deploy on push); every PR gets a deploy preview |
 | Repo | GitHub — repository name: `drinkcost` |
 | Domain | `drinkcost.bar` via Infomaniak (DNS Fast Anycast) |
 | Analytics | Google Analytics 4 — ID: `G-CBMJ6CRX0N` |
@@ -31,6 +31,8 @@ Built in a single day (March 27, 2026) — prototype to live product.
 ├── terms.html       # CGU / Terms of Use — trilingue
 ├── CONTEXT.md       # This file
 ├── CLAUDE.md        # Claude Code rules
+├── netlify.toml     # Netlify config — security headers + 404 rules hiding repo internals
+├── .claude/skills/  # Vetted third-party skills (web quality, security, shipping) — see CLAUDE.md rule 15
 ```
 Script load order matters: currency → i18n → calc (init runs at the end of calc.js).
 
@@ -70,7 +72,8 @@ Script load order matters: currency → i18n → calc (init runs at the end of c
 - Full Terms of Use in FR / EN / ES
 - Same design system as index.html
 - Auto language detection
-- Sections: purpose, description, IP protection, data privacy, liability, acceptable use, jurisdiction (Neuchâtel, Swiss law)
+- Sections: purpose, description, IP protection, data privacy, liability, acceptable use, jurisdiction
+- ⚠️ OUTDATED: still states Swiss law / Neuchâtel courts. The publisher now lives in Guadeloupe (France) — to be rewritten under French law (Phase 2)
 
 ---
 
@@ -141,16 +144,18 @@ const CPLX = {
 
 ## What's Pending / Next Steps
 
+> Current roadmap (Nov 2026): Phase 0 work setup → Phase 1 calculation accuracy (VAT 0 bug, single net-margin definition, Intl number formatting, untranslated method key, oz in examples) → Phase 2 legal (GA4, self-hosted fonts, legal notice + privacy, French-law terms) → Phase 3 SEO/conversion → Phase 4 mobile design polish → Phase 5 security headers/CSP. The items below are the original March 2026 list, kept for history.
+
 ### Immediate
 - [ ] Add SEO meta tags (title, description, OG, Twitter cards) in 3 languages
 - [ ] Register drinkcost.com when revenue justifies (~3 months)
-- [ ] File trademark "DrinkCost" at IGE (Swiss IP Institute) ~550 CHF
+- [ ] ~~File trademark "DrinkCost" at IGE (Swiss IP Institute)~~ — on hold; if ever needed, file at INPI/EUIPO (publisher now in France)
 
 ### V2 — After first user feedback
 - [ ] User accounts + data persistence (recipes saved)
 - [ ] PDF export of cost sheets
 - [ ] Recipe library / ingredient database with pre-filled prices
-- [ ] Monetization: freemium (3 free sheets → paid unlimited) at 9-19 CHF/month
+- [x] ~~Monetization: freemium (3 free sheets → paid unlimited) at 9-19 CHF/month~~ — abandoned, the tool stays free
 
 ### SEO Content
 - [ ] Landing page text with target keywords
@@ -161,15 +166,15 @@ const CPLX = {
 
 ## Business Context
 
-**Founder**: Jordan Haniecki — Senior bar manager & mixologist, 7+ years luxury hospitality (5-star hotels Switzerland & Caribbean), based in Neuchâtel, Switzerland.
+**Founder**: Jordan Haniecki — Senior bar manager & mixologist, 7+ years luxury hospitality (5-star hotels Switzerland & Caribbean). Formerly based in Neuchâtel, Switzerland; **now based in Guadeloupe (France)** — French law, GDPR and CNIL apply to the site.
 
 **Co-concept**: Dimitri Daninthe (mixologist)
 
 **Target users**: Bar managers, head bartenders, F&B directors in independent bars, hotels, restaurants, event companies — worldwide.
 
-**Positioning**: The only trilingual cocktail cost tool built by a professional for professionals. Competitors (Bevspot, MarketMan, PourCost) are English-only, US-centric, overcomplicated and expensive.
+**Positioning**: A trilingual cocktail cost tool built by a professional for professionals. Competitors (Bevspot, MarketMan, PourCost) are mostly English-only, US-centric, overcomplicated and expensive. Do not claim to be "the only" one anywhere on the site (unverifiable).
 
-**Revenue model**: Freemium SaaS — free basic tool drives organic acquisition, premium subscription for save/export/library features.
+**Revenue model**: None — the tool is **deliberately free**. The original freemium plan (3 free sheets → 9-19 CHF/month) is abandoned. Its value is the clean, printable, standardized cost sheet and the saved-sheet library, not the arithmetic (any AI chatbot can compute a food cost).
 
 **Current domain**: `drinkcost.bar` — intentional, memorable, industry-specific extension.
 **drinkcost.com**: taken, listed at ~3600 CHF — defer purchase until revenue justifies.
