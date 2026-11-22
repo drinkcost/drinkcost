@@ -1,0 +1,68 @@
+# Netlify configuration — DrinkCost
+# Static site: no build step, the repository root is published as-is.
+
+[build]
+  publish = "."
+
+# ---------------------------------------------------------------------------
+# Never serve repository internals (agent rules, project notes, skills).
+# The repo root is the publish directory, so without these rules every .md
+# file and the .claude/ folder would be publicly downloadable.
+# ---------------------------------------------------------------------------
+[[redirects]]
+  from = "/.claude/*"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/CLAUDE.md"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/CONTEXT.md"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/DOCS.md"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/FAQ.md"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/README.md"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404"
+  status = 404
+  force = true
+
+# ---------------------------------------------------------------------------
+# Baseline security headers.
+# A full Content-Security-Policy (script-src, style-src…) comes in Phase 5,
+# once Google Analytics and Google Fonts are removed — adding it now would
+# have to allow-list third parties that are about to go away.
+# frame-ancestors alone is safe today: it only forbids framing (clickjacking).
+# ---------------------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Content-Security-Policy = "frame-ancestors 'none'"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
